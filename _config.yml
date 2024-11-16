@@ -4,7 +4,6 @@ theme: jekyll-theme-minimal
 
 # Asset configuration
 logo: /assets/images/logo.png
-favicon: /assets/images/favicon.ico
 
 # Social media and contact links
 github_username: tommytt427
