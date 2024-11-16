@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-![Profile Picture](/assets/images/profile.jpg){: .profile-image}
+![Profile Picture](/assets/images/ttrannEdit1.JPG){: .profile-image}
 
 # Welcome to My Portfolio
 
