@@ -30,9 +30,43 @@ title: Home
   - [My Resume](/assets/docs/resume.pdf)
 </div>
 
-## Contact
-<div class="featured-content">
-  - GitHub: [@{{ site.github_username }}](https://github.com/{{ site.github_username }})
-  - LinkedIn: [Profile]({{ site.linkedin_url }})
-  - Email: [{{ site.email }}](mailto:{{ site.email }})
+## Contact Me
+
+<div class="social-links">
+  <a href="https://github.com/{{ site.social_links.github }}" class="social-link" target="_blank">
+    <i class="fab fa-github"></i>
+  </a>
+  <a href="https://linkedin.com/in/{{ site.social_links.linkedin }}" class="social-link" target="_blank">
+    <i class="fab fa-linkedin"></i>
+  </a>
+  <a href="mailto:{{ site.social_links.email }}" class="social-link">
+    <i class="fas fa-envelope"></i>
+  </a>
 </div>
+
+<ul class="contact-list">
+  <li class="contact-item">
+    <div class="contact-icon">
+      <i class="fas fa-envelope"></i>
+    </div>
+    <div class="contact-text">
+      <a href="mailto:{{ site.social_links.email }}">{{ site.social_links.email }}</a>
+    </div>
+  </li>
+  <li class="contact-item">
+    <div class="contact-icon">
+      <i class="fab fa-github"></i>
+    </div>
+    <div class="contact-text">
+      <a href="https://github.com/{{ site.social_links.github }}" target="_blank">github.com/{{ site.social_links.github }}</a>
+    </div>
+  </li>
+  <li class="contact-item">
+    <div class="contact-icon">
+      <i class="fab fa-linkedin"></i>
+    </div>
+    <div class="contact-text">
+      <a href="https://linkedin.com/in/{{ site.social_links.linkedin }}" target="_blank">LinkedIn Profile</a>
+    </div>
+  </li>
+</ul>
