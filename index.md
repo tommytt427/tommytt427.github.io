@@ -9,7 +9,7 @@ title: Home
 
 ## About Me
 <div class="featured-content">
-I'm a [your profession] passionate about [your interests]. With experience in [your skills], I love creating solutions that [your goal].
+ My name is Thomas Tran and I am a current Computer Engineering undergraduate at the University of Michigan College of Engineering. You can look around and see what projects I have or am working on!
 </div>
 
 ## Featured Projects
