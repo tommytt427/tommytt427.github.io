@@ -17,24 +17,17 @@ I'm a [your profession] passionate about [your interests]. With experience in [y
 <div class="project-container">
   <div class="featured-content">
     <h3>Project 1</h3>
-    ![Project 1 Screenshot](/assets/images/project1.jpg){: .project-image}
-    <p>Description of your first project. What did you build? What technologies did you use?</p>
     <a href="[project link]" class="custom-link">View Project →</a>
   </div>
 
   <div class="featured-content">
     <h3>Project 2</h3>
-    ![Project 2 Screenshot](/assets/images/project2.jpg){: .project-image}
-    <p>Description of your second project. What problems did it solve?</p>
-    <a href="[project link]" class="custom-link">View Project →</a>
   </div>
 </div>
 
 ## Documents & Resources
 <div class="document-container">
   - [My Resume](/assets/docs/resume.pdf)
-  - [Project Documentation](/assets/docs/documentation.pdf)
-  - [Research Paper](/assets/docs/research.pdf)
 </div>
 
 ## Contact
