@@ -33,13 +33,13 @@ title: Home
 ## Contact Me
 
 <div class="social-links">
-  <a href="https://github.com/your-github-username" class="social-link github" target="_blank" data-tooltip="GitHub">
+  <a href="https://github.com/{{ site.social_links.github }}" class="social-link" target="_blank">
     <i class="fab fa-github"></i>
   </a>
-  <a href="https://linkedin.com/in/your-linkedin-url" class="social-link linkedin" target="_blank" data-tooltip="LinkedIn">
+  <a href="https://linkedin.com/in/{{ site.social_links.linkedin }}" class="social-link" target="_blank">
     <i class="fab fa-linkedin"></i>
   </a>
-  <a href="mailto:your.email@domain.com" class="social-link email" data-tooltip="Email">
+  <a href="mailto:{{ site.social_links.email }}" class="social-link">
     <i class="fas fa-envelope"></i>
   </a>
 </div>
