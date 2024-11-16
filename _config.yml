@@ -5,20 +5,11 @@ theme: jekyll-theme-minimal
 # Asset configuration
 logo: /assets/images/logo.png
 
-# Social media and contact links
-github_username: tommytt427
-linkedin_url: https://www.linkedin.com/in/ttrann3/
-email: ttrann@umich.edu
+# Add Font Awesome via CDN
+font_awesome_kit: # your kit code if you have one, or leave empty to use the free CDN
 
-# Additional settings
-show_downloads: false
-google_analytics: # your analytics ID here
-
-# Collections (if you want to organize content)
-collections:
-  projects:
-    output: true
-    permalink: /projects/:path/
-  posts:
-    output: true
-    permalink: /blog/:year/:month/:day/:title/
+# Your social media and contact info
+social_links:
+  github: https://github.com/tommytt427
+  linkedin: https://www.linkedin.com/in/ttrann3/
+  email: ttrann@umich.edu
