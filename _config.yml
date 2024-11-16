@@ -1,8 +1,25 @@
 title: Your Name
-description: A short description of your site
-theme: jekyll-theme-minimal
-show_downloads: false
-google_analytics: # your analytics ID (optional)
+description: Your Site Description
+theme: jekyll-theme-midnight
 
-# You can customize your theme's look further
-# The available options depend on the theme you choose
+# Asset configuration
+logo: /assets/images/logo.png
+favicon: /assets/images/favicon.ico
+
+# Social media and contact links
+github_username: tommytt427
+linkedin_url: https://www.linkedin.com/in/ttrann3/
+email: ttrann@umich.edu
+
+# Additional settings
+show_downloads: false
+google_analytics: # your analytics ID here
+
+# Collections (if you want to organize content)
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
