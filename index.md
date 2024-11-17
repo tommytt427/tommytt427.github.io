@@ -72,13 +72,13 @@ title: Home
 
 ## Contact Me
 <div class="social-links">
-  <a href="https://github.com/{{ site.social_links.github }}" class="social-link" target="_blank">
+  <a href="https://github.com/{{ site.social_links.github }}" class="social-link github" data-tooltip="GitHub" target="_blank">
     <i class="fab fa-github"></i>
   </a>
-  <a href="https://linkedin.com/in/{{ site.social_links.linkedin }}" class="social-link" target="_blank">
+  <a href="https://linkedin.com/in/{{ site.social_links.linkedin }}" class="social-link linkedin" data-tooltip="LinkedIn" target="_blank">
     <i class="fab fa-linkedin"></i>
   </a>
-  <a href="mailto:{{ site.social_links.email }}" class="social-link">
+  <a href="mailto:{{ site.social_links.email }}" class="social-link email" data-tooltip="Email">
     <i class="fas fa-envelope"></i>
   </a>
 </div>
