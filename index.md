@@ -27,15 +27,40 @@ title: Home
 
 ## Documents & Resources
 <div class="document-container">
-  <a href="/assets/docs/resume.pdf" class="document-link" target="_blank">
-    <div class="document-icon">
-      <i class="fas fa-file-pdf fa-2x"></i>
+  <div class="pdf-preview" onclick="openPdfViewer('/assets/docs/resume.pdf')">
+    <div class="pdf-thumbnail">
+      <img src="/assets/docs/resume-thumbnail.jpg" alt="Resume Preview" class="thumbnail-img">
+      <div class="pdf-overlay">
+        <i class="fas fa-expand-alt"></i>
+      </div>
     </div>
-    <div class="document-info">
-      <span class="document-title">My Resume</span>
-      <span class="document-desc">Download PDF</span>
+    <div class="pdf-info">
+      <span class="pdf-title">My Resume</span>
+      <span class="pdf-meta">
+        <i class="fas fa-file-pdf"></i> Click to view
+      </span>
     </div>
-  </a>
+  </div>
+</div>
+
+<!-- PDF Viewer Modal -->
+<div id="pdfModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Resume</h2>
+      <div class="modal-actions">
+        <a id="downloadPdf" href="/assets/docs/resume.pdf" download class="download-btn">
+          <i class="fas fa-download"></i>
+        </a>
+        <button class="close-btn" onclick="closePdfViewer()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <iframe id="pdfViewer" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+  </div>
 </div>
 
 ## Contact Me
