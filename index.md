@@ -100,8 +100,7 @@ title: Home
                name="name" 
                placeholder="Your Name" 
                required 
-               autocomplete="new-password"
-               spellcheck="false">
+               autocomplete="off">
       </div>
       <div class="form-group">
         <i class="fas fa-envelope"></i>
@@ -110,16 +109,13 @@ title: Home
                name="email" 
                placeholder="Your Email" 
                required 
-               autocomplete="new-password"
-               spellcheck="false">
+               autocomplete="off">
       </div>
       <div class="form-group">
         <textarea id="message" 
                   name="message" 
                   placeholder="Your Message" 
-                  required 
-                  autocomplete="new-password"
-                  spellcheck="false"></textarea>
+                  required></textarea>
       </div>
       <button type="submit" class="submit-button">
         Send Message <i class="fas fa-paper-plane"></i>
