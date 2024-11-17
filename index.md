@@ -12,24 +12,19 @@ title: Home
  My name is Thomas Tran and I am a current Computer Engineering undergraduate at the University of Michigan College of Engineering. You can look around and see what projects I have or am working on!
 </div>
 
-## Featured Projects
+## Projects
 
-<div class="project-container">
+<div class="project-grid">
   {% for project in site.projects %}
     <div class="project-card">
-      <div class="project-card-header">
-        <span class="project-status {{ project.status | downcase }}">
-          <i class="fas fa-circle"></i> {{ project.status }}
-        </span>
-      </div>
       {% if project.project_image %}
         <img src="{{ project.project_image }}" alt="{{ project.title }}" class="project-thumbnail">
       {% endif %}
       <div class="project-card-content">
         <h3>{{ project.title }}</h3>
-        <p>{{ project.excerpt }}</p>
+        <p>{{ project.description }}</p>
         <a href="{{ project.url }}" class="project-link">
-          View Project Guide <i class="fas fa-arrow-right"></i>
+          View Details <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </div>
