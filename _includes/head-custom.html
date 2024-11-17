@@ -1,8 +1,9 @@
 <!-- Add Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<!-- JavaScript for PDF Viewer -->
+<!-- JavaScript for PDF Viewer and Contact Form -->
 <script>
+// PDF Viewer Functions
 function openPdfViewer(pdfUrl) {
     const modal = document.getElementById('pdfModal');
     const viewer = document.getElementById('pdfViewer');
@@ -26,10 +27,28 @@ window.onclick = function(event) {
         closePdfViewer();
     }
 }
+
+// Contact Form Handler
+function handleContactSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Create mailto link with form data
+    const mailtoLink = `mailto:{{ site.social_links.email }}?subject=Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Reset form
+    event.target.reset();
+}
 </script>
 
-<!-- Custom styles for social icons -->
+<!-- Custom styles -->
 <style>
+/* Social Links Styles */
 .social-links {
     padding: 20px 0;
     text-align: center;
@@ -50,7 +69,6 @@ window.onclick = function(event) {
     transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Hover effects */
 .social-link:hover {
     text-decoration: none;
 }
@@ -59,7 +77,7 @@ window.onclick = function(event) {
     transform: scale(1.3);
 }
 
-/* Specific colors for each service */
+/* Service-specific colors */
 .social-link.github:hover {
     color: #333;
 }
@@ -72,7 +90,7 @@ window.onclick = function(event) {
     color: #D44638;
 }
 
-/* Optional: Add tooltip effect */
+/* Tooltip effects */
 .social-link::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -93,24 +111,130 @@ window.onclick = function(event) {
     transform: translateX(-50%) scale(1);
     opacity: 1;
 }
-</style>
 
-
-// Add this to your existing head-custom.html
-<script>
-function handleContactSubmit(event) {
-  event.preventDefault();
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-  
-  // Create mailto link with form data
-  const mailtoLink = `mailto:{{ site.social_links.email }}?subject=Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
-  
-  // Open email client
-  window.location.href = mailtoLink;
-  
-  // Reset form
-  event.target.reset();
+/* Sliding Contact Form Styles */
+.sliding-contact-form {
+    position: fixed;
+    left: 2rem;
+    bottom: 2rem;
+    display: flex;
+    align-items: flex-end;
+    z-index: 1000;
 }
-</script>
+
+.contact-button {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: #0066cc;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #0052a3;
+    transform: scale(1.05);
+}
+
+.contact-panel {
+    position: absolute;
+    left: 4.5rem;
+    bottom: 0;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    opacity: 0;
+    transform: translateX(-20px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.sliding-contact-form:hover .contact-panel {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+/* Form Elements */
+.form-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-group i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group textarea {
+    padding-left: 1rem;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0066cc;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-button:hover {
+    background-color: #0052a3;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .contact-panel {
+        background: #2d3748;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        background-color: #1a202c;
+        border-color: #4a5568;
+        color: white;
+    }
+
+    .form-group i {
+        color: #a0aec0;
+    }
+}
+</style>
