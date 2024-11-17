@@ -563,116 +563,124 @@ a.custom-link {
 /* Sliding Contact Form */
 .sliding-contact-form {
   position: fixed;
-  left: 20px;
-  bottom: 20px;
-  z-index: 1000;
+  left: 2rem;
+  bottom: 2rem;
   display: flex;
   align-items: flex-end;
+  z-index: 1000;
 }
 
 .contact-button {
-  width: 50px;
-  height: 50px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 50%;
-  background-color: #0366d6;
+  background-color: #0066cc;
+  border: none;
   color: white;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  transition: background-color 0.3s;
-  z-index: 2;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .contact-button:hover {
-  background-color: #024ea7;
+  background-color: #0052a3;
+  transform: scale(1.05);
 }
 
 .contact-panel {
   position: absolute;
-  left: 70px;
+  left: 4.5rem;
   bottom: 0;
-  width: 300px;
   background: white;
+  padding: 1.5rem;
   border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  transform: translateX(-100%);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  width: 300px;
   opacity: 0;
-  visibility: hidden;
+  transform: translateX(-20px);
+  pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .sliding-contact-form:hover .contact-panel {
-  transform: translateX(0);
   opacity: 1;
-  visibility: visible;
-}
-
-.contact-panel h3 {
-  margin: 0 0 20px 0;
-  color: #24292e;
+  transform: translateX(0);
+  pointer-events: all;
 }
 
 .form-group {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .form-group i {
   position: absolute;
-  left: 10px;
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #6a737d;
+  color: #666;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 10px 10px 10px 35px;
-  border: 1px solid #e1e4e8;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
 }
 
 .form-group textarea {
-  padding-left: 10px;
-  height: 80px;
-  resize: none;
+  padding-left: 1rem;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0066cc;
 }
 
 .submit-button {
   width: 100%;
-  padding: 10px;
-  background: #2ea44f;
+  padding: 0.75rem;
+  background-color: #0066cc;
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .submit-button:hover {
-  background: #2c974b;
+  background-color: #0052a3;
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .contact-panel {
-    background: #21262d;
+    background: #2d3748;
   }
-  
-  .contact-panel h3 {
-    color: white;
-  }
-  
+
   .form-group input,
   .form-group textarea {
-    background: #2d333b;
-    border-color: #444c56;
+    background-color: #1a202c;
+    border-color: #4a5568;
     color: white;
+  }
+
+  .form-group i {
+    color: #a0aec0;
   }
 }
