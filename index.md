@@ -16,6 +16,7 @@ title: Home
 
 <div class="project-grid">
   {% for project in site.projects %}
+    {% if project.type == "main" %}
     <div class="project-card">
       {% if project.project_image %}
         <img src="{{ project.project_image }}" alt="{{ project.title }}" class="project-thumbnail">
@@ -28,6 +29,7 @@ title: Home
         </a>
       </div>
     </div>
+    {% endif %}
   {% endfor %}
 </div>
 
