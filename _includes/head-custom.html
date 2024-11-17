@@ -28,11 +28,7 @@ window.onclick = function(event) {
     }
 }
 
-// Contact Form Handlers
-let isOverButton = false;
-let isOverPanel = false;
-let mouseTracker = null;
-
+// Contact Form Handler
 function handleContactSubmit(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
@@ -47,75 +43,6 @@ function handleContactSubmit(event) {
     
     // Reset form
     event.target.reset();
-}
-
-// Initialize contact form behavior once DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.sliding-contact-form');
-    const button = form.querySelector('.contact-button');
-    const panel = form.querySelector('.contact-panel');
-    
-    // Track mouse position relative to the viewport
-    document.addEventListener('mousemove', (e) => {
-        mouseTracker = {
-            x: e.clientX,
-            y: e.clientY
-        };
-    });
-
-    // Button listeners
-    button.addEventListener('mouseenter', () => {
-        isOverButton = true;
-        updateFormVisibility();
-    });
-
-    button.addEventListener('mouseleave', () => {
-        isOverButton = false;
-        // Small delay to check if mouse moved to panel
-        setTimeout(updateFormVisibility, 100);
-    });
-
-    // Panel listeners
-    panel.addEventListener('mouseenter', () => {
-        isOverPanel = true;
-        updateFormVisibility();
-    });
-
-    panel.addEventListener('mouseleave', (e) => {
-        // Only count as a leave if we're actually leaving the panel
-        // and not moving to a child element
-        if (!e.relatedTarget || !panel.contains(e.relatedTarget)) {
-            isOverPanel = false;
-            // Small delay to check if mouse moved to button
-            setTimeout(updateFormVisibility, 100);
-        }
-    });
-
-    // Add listeners to prevent closing when interacting with browser UI
-    panel.addEventListener('focusin', () => {
-        isOverPanel = true;
-        updateFormVisibility();
-    });
-
-    // Prevent closing when clicking or interacting within the panel
-    panel.addEventListener('click', (e) => {
-        if (panel.contains(e.target)) {
-            isOverPanel = true;
-            updateFormVisibility();
-        }
-    });
-});
-
-function updateFormVisibility() {
-    const panel = document.querySelector('.contact-panel');
-    if (isOverButton || isOverPanel) {
-        panel.classList.add('active');
-    } else {
-        // Only close if mouse is not over button or panel
-        if (!isOverButton && !isOverPanel) {
-            panel.classList.remove('active');
-        }
-    }
 }
 </script>
 
@@ -240,10 +167,98 @@ function updateFormVisibility() {
     justify-content: center;
 }
 
-.contact-panel.active {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-    pointer-events: all !important;
+/* Add these JavaScript event listeners */
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.sliding-contact-form');
+    const contactPanel = document.querySelector('.contact-panel');
+    let isHovered = false;
+
+    function showPanel() {
+        isHovered = true;
+        contactPanel.style.opacity = '1';
+        contactPanel.style.transform = 'translateX(0)';
+        contactPanel.style.pointerEvents = 'all';
+    }
+
+    function hidePanel() {
+        // Only hide if we're not hovering over the form or its children
+        if (!isFormHovered()) {
+            isHovered = false;
+            contactPanel.style.opacity = '0';
+            contactPanel.style.transform = 'translateX(-100%)';
+            contactPanel.style.pointerEvents = 'none';
+        }
+    }
+
+    function isFormHovered() {
+        return contactForm.matches(':hover') || 
+               Array.from(contactForm.querySelectorAll('*')).some(el => el.matches(':hover'));
+    }
+
+    // Show panel on mouseenter
+    contactForm.addEventListener('mouseenter', showPanel);
+
+    // Hide panel on mouseleave, but only if we're not still within form elements
+    contactForm.addEventListener('mouseleave', function(e) {
+        // Check if we're moving to a child element
+        const relatedTarget = e.relatedTarget;
+        if (!contactForm.contains(relatedTarget)) {
+            hidePanel();
+        }
+    });
+
+    // Prevent closing when interacting with form elements
+    contactForm.querySelectorAll('input, textarea').forEach(element => {
+        element.addEventListener('focus', showPanel);
+    });
+
+    // Additional handler for right-click context menus
+    document.addEventListener('contextmenu', function(e) {
+        if (isHovered) {
+            const rect = contactForm.getBoundingClientRect();
+            const isWithinBounds = e.clientX >= rect.left && 
+                                 e.clientX <= rect.right && 
+                                 e.clientY >= rect.top && 
+                                 e.clientY <= rect.bottom;
+            if (!isWithinBounds) {
+                e.preventDefault(); // Prevent context menu if outside form
+            }
+        }
+    });
+
+    // Handle browser autocomplete
+    const observer = new MutationObserver(function(mutations) {
+        if (isHovered) {
+            showPanel();
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+});
+</script>
+
+/* Modify the contact panel CSS to be controlled by JS */
+.contact-panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 75vw;
+    background: white;
+    padding: 2rem;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(-100%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
 }
 
 /* Form Elements */
