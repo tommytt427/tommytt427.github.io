@@ -28,7 +28,33 @@ window.onclick = function(event) {
     }
 }
 
-// Contact Form Handler
+// Contact Form Handlers
+function toggleContactForm() {
+    const contactPanel = document.querySelector('.contact-panel');
+    const contactButton = document.querySelector('.contact-button');
+    const isOpen = contactPanel.classList.contains('open');
+    
+    if (isOpen) {
+        contactPanel.classList.remove('open');
+        contactButton.classList.remove('active');
+    } else {
+        contactPanel.classList.add('open');
+        contactButton.classList.add('active');
+    }
+}
+
+// Close contact form when clicking outside
+document.addEventListener('click', function(event) {
+    const contactForm = document.querySelector('.sliding-contact-form');
+    const contactPanel = document.querySelector('.contact-panel');
+    const contactButton = document.querySelector('.contact-button');
+    
+    if (!contactForm.contains(event.target) && contactPanel.classList.contains('open')) {
+        contactPanel.classList.remove('open');
+        contactButton.classList.remove('active');
+    }
+});
+
 function handleContactSubmit(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
@@ -167,98 +193,14 @@ function handleContactSubmit(event) {
     justify-content: center;
 }
 
-/* Add these JavaScript event listeners */
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.sliding-contact-form');
-    const contactPanel = document.querySelector('.contact-panel');
-    let isHovered = false;
+.contact-panel.open {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
 
-    function showPanel() {
-        isHovered = true;
-        contactPanel.style.opacity = '1';
-        contactPanel.style.transform = 'translateX(0)';
-        contactPanel.style.pointerEvents = 'all';
-    }
-
-    function hidePanel() {
-        // Only hide if we're not hovering over the form or its children
-        if (!isFormHovered()) {
-            isHovered = false;
-            contactPanel.style.opacity = '0';
-            contactPanel.style.transform = 'translateX(-100%)';
-            contactPanel.style.pointerEvents = 'none';
-        }
-    }
-
-    function isFormHovered() {
-        return contactForm.matches(':hover') || 
-               Array.from(contactForm.querySelectorAll('*')).some(el => el.matches(':hover'));
-    }
-
-    // Show panel on mouseenter
-    contactForm.addEventListener('mouseenter', showPanel);
-
-    // Hide panel on mouseleave, but only if we're not still within form elements
-    contactForm.addEventListener('mouseleave', function(e) {
-        // Check if we're moving to a child element
-        const relatedTarget = e.relatedTarget;
-        if (!contactForm.contains(relatedTarget)) {
-            hidePanel();
-        }
-    });
-
-    // Prevent closing when interacting with form elements
-    contactForm.querySelectorAll('input, textarea').forEach(element => {
-        element.addEventListener('focus', showPanel);
-    });
-
-    // Additional handler for right-click context menus
-    document.addEventListener('contextmenu', function(e) {
-        if (isHovered) {
-            const rect = contactForm.getBoundingClientRect();
-            const isWithinBounds = e.clientX >= rect.left && 
-                                 e.clientX <= rect.right && 
-                                 e.clientY >= rect.top && 
-                                 e.clientY <= rect.bottom;
-            if (!isWithinBounds) {
-                e.preventDefault(); // Prevent context menu if outside form
-            }
-        }
-    });
-
-    // Handle browser autocomplete
-    const observer = new MutationObserver(function(mutations) {
-        if (isHovered) {
-            showPanel();
-        }
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-});
-</script>
-
-/* Modify the contact panel CSS to be controlled by JS */
-.contact-panel {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 75vw;
-    background: white;
-    padding: 2rem;
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateX(-100%);
-    pointer-events: none;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 1;
+.contact-button.active {
+    background-color: #0052a3;
 }
 
 /* Form Elements */
