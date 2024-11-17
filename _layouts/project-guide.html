@@ -1,100 +1,43 @@
 ---
-layout: project-guide
-title: "Turing Complete Walkthrough"
-description: "A comprehensive guide through the game's progression from basic logic to complex CPU designs"
-status: "In Progress"
-last_updated: "2024-11-16"
-project_image: "/assets/images/turing-complete/banner.jpg"
-sections:
-  - id: overview
-    title: "Guide Overview"
-    icon: "fa-info-circle"
-  - id: progression
-    title: "Learning Path"
-    icon: "fa-road"
-  - id: sections
-    title: "Guide Sections"
-    icon: "fa-book"
+layout: default
 ---
 
-## Guide Overview {#overview}
-Welcome to my comprehensive walkthrough of Turing Complete, a game about building a computer from basic logic gates to a functioning CPU. This guide will take you through my solutions for each major section of the game.
-
-## Learning Path {#progression}
-The guide follows the game's natural progression:
-1. Start with basic logic gates and combinations
-2. Move on to arithmetic operations and memory management
-3. Learn CPU architecture fundamentals
-4. Explore programming concepts
-5. Advanced CPU design and optimization
-6. Function implementation and management
-7. Tackle assembly challenges
-8. Create custom projects in the sandbox
-
-## Guide Sections {#sections}
-
-<div class="guide-sections">
-  <div class="section-card">
-    <a href="basic-logic" class="section-link">
-      <h3><i class="fas fa-microchip"></i> Basic Logic</h3>
-      <p>Gates, combinations, and fundamental circuits</p>
-      <span class="section-status completed">Completed</span>
-    </a>
+<div class="project-guide">
+  <!-- Project Header -->
+  <div class="project-header">
+    <h1 class="project-title">{{ page.title }}</h1>
+    <div class="project-metadata">
+      <span class="project-status {{ page.status | downcase }}">
+        <i class="fas fa-circle"></i> {{ page.status }}
+      </span>
+      <span class="project-date">
+        <i class="fas fa-calendar"></i> Last Updated: {{ page.last_updated }}
+      </span>
+    </div>
+    {% if page.project_image %}
+    <div class="project-banner">
+      <img src="{{ page.project_image }}" alt="{{ page.title }}" class="banner-image">
+    </div>
+    {% endif %}
   </div>
 
-  <div class="section-card">
-    <a href="arithmetic-memory" class="section-link">
-      <h3><i class="fas fa-calculator"></i> Arithmetic & Memory</h3>
-      <p>Building adders, counters, and memory units</p>
-      <span class="section-status completed">Completed</span>
-    </a>
+  <!-- Quick Navigation -->
+  <div class="quick-nav">
+    <h3>Quick Navigation</h3>
+    <ul class="nav-list" id="tableOfContents">
+      {% for section in page.sections %}
+      <li>
+        <a href="#{{ section.id }}" class="nav-link">
+          <i class="fas {{ section.icon }}"></i>
+          {{ section.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 
-  <div class="section-card">
-    <a href="cpu-architecture" class="section-link">
-      <h3><i class="fas fa-memory"></i> CPU Architecture</h3>
-      <p>Basic CPU components and design</p>
-      <span class="section-status in-progress">In Progress</span>
-    </a>
-  </div>
-
-  <div class="section-card">
-    <a href="programming" class="section-link">
-      <h3><i class="fas fa-code"></i> Programming</h3>
-      <p>Basic programming concepts and implementation</p>
-      <span class="section-status planned">Planned</span>
-    </a>
-  </div>
-
-  <div class="section-card">
-    <a href="cpu-architecture-2" class="section-link">
-      <h3><i class="fas fa-microchip"></i> CPU Architecture 2</h3>
-      <p>Advanced CPU concepts and optimizations</p>
-      <span class="section-status planned">Planned</span>
-    </a>
-  </div>
-
-  <div class="section-card">
-    <a href="functions" class="section-link">
-      <h3><i class="fas fa-project-diagram"></i> Functions</h3>
-      <p>Implementation of function calls and returns</p>
-      <span class="section-status planned">Planned</span>
-    </a>
-  </div>
-
-  <div class="section-card">
-    <a href="assembly-challenges" class="section-link">
-      <h3><i class="fas fa-puzzle-piece"></i> Assembly Challenges</h3>
-      <p>Solutions to assembly programming challenges</p>
-      <span class="section-status planned">Planned</span>
-    </a>
-  </div>
-
-  <div class="section-card">
-    <a href="sandbox-projects" class="section-link">
-      <h3><i class="fas fa-cubes"></i> Sandbox Projects</h3>
-      <p>Custom projects and experiments</p>
-      <span class="section-status planned">Planned</span>
-    </a>
+  <!-- Project Content -->
+  <div class="project-content">
+    {{ content }}
   </div>
 </div>
