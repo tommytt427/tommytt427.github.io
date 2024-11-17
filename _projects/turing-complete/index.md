@@ -35,7 +35,7 @@ The guide follows the game's natural progression:
 
 <div class="guide-sections">
   <div class="section-card">
-    <a href="basic-logic" class="section-link">
+    <a href="{{ site.baseurl }}/projects/turing-complete/basic-logic" class="section-link">
       <h3><i class="fas fa-microchip"></i> Basic Logic</h3>
       <p>Gates, combinations, and fundamental circuits</p>
       <span class="section-status completed">Completed</span>
