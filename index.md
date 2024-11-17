@@ -15,14 +15,25 @@ title: Home
 ## Featured Projects
 
 <div class="project-container">
-  <div class="featured-content">
-    <h3>Project 1</h3>
-    <a href="[project link]" class="custom-link">View Project →</a>
-  </div>
-
-  <div class="featured-content">
-    <h3>Project 2</h3>
-  </div>
+  {% for project in site.projects %}
+    <div class="project-card">
+      <div class="project-card-header">
+        <span class="project-status {{ project.status | downcase }}">
+          <i class="fas fa-circle"></i> {{ project.status }}
+        </span>
+      </div>
+      {% if project.project_image %}
+        <img src="{{ project.project_image }}" alt="{{ project.title }}" class="project-thumbnail">
+      {% endif %}
+      <div class="project-card-content">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.excerpt }}</p>
+        <a href="{{ project.url }}" class="project-link">
+          View Project Guide <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
 ## Documents & Resources
