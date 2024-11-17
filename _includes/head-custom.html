@@ -29,41 +29,30 @@ window.onclick = function(event) {
 }
 
 // Contact Form Handlers
-function toggleContactForm(event) {
-    event.stopPropagation(); // Prevent click from bubbling to document
+function toggleContactForm() {
     const contactPanel = document.querySelector('.contact-panel');
     const contactButton = document.querySelector('.contact-button');
     const isOpen = contactPanel.classList.contains('open');
     
     if (isOpen) {
-        closeContactForm();
+        contactPanel.classList.remove('open');
+        contactButton.classList.remove('active');
     } else {
         contactPanel.classList.add('open');
         contactButton.classList.add('active');
     }
 }
 
-function closeContactForm() {
-    const contactPanel = document.querySelector('.contact-panel');
-    const contactButton = document.querySelector('.contact-button');
-    contactPanel.classList.remove('open');
-    contactButton.classList.remove('active');
-}
-
 // Close contact form when clicking outside
 document.addEventListener('click', function(event) {
     const contactForm = document.querySelector('.sliding-contact-form');
     const contactPanel = document.querySelector('.contact-panel');
+    const contactButton = document.querySelector('.contact-button');
     
-    // If contact form is open and click is outside the form
-    if (contactPanel.classList.contains('open') && !contactForm.contains(event.target)) {
-        closeContactForm();
+    if (!contactForm.contains(event.target) && contactPanel.classList.contains('open')) {
+        contactPanel.classList.remove('open');
+        contactButton.classList.remove('active');
     }
-});
-
-// Prevent clicks inside the panel from closing the form
-document.querySelector('.contact-panel').addEventListener('click', function(event) {
-    event.stopPropagation();
 });
 
 function handleContactSubmit(event) {
@@ -272,8 +261,8 @@ function handleContactSubmit(event) {
 .submit-button {
     max-width: 800px;
     margin: 0 auto;
-    width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
+    width: calc(100% - 3rem); /* Account for the icon padding to match input fields */
+    padding: 1rem;
     background-color: #0066cc;
     color: white;
     border: none;
@@ -285,6 +274,7 @@ function handleContactSubmit(event) {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    margin-left: 3rem; /* Align with the text input start position */
 }
 
 .submit-button:hover {
