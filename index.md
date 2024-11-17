@@ -95,14 +95,31 @@ title: Home
     <form id="contact-form" onsubmit="handleContactSubmit(event)" autocomplete="off">
       <div class="form-group">
         <i class="fas fa-user"></i>
-        <input type="text" id="name" name="name" placeholder="Your Name" required autocomplete="off">
+        <input type="text" 
+               id="name" 
+               name="name" 
+               placeholder="Your Name" 
+               required 
+               autocomplete="new-password"
+               spellcheck="false">
       </div>
       <div class="form-group">
         <i class="fas fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="Your Email" required autocomplete="off">
+        <input type="email" 
+               id="email" 
+               name="email" 
+               placeholder="Your Email" 
+               required 
+               autocomplete="new-password"
+               spellcheck="false">
       </div>
       <div class="form-group">
-        <textarea id="message" name="message" placeholder="Your Message" required autocomplete="off"></textarea>
+        <textarea id="message" 
+                  name="message" 
+                  placeholder="Your Message" 
+                  required 
+                  autocomplete="new-password"
+                  spellcheck="false"></textarea>
       </div>
       <button type="submit" class="submit-button">
         Send Message <i class="fas fa-paper-plane"></i>
