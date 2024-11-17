@@ -13,3 +13,8 @@ social_links:
   github: tommytt427
   linkedin: ttrann3
   email: ttrann@umich.edu
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
