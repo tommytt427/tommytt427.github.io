@@ -86,7 +86,7 @@ title: Home
 <!-- Sliding Contact Form -->
 <div class="sliding-contact-form">
   <div class="contact-trigger">
-    <button class="contact-button" aria-label="Contact Form">
+    <button class="contact-button" aria-label="Contact Form" onclick="toggleContactForm()">
       <i class="fas fa-envelope"></i>
     </button>
   </div>
