@@ -29,30 +29,41 @@ window.onclick = function(event) {
 }
 
 // Contact Form Handlers
-function toggleContactForm() {
+function toggleContactForm(event) {
+    event.stopPropagation(); // Prevent click from bubbling to document
     const contactPanel = document.querySelector('.contact-panel');
     const contactButton = document.querySelector('.contact-button');
     const isOpen = contactPanel.classList.contains('open');
     
     if (isOpen) {
-        contactPanel.classList.remove('open');
-        contactButton.classList.remove('active');
+        closeContactForm();
     } else {
         contactPanel.classList.add('open');
         contactButton.classList.add('active');
     }
 }
 
+function closeContactForm() {
+    const contactPanel = document.querySelector('.contact-panel');
+    const contactButton = document.querySelector('.contact-button');
+    contactPanel.classList.remove('open');
+    contactButton.classList.remove('active');
+}
+
 // Close contact form when clicking outside
 document.addEventListener('click', function(event) {
     const contactForm = document.querySelector('.sliding-contact-form');
     const contactPanel = document.querySelector('.contact-panel');
-    const contactButton = document.querySelector('.contact-button');
     
-    if (!contactForm.contains(event.target) && contactPanel.classList.contains('open')) {
-        contactPanel.classList.remove('open');
-        contactButton.classList.remove('active');
+    // If contact form is open and click is outside the form
+    if (contactPanel.classList.contains('open') && !contactForm.contains(event.target)) {
+        closeContactForm();
     }
+});
+
+// Prevent clicks inside the panel from closing the form
+document.querySelector('.contact-panel').addEventListener('click', function(event) {
+    event.stopPropagation();
 });
 
 function handleContactSubmit(event) {
@@ -234,9 +245,15 @@ function handleContactSubmit(event) {
 }
 
 .form-group textarea {
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 3rem;
     min-height: 200px;
     resize: vertical;
+}
+
+/* Adjust the icon position for textarea */
+.form-group textarea + i {
+    top: 1.5rem;
+    transform: none;
 }
 
 .form-group input:focus,
