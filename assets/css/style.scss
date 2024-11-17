@@ -54,3 +54,31 @@ a.custom-link {
   box-shadow: 0 2px 15px rgba(0,0,0,0.1);
   margin: 30px 0;
 }
+
+.document-container {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    margin: 20px 0;
+}
+
+.document-container .custom-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0366d6;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.document-container .custom-link:hover {
+    background-color: #024ea7;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.document-container .custom-link i {
+    margin-right: 8px;
+}
