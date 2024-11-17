@@ -86,23 +86,23 @@ title: Home
 <!-- Sliding Contact Form -->
 <div class="sliding-contact-form">
   <div class="contact-trigger">
-    <button class="contact-button" aria-label="Contact Form" onclick="toggleContactForm()">
+    <button class="contact-button" aria-label="Contact Form">
       <i class="fas fa-envelope"></i>
     </button>
   </div>
   <div class="contact-panel">
     <h2>Get In Touch</h2>
-    <form id="contact-form" onsubmit="handleContactSubmit(event)">
+    <form id="contact-form" onsubmit="handleContactSubmit(event)" autocomplete="off">
       <div class="form-group">
         <i class="fas fa-user"></i>
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <input type="text" id="name" name="name" placeholder="Your Name" required autocomplete="off">
       </div>
       <div class="form-group">
         <i class="fas fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required autocomplete="off">
       </div>
       <div class="form-group">
-        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+        <textarea id="message" name="message" placeholder="Your Message" required autocomplete="off"></textarea>
       </div>
       <button type="submit" class="submit-button">
         Send Message <i class="fas fa-paper-plane"></i>
