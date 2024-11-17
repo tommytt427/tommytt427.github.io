@@ -1,8 +1,9 @@
 ---
 layout: project-guide
-title: "Basic Logic"  # Change for each section
+title: "Basic Logic"
+permalink: /projects/turing-complete/basic-logic/
 section: "turing-complete"
-status: "Completed"  # Change as needed
+status: "Completed"
 last_updated: "2024-11-16"
 project_image: "/assets/images/turing-complete/basic-logic-banner.jpg"
 sections:
