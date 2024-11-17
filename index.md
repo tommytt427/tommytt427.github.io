@@ -92,7 +92,8 @@ title: Home
   </div>
   <div class="contact-panel">
     <h2>Get In Touch</h2>
-    <form id="contact-form" onsubmit="handleContactSubmit(event)" autocomplete="off">
+    <form action="https://api.web3forms.com/submit" method="POST">
+     <input type="hidden" name="access_key" value="e52531c3-0d82-4041-8805-a10f0a1665dd">
       <div class="form-group">
         <i class="fas fa-user"></i>
         <input type="text" 
@@ -117,6 +118,8 @@ title: Home
                   placeholder="Your Message" 
                   required></textarea>
       </div>
+         <!-- Honeypot Spam Protection -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
       <button type="submit" class="submit-button">
         Send Message <i class="fas fa-paper-plane"></i>
       </button>
@@ -127,33 +130,3 @@ title: Home
     </form>
   </div>
 </div>
-
-<script>
-  let isInteractingWithAutocomplete = false;
-
-  // Add listeners for focus and blur on email input to detect autocomplete interaction
-  document.getElementById('email').addEventListener('focus', () => {
-      isInteractingWithAutocomplete = true;
-  });
-  document.getElementById('email').addEventListener('blur', () => {
-      // Use a small delay to account for autocomplete interaction after blur
-      setTimeout(() => {
-          isInteractingWithAutocomplete = false;
-      }, 200);
-  });
-
-  // Close contact form when clicking outside, but ignore autocomplete interactions
-  document.addEventListener('click', function(event) {
-      const contactForm = document.querySelector('.sliding-contact-form');
-      const contactPanel = document.querySelector('.contact-panel');
-
-      // If the form is open, the click is outside, and it's not an autocomplete interaction
-      if (
-          contactPanel.classList.contains('open') &&
-          !contactForm.contains(event.target) &&
-          !isInteractingWithAutocomplete
-      ) {
-          closeContactForm();
-      }
-  });
-</script>
