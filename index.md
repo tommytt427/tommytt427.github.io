@@ -126,7 +126,3 @@ title: Home
     </form>
   </div>
 </div>
-      </button>
-    </form>
-  </div>
-</div>
