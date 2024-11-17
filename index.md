@@ -123,3 +123,37 @@ title: Home
     </form>
   </div>
 </div>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  let isInteractingWithAutocomplete = false;
+
+  // Add listeners for focus and blur on email input to detect autocomplete interaction
+  document.getElementById('email').addEventListener('focus', () => {
+      isInteractingWithAutocomplete = true;
+  });
+  document.getElementById('email').addEventListener('blur', () => {
+      // Use a small delay to account for autocomplete interaction after blur
+      setTimeout(() => {
+          isInteractingWithAutocomplete = false;
+      }, 200);
+  });
+
+  // Close contact form when clicking outside, but ignore autocomplete interactions
+  document.addEventListener('click', function(event) {
+      const contactForm = document.querySelector('.sliding-contact-form');
+      const contactPanel = document.querySelector('.contact-panel');
+
+      // If the form is open, the click is outside, and it's not an autocomplete interaction
+      if (
+          contactPanel.classList.contains('open') &&
+          !contactForm.contains(event.target) &&
+          !isInteractingWithAutocomplete
+      ) {
+          closeContactForm();
+      }
+  });
+</script>
