@@ -1,6 +1,6 @@
 ---
 layout: project-guide
-title: "Project Name"
+title: "Turing Complete"
 description: "A brief description of your project that will appear on the main page"
 status: "In Progress"
 last_updated: "2024-11-16"
