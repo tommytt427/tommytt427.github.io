@@ -4,7 +4,7 @@ title: "Project Name"
 description: "A brief description of your project that will appear on the main page"
 status: "In Progress"
 last_updated: "2024-11-16"
-project_image: "/assets/images/project-banner.jpg"
+project_image: "/assets/images/turingcomplete.jpg"
 sections:
   - id: overview
     title: "Project Overview"
