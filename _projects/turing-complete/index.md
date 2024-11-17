@@ -19,7 +19,7 @@ sections:
 ---
 
 ## Guide Overview {#overview}
-Welcome to my comprehensive walkthrough of Turing Complete, a game about building a computer from basic logic gates all the way up to a functioning CPU. This guide will take you through my solutions and explanations for each major section of the game.
+Welcome to my comprehensive walkthrough of Turing Complete, a game about building a computer from basic logic gates to a functioning CPU. This guide will take you through my solutions and explanations for each major section of the game.
 
 ## Learning Path {#progression}
 The guide follows the game's natural progression:
@@ -32,7 +32,7 @@ The guide follows the game's natural progression:
 7. Tackle assembly challenges
 8. Create custom projects in the sandbox
 
-This simulator has a lot to handle. Many components may seem confusing because it is simplified in the language the game makes it to be. That is there is a <a href="https://turingcomplete.wiki/wiki/Components">wiki page</a> that gives a brief detail of the components if you need referencing.
+This simulator has a lot to handle. Many components may seem confusing because it is simplified in the language the game makes it to be. That is why there is a <a href="https://turingcomplete.wiki/wiki/Components">wiki page</a> that gives a brief detail of the components if you need referencing.
 
 ## Guide Sections {#sections}
 
