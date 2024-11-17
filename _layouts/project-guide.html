@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+<div class="project-guide">
+  <!-- Project Header -->
+  <div class="project-header">
+    <h1 class="project-title">{{ page.title }}</h1>
+    <div class="project-metadata">
+      <span class="project-status {{ page.status | downcase }}">
+        <i class="fas fa-circle"></i> {{ page.status }}
+      </span>
+      <span class="project-date">
+        <i class="fas fa-calendar"></i> Last Updated: {{ page.last_updated }}
+      </span>
+    </div>
+    {% if page.project_image %}
+    <div class="project-banner">
+      <img src="{{ page.project_image }}" alt="{{ page.title }}" class="banner-image">
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Quick Navigation -->
+  <div class="quick-nav">
+    <h3>Quick Navigation</h3>
+    <ul class="nav-list" id="tableOfContents">
+      {% for section in page.sections %}
+      <li>
+        <a href="#{{ section.id }}" class="nav-link">
+          <i class="fas {{ section.icon }}"></i>
+          {{ section.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Project Content -->
+  <div class="project-content">
+    {{ content }}
+  </div>
+
+  <!-- Progress Updates -->
+  <div class="progress-updates">
+    <h2>Development Progress</h2>
+    <div class="timeline">
+      {% for update in page.updates reversed %}
+      <div class="timeline-item">
+        <div class="timeline-date">{{ update.date }}</div>
+        <div class="timeline-content">
+          <h3>{{ update.title }}</h3>
+          <p>{{ update.description }}</p>
+          {% if update.image %}
+          <img src="{{ update.image }}" alt="{{ update.title }}" class="update-image">
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
