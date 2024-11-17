@@ -2,18 +2,14 @@
 layout: default
 title: Home
 ---
-
 ![Profile Picture](/assets/images/ttrannEdit1.JPG){: .profile-image}
-
 # Welcome to My Portfolio
-
 ## About Me
 <div class="featured-content">
  My name is Thomas Tran and I am a current Computer Engineering undergraduate at the University of Michigan College of Engineering. You can look around and see what projects I have or am working on!
 </div>
 
 ## Projects
-
 <div class="project-grid">
   {% for project in site.projects %}
     {% if project.type == "main" %}
@@ -72,7 +68,6 @@ title: Home
 </div>
 
 ## Contact Me
-
 <div class="social-links">
   <a href="https://github.com/{{ site.social_links.github }}" class="social-link" target="_blank">
     <i class="fab fa-github"></i>
@@ -83,4 +78,30 @@ title: Home
   <a href="mailto:{{ site.social_links.email }}" class="social-link">
     <i class="fas fa-envelope"></i>
   </a>
+</div>
+
+<!-- Sliding Contact Form -->
+<div class="sliding-contact-form">
+  <div class="contact-button">
+    <i class="fas fa-envelope"></i>
+  </div>
+  <div class="contact-panel">
+    <h3>Contact Me</h3>
+    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder="Name" id="contactName" required>
+      </div>
+      <div class="form-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" placeholder="Email" id="contactEmail" required>
+      </div>
+      <div class="form-group">
+        <textarea placeholder="Message" id="contactMessage" required></textarea>
+      </div>
+      <button type="submit" class="submit-button">
+        Send <i class="fas fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
 </div>
