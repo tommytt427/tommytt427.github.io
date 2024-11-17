@@ -1,6 +1,7 @@
 ---
 layout: project-guide
 title: "Turing Complete Walkthrough"
+type: main
 description: "A comprehensive guide through the game's progression from basic logic to complex CPU designs"
 status: "In Progress"
 last_updated: "2024-11-16"
