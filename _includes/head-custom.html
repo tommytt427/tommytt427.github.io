@@ -94,3 +94,18 @@ window.onclick = function(event) {
     opacity: 1;
 }
 </style>
+
+
+function handleContactSubmit(event) {
+  event.preventDefault();
+  const name = document.getElementById('contactName').value;
+  const email = document.getElementById('contactEmail').value;
+  const message = document.getElementById('contactMessage').value;
+  
+  // Create mailto link
+  const mailtoLink = `mailto:${email}?subject=Contact from ${name}&body=${encodeURIComponent(message)}`;
+  window.location.href = mailtoLink;
+  
+  // Reset form
+  event.target.reset();
+}
