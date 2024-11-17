@@ -2,8 +2,11 @@
 layout: default
 title: Home
 ---
+
 ![Profile Picture](/assets/images/ttrannEdit1.JPG){: .profile-image}
+
 # Welcome to My Portfolio
+
 ## About Me
 <div class="featured-content">
  My name is Thomas Tran and I am a current Computer Engineering undergraduate at the University of Michigan College of Engineering. You can look around and see what projects I have or am working on!
@@ -82,22 +85,23 @@ title: Home
 
 <!-- Sliding Contact Form -->
 <div class="sliding-contact-form">
-  <div class="contact-button">
-    <i class="fas fa-envelope"></i>
+  <div class="contact-trigger">
+    <button class="contact-button" aria-label="Contact Form">
+      <i class="fas fa-envelope"></i>
+    </button>
   </div>
   <div class="contact-panel">
-    <h3>Contact Me</h3>
-    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+    <form id="contact-form" onsubmit="handleContactSubmit(event)">
       <div class="form-group">
         <i class="fas fa-user"></i>
-        <input type="text" placeholder="Name" id="contactName" required>
+        <input type="text" id="name" name="name" placeholder="Name" required>
       </div>
       <div class="form-group">
         <i class="fas fa-envelope"></i>
-        <input type="email" placeholder="Email" id="contactEmail" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
       </div>
       <div class="form-group">
-        <textarea placeholder="Message" id="contactMessage" required></textarea>
+        <textarea id="message" name="message" placeholder="Message" required></textarea>
       </div>
       <button type="submit" class="submit-button">
         Send <i class="fas fa-paper-plane"></i>
