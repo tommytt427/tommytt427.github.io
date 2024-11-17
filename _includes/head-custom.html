@@ -96,16 +96,21 @@ window.onclick = function(event) {
 </style>
 
 
+// Add this to your existing head-custom.html
+<script>
 function handleContactSubmit(event) {
   event.preventDefault();
-  const name = document.getElementById('contactName').value;
-  const email = document.getElementById('contactEmail').value;
-  const message = document.getElementById('contactMessage').value;
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
   
-  // Create mailto link
-  const mailtoLink = `mailto:${email}?subject=Contact from ${name}&body=${encodeURIComponent(message)}`;
+  // Create mailto link with form data
+  const mailtoLink = `mailto:{{ site.social_links.email }}?subject=Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
+  
+  // Open email client
   window.location.href = mailtoLink;
   
   // Reset form
   event.target.reset();
 }
+</script>
