@@ -40,23 +40,4 @@ layout: default
   <div class="project-content">
     {{ content }}
   </div>
-
-  <!-- Progress Updates -->
-  <div class="progress-updates">
-    <h2>Development Progress</h2>
-    <div class="timeline">
-      {% for update in page.updates reversed %}
-      <div class="timeline-item">
-        <div class="timeline-date">{{ update.date }}</div>
-        <div class="timeline-content">
-          <h3>{{ update.title }}</h3>
-          <p>{{ update.description }}</p>
-          {% if update.image %}
-          <img src="{{ update.image }}" alt="{{ update.title }}" class="update-image">
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
 </div>
