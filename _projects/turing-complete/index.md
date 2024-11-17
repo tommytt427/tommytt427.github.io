@@ -32,6 +32,8 @@ The guide follows the game's natural progression:
 7. Tackle assembly challenges
 8. Create custom projects in the sandbox
 
+This simulator has a lot to handle. Many components may seem confusing because it is simplified in the language the game makes it to be. That is there is a <a href="https://turingcomplete.wiki/wiki/Components">wiki page that gives a brief detail of the components if you need referencing.</a>
+
 ## Guide Sections {#sections}
 
 <div class="guide-sections">
