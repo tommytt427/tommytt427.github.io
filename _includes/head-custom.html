@@ -28,7 +28,33 @@ window.onclick = function(event) {
     }
 }
 
-// Contact Form Handler
+// Contact Form Handlers
+function toggleContactForm() {
+    const contactPanel = document.querySelector('.contact-panel');
+    const contactButton = document.querySelector('.contact-button');
+    const isOpen = contactPanel.classList.contains('open');
+    
+    if (isOpen) {
+        contactPanel.classList.remove('open');
+        contactButton.classList.remove('active');
+    } else {
+        contactPanel.classList.add('open');
+        contactButton.classList.add('active');
+    }
+}
+
+// Close contact form when clicking outside
+document.addEventListener('click', function(event) {
+    const contactForm = document.querySelector('.sliding-contact-form');
+    const contactPanel = document.querySelector('.contact-panel');
+    const contactButton = document.querySelector('.contact-button');
+    
+    if (!contactForm.contains(event.target) && contactPanel.classList.contains('open')) {
+        contactPanel.classList.remove('open');
+        contactButton.classList.remove('active');
+    }
+});
+
 function handleContactSubmit(event) {
     event.preventDefault();
     const name = document.getElementById('name').value;
@@ -167,10 +193,14 @@ function handleContactSubmit(event) {
     justify-content: center;
 }
 
-.sliding-contact-form:hover .contact-panel {
+.contact-panel.open {
     opacity: 1;
     transform: translateX(0);
     pointer-events: all;
+}
+
+.contact-button.active {
+    background-color: #0052a3;
 }
 
 /* Form Elements */
