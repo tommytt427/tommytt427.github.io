@@ -1,7 +1,7 @@
 ---
 layout: project-guide
-title: "Turing Complete"
-description: "A brief description of your project that will appear on the main page"
+title: "Turing Complete Walkthrough"
+description: "This is a walkthrough of my own designs for the Computer Architecture simulator Turing Complete"
 status: "In Progress"
 last_updated: "2024-11-16"
 project_image: "/assets/images/turingcomplete.jpg"
