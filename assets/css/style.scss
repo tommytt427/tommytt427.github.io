@@ -55,7 +55,6 @@ a.custom-link {
   margin: 30px 0;
 }
 
-// Document links
 .document-link {
     display: flex;
     align-items: center;
@@ -84,12 +83,17 @@ a.custom-link {
     flex-direction: column;
 }
 
+.document-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
 .document-desc {
     font-size: 14px;
     color: #586069;
 }
 
-// PDF Preview Styles
+// New PDF Preview Styles
 .pdf-preview {
     display: flex;
     align-items: center;
@@ -239,80 +243,16 @@ a.custom-link {
     border: none;
 }
 
-// NEW PROJECT GUIDE STYLES START HERE
 
-// Guide Sections Grid
-.guide-sections {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin: 30px 0;
-}
 
-.section-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-}
-
-.section-link {
-  display: block;
-  padding: 20px;
-  text-decoration: none;
-  color: inherit;
-  
-  h3 {
-    color: #24292e;
-    margin: 0 0 10px 0;
-    
-    i {
-      margin-right: 8px;
-      color: #0366d6;
-    }
-  }
-  
-  p {
-    color: #586069;
-    margin: 0 0 15px 0;
-  }
-}
-
-.section-status {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8em;
-  
-  &.completed {
-    background: #dcffe4;
-    color: #1a7f37;
-  }
-  
-  &.in-progress {
-    background: #fff8c5;
-    color: #9a6700;
-  }
-  
-  &.planned {
-    background: #f6f8fa;
-    color: #57606a;
-  }
-}
-
-// Project Guide Layout
+// Project Guide Styles
 .project-guide {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
+// Project Header
 .project-header {
   margin-bottom: 40px;
   
@@ -332,19 +272,14 @@ a.custom-link {
     border-radius: 15px;
     font-size: 0.9em;
     
-    &.completed {
-      background: #dcffe4;
-      color: #1a7f37;
-    }
-    
     &.in-progress {
-      background: #fff8c5;
-      color: #9a6700;
+      background: #fff3cd;
+      color: #856404;
     }
     
-    &.planned {
-      background: #f6f8fa;
-      color: #57606a;
+    &.completed {
+      background: #d4edda;
+      color: #155724;
     }
     
     i {
@@ -407,7 +342,66 @@ a.custom-link {
   }
 }
 
-// Project Content
+// Project Cards for Index Page
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.project-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+}
+
+.project-card-content {
+  padding: 20px;
+  
+  h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4em;
+    color: #333;
+  }
+  
+  p {
+    color: #666;
+    margin-bottom: 15px;
+  }
+}
+
+.project-thumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  color: #0366d6;
+  text-decoration: none;
+  font-weight: 500;
+  
+  i {
+    margin-left: 5px;
+    transition: transform 0.2s ease;
+  }
+  
+  &:hover i {
+    transform: translateX(3px);
+  }
+}
+
+// Project Content Sections
 .project-content {
   h2 {
     color: #212529;
@@ -427,5 +421,9 @@ a.custom-link {
   .project-header .project-metadata {
     flex-direction: column;
     gap: 10px;
+  }
+  
+  .project-grid {
+    grid-template-columns: 1fr;
   }
 }
