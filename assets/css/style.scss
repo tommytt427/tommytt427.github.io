@@ -55,30 +55,40 @@ a.custom-link {
   margin: 30px 0;
 }
 
-.document-container {
-    padding: 20px;
-    border-radius: 8px;
-    background: #f8f9fa;
-    margin: 20px 0;
-}
-
-.document-container .custom-link {
-    display: inline-flex;
+.document-link {
+    display: flex;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #0366d6;
-    color: white;
-    border-radius: 5px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    color: #24292e;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
-.document-container .custom-link:hover {
-    background-color: #024ea7;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+.document-link:hover {
+    background: #f6f8fa;
+    border-color: #0366d6;
+    text-decoration: none;
 }
 
-.document-container .custom-link i {
-    margin-right: 8px;
+.document-icon {
+    color: #0366d6;
+    margin-right: 15px;
+}
+
+.document-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.document-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.document-desc {
+    font-size: 14px;
+    color: #586069;
 }
