@@ -27,8 +27,14 @@ title: Home
 
 ## Documents & Resources
 <div class="document-container">
-  <a href="/assets/docs/resume.pdf" class="custom-link">
-    <i class="fas fa-file-pdf"></i> Download Resume
+  <a href="/assets/docs/resume.pdf" class="document-link" target="_blank">
+    <div class="document-icon">
+      <i class="fas fa-file-pdf fa-2x"></i>
+    </div>
+    <div class="document-info">
+      <span class="document-title">My Resume</span>
+      <span class="document-desc">Download PDF</span>
+    </div>
   </a>
 </div>
 
