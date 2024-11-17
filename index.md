@@ -91,20 +91,21 @@ title: Home
     </button>
   </div>
   <div class="contact-panel">
+    <h2>Get In Touch</h2>
     <form id="contact-form" onsubmit="handleContactSubmit(event)">
       <div class="form-group">
         <i class="fas fa-user"></i>
-        <input type="text" id="name" name="name" placeholder="Name" required>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
       </div>
       <div class="form-group">
         <i class="fas fa-envelope"></i>
-        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
       </div>
       <div class="form-group">
-        <textarea id="message" name="message" placeholder="Message" required></textarea>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
       </div>
       <button type="submit" class="submit-button">
-        Send <i class="fas fa-paper-plane"></i>
+        Send Message <i class="fas fa-paper-plane"></i>
       </button>
     </form>
   </div>
