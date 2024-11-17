@@ -1,6 +1,7 @@
 ---
 layout: project-guide
 title: "Basic Logic"
+type: section
 permalink: /projects/turing-complete/basic-logic/
 section: "turing-complete"
 status: "Completed"
