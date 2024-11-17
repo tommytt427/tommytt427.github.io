@@ -115,14 +115,19 @@ function handleContactSubmit(event) {
 /* Sliding Contact Form Styles */
 .sliding-contact-form {
     position: fixed;
-    left: 2rem;
-    bottom: 2rem;
+    left: 0;
+    top: 0;
+    bottom: 0;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     z-index: 1000;
 }
 
 .contact-button {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
@@ -136,26 +141,30 @@ function handleContactSubmit(event) {
     font-size: 1.5rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 2;
 }
 
 .contact-button:hover {
     background-color: #0052a3;
-    transform: scale(1.05);
+    transform: translateY(-50%) scale(1.05);
 }
 
 .contact-panel {
     position: absolute;
-    left: 4.5rem;
-    bottom: 0;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 75vw;
     background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    padding: 2rem;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-100%);
     pointer-events: none;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .sliding-contact-form:hover .contact-panel {
@@ -167,7 +176,11 @@ function handleContactSubmit(event) {
 /* Form Elements */
 .form-group {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
 .form-group i {
@@ -176,21 +189,23 @@ function handleContactSubmit(event) {
     top: 50%;
     transform: translateY(-50%);
     color: #666;
+    font-size: 1.2rem;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1rem;
     transition: border-color 0.3s ease;
+    background-color: white;
 }
 
 .form-group textarea {
-    padding-left: 1rem;
-    min-height: 100px;
+    padding: 1rem;
+    min-height: 200px;
     resize: vertical;
 }
 
@@ -200,14 +215,23 @@ function handleContactSubmit(event) {
     border-color: #0066cc;
 }
 
+.contact-panel h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #0066cc;
+    font-size: 2rem;
+}
+
 .submit-button {
+    max-width: 800px;
+    margin: 0 auto;
     width: 100%;
-    padding: 0.75rem;
+    padding: 1rem;
     background-color: #0066cc;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
     display: flex;
@@ -223,18 +247,104 @@ function handleContactSubmit(event) {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     .contact-panel {
-        background: #2d3748;
+        background: #1a1a1a;
     }
 
     .form-group input,
     .form-group textarea {
-        background-color: #1a202c;
-        border-color: #4a5568;
+        background-color: #2d2d2d;
+        border-color: #404040;
         color: white;
     }
 
     .form-group i {
-        color: #a0aec0;
+        color: #888;
+    }
+
+    .contact-panel h2 {
+        color: #66b3ff;
+    }
+}
+
+/* Responsiveness for different screen sizes */
+@media (max-width: 1200px) {
+    .contact-panel {
+        width: 85vw; /* Slightly wider on medium screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .contact-panel {
+        width: 90vw;
+    }
+    
+    .form-group {
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-panel {
+        width: 100vw;
+        padding: 1rem;
+    }
+
+    .form-group {
+        max-width: 100%;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Prevent zoom on mobile */
+        padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+    }
+
+    .contact-panel h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-button {
+        width: 3rem;
+        height: 3rem;
+        left: 1rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-panel {
+        padding: 0.8rem;
+    }
+
+    .submit-button {
+        padding: 0.8rem;
+    }
+}
+
+/* Height-based adjustments */
+@media (max-height: 600px) {
+    .contact-panel {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+    }
+}
+
+/* Handle ultra-wide screens */
+@media (min-width: 2000px) {
+    .contact-panel {
+        max-width: 1500px;
+    }
+    
+    .form-group {
+        max-width: 1000px;
     }
 }
 </style>
