@@ -821,6 +821,7 @@ header {
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-top: 15px;
+  position: relative;
 }
 
 .skill-item {
@@ -844,6 +845,7 @@ header {
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
 
     i {
       transform: scale(1.1);
@@ -872,7 +874,7 @@ header {
   visibility: hidden;
   transition: all 0.3s ease;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 101;
 }
 
 // Sidebar social links
