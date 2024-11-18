@@ -1,0 +1,19 @@
+{% assign banner = include.banner %}
+<div class="video-banner-container">
+  <video class="video-banner" autoplay loop muted playsinline>
+    <source src="{{ banner.video_url }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="banner-overlay">
+    <div class="banner-title">{{ banner.title }}</div>
+    <div class="banner-role">{{ banner.role }}</div>
+    <div class="banner-duration">{{ banner.duration }}</div>
+    <div class="banner-description">
+      <ul class="banner-highlights">
+        {% for highlight in banner.highlights %}
+        <li>{{ highlight }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
