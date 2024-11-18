@@ -7,22 +7,15 @@ logo: /assets/images/logo.png
 
 # Skills and interests sections
 skills:
-  - name: Programming
-    icon: fa-code
-  - name: Web Development
-    icon: fa-globe
   - name: VS Code
-    icon: fa-code-branch
-  - name: Computer Engineering
-    icon: fa-microchip
-  - name: Linux
-    icon: fa-linux
+    icon: fa-brands fa-vs
+    color: "#007ACC"
   - name: Python
-    icon: fa-python
+    icon: fa-brands fa-python
+    color: "#3776AB"
   - name: GitHub
-    icon: fa-github
-  - name: Machine Learning
-    icon: fa-brain
+    icon: fa-brands fa-github
+    color: "#181717"
 
 interests:
   - name: Gaming
