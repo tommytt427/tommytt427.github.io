@@ -813,8 +813,8 @@ header {
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .skill-item {
@@ -824,45 +824,46 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f6f8fa;
+  background: #ffffff;
   border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
+  border: 1px solid #e1e4e8;
 
   i {
-    font-size: 20px;
-    color: #0366d6;
+    font-size: 22px;
     transition: transform 0.3s ease;
   }
 
   &:hover {
-    background: #0366d6;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 
     i {
-      color: white;
       transform: scale(1.1);
     }
 
     .skill-tooltip {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
+      visibility: visible;
     }
   }
 }
 
 .skill-tooltip {
   position: absolute;
-  bottom: -25px;
+  bottom: -30px;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%) translateY(-10px);
   background: rgba(0,0,0,0.8);
   color: white;
-  padding: 4px 8px;
+  padding: 5px 10px;
   border-radius: 4px;
   font-size: 12px;
   white-space: nowrap;
   opacity: 0;
+  visibility: hidden;
   transition: all 0.3s ease;
   pointer-events: none;
   z-index: 1000;
@@ -872,38 +873,35 @@ header {
 .sidebar-social {
   display: flex;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 15px;
 
   a {
     font-size: 24px;
     color: #24292e;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 
     &:hover {
-      color: #0366d6;
       transform: translateY(-2px);
     }
   }
-}
 
-// Make sidebar sticky on larger screens
-@media screen and (min-width: 960px) {
-  header {
-    position: sticky;
-    top: 20px;
-    height: calc(100vh - 40px);
-    overflow-y: auto;
-    
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 3px;
-    }
+  .fa-github:hover {
+    color: #181717;
+  }
+
+  .fa-linkedin:hover {
+    color: #0A66C2;
+  }
+
+  .fa-envelope:hover {
+    color: #EA4335;
   }
 }
-.sidebar-banner-overlay {
-  z-index: 3;  // Ensure hover overlay stays on top
+
+// Keep header static (no scrollbar)
+@media screen and (min-width: 960px) {
+  header {
+    position: fixed;
+    width: 270px;  // Adjust this value based on your theme's sidebar width
+  }
 }
