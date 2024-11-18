@@ -21,13 +21,13 @@
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
 
-        <!-- Skills Section -->
+        <!-- Technical Skills Section -->
         <div class="sidebar-section">
-          <h3><i class="fas fa-tools"></i> Skills</h3>
+          <h3><i class="fas fa-tools"></i> Technical Skills</h3>
           <div class="skills-grid">
             {% for skill in site.skills %}
             <div class="skill-item" title="{{ skill.name }}">
-              <i class="fas {{ skill.icon }}"></i>
+              <i class="{{ skill.icon }}" style="color: {{ skill.color }};"></i>
               <span class="skill-tooltip">{{ skill.name }}</span>
             </div>
             {% endfor %}
