@@ -770,14 +770,14 @@ header {
 // PNG Overlay styles
 .banner-png-overlay {
   position: absolute;
-  top: 20%;          // Center vertically
+  top: 25%;          // Center vertically
   left: 50%;         // Center horizontally
   transform: translate(-50%, -50%);  // Perfect centering
   width: 60%;        // Adjust size as needed
   height: auto;
   pointer-events: none;  // Allows clicking through to the hover effect
   z-index: 2;       // Above video but below hover overlay
-  opacity: 1;     // Adjust transparency
+  opacity: 0.8;     // Adjust transparency
 }
 
 // Ensure proper stacking
@@ -792,7 +792,4 @@ header {
 
 .sidebar-banner-overlay {
   z-index: 3;  // Ensure hover overlay stays on top
-}
-    transform: translate(-50%, -55%);  // Gentle floating effect
-  }
 }
