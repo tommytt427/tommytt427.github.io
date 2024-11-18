@@ -7,15 +7,27 @@ logo: /assets/images/logo.png
 
 # Skills and interests sections
 skills:
-  - name: VS Code
-    icon: fa-brands fa-vs
-    color: "#007ACC"
-  - name: Python
-    icon: fa-brands fa-python
-    color: "#3776AB"
-  - name: GitHub
+  - name: I enjoy coding on VS Code!
+    icon: fa-brands fa-cplusplus
+    color: "#00599C"
+  - name: Our project team mostly uses Altium Designer for PCB work!
+    icon: fa-solid fa-drafting-compass
+    color: "#A5915F"
+  - name: GitHub user!
     icon: fa-brands fa-github
     color: "#181717"
+  - name: Verilog and Schematic design for Quartus!
+    icon: fa-solid fa-microchip
+    color: "#0071C5"
+  - name: I currently use Cadence Virtuoso for IC design!
+    icon: fa-solid fa-circuit-board
+    color: "#A40832"
+  - name: LTSpice!
+    icon: fa-solid fa-wave-square
+    color: "#0000FF"
+  - name: Matlab and Simulink
+    icon: fa-solid fa-chart-line
+    color: "#FF7200"
 
 interests:
   - name: Gaming
