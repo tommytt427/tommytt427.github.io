@@ -906,10 +906,46 @@ header {
   }
 }
 
-// Keep header static (no scrollbar)
-@media screen and (min-width: 960px) {
+// Fix layout issues with sidebar and content
+.wrapper {
+  display: flex;
+  gap: 50px;
+}
+
+header {
+  width: 270px;
+  margin-right: 0;
+  flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+section {
+  flex: 1;
+  max-width: calc(100% - 320px); // 270px sidebar + 50px gap
+  padding: 20px;
+}
+
+// Responsive adjustments
+@media screen and (max-width: 960px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
   header {
-    position: fixed;
-    width: 270px;  // Adjust this value based on your theme's sidebar width
+    width: 100%;
+    position: relative;
+    max-height: none;
+  }
+
+  section {
+    max-width: 100%;
+  }
+
+  .sidebar-video-banner {
+    max-width: 400px;
+    margin: 20px auto;
   }
 }
