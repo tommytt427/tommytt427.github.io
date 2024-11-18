@@ -685,6 +685,8 @@ a.custom-link {
   }
 }
 
+
+
 // Sidebar Video Banner Styles
 .sidebar-video-banner {
   position: relative;
@@ -693,7 +695,22 @@ a.custom-link {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+}
+
+.sidebar-video-banner-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .sidebar-banner {
@@ -724,13 +741,17 @@ a.custom-link {
 
 
 .sidebar-banner-content {
-  color: white;
-  text-align: center;
-  padding: 15px;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 4; // Highest z-index to ensure text is visible
+  h3 {
+    position: relative;
+    
+    &::after {
+      content: '→';
+      position: absolute;
+      right: -20px;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+  }
 }
 
 .sidebar-video-banner:hover .sidebar-banner-content {
@@ -742,6 +763,10 @@ a.custom-link {
   margin: 0 0 5px 0;
   color: #fff;
   font-size: 16px;
+}
+.sidebar-video-banner:hover .sidebar-banner-content h3::after {
+  opacity: 1;
+  right: -25px;
 }
 
 .sidebar-banner-content p {
