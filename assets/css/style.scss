@@ -693,12 +693,14 @@ a.custom-link {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .sidebar-banner {
   width: 100%;
   height: auto;
   display: block;
+  z-index: 1;
 }
 
 .sidebar-banner-overlay {
@@ -713,11 +715,13 @@ a.custom-link {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3; // Higher than PNG overlay
 }
 
 .sidebar-video-banner:hover .sidebar-banner-overlay {
   opacity: 1;
 }
+
 
 .sidebar-banner-content {
   color: white;
@@ -726,6 +730,7 @@ a.custom-link {
   transform: translateY(10px);
   opacity: 0;
   transition: all 0.3s ease;
+  z-index: 4; // Highest z-index to ensure text is visible
 }
 
 .sidebar-video-banner:hover .sidebar-banner-content {
@@ -770,14 +775,15 @@ header {
 // PNG Overlay styles
 .banner-png-overlay {
   position: absolute;
-  top: 25%;          // Center vertically
-  left: 50%;         // Center horizontally
-  transform: translate(-50%, -50%);  // Perfect centering
-  width: 60%;        // Adjust size as needed
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
   height: auto;
-  pointer-events: none;  // Allows clicking through to the hover effect
-  z-index: 2;       // Above video but below hover overlay
-  opacity: 0.8;     // Adjust transparency
+  z-index: 2;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: opacity 0.3s ease; // Smooth transition for opacity
 }
 
 // Ensure proper stacking
