@@ -688,19 +688,33 @@ a.custom-link {
 // Sidebar Video Banner Styles
 .sidebar-video-banner {
   position: relative;
+  display: block;
   width: 100%;
-  margin: 20px 0;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  cursor: pointer;
+  margin: 20px 0;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-decoration: none;
+    
+    .sidebar-banner-overlay {
+      background-color: rgba(0,0,0,0.7);
+    }
+    
+    .banner-png-overlay {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .sidebar-banner {
   width: 100%;
-  height: auto;
   display: block;
-  z-index: 1;
 }
 
 .sidebar-banner-overlay {
@@ -709,13 +723,10 @@ a.custom-link {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  opacity: 0;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3; // Higher than PNG overlay
+  background-color: rgba(0,0,0,0.8);
+  transition: background-color 0.3s ease;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .sidebar-video-banner:hover .sidebar-banner-overlay {
@@ -725,12 +736,29 @@ a.custom-link {
 
 .sidebar-banner-content {
   color: white;
-  text-align: center;
-  padding: 15px;
-  transform: translateY(10px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 4; // Highest z-index to ensure text is visible
+  
+  h3 {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: white;
+  }
+  
+  p {
+    font-size: 14px;
+    margin: 0 0 8px 0;
+    color: rgba(255,255,255,0.9);
+  }
+  
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    
+    li {
+      margin: 4px 0;
+    }
+  }
 }
 
 .sidebar-video-banner:hover .sidebar-banner-content {
@@ -775,15 +803,11 @@ header {
 // PNG Overlay styles
 .banner-png-overlay {
   position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
+  top: 10px;
+  right: 10px;
+  width: 50px;
   height: auto;
-  z-index: 2;
-  opacity: 0.8;
-  pointer-events: none;
-  transition: opacity 0.3s ease; // Smooth transition for opacity
+  transition: transform 0.3s ease;
 }
 
 // Ensure proper stacking
