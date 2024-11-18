@@ -20,23 +20,25 @@
 
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
-        <!-- Add your video banner here -->
-        <div class="sidebar-video-banner">
-          <video class="sidebar-banner" autoplay loop muted playsinline>
-            <source src="/assets/videos/masa-banner.mp4" type="video/mp4">
-          </video>
-          <div class="sidebar-banner-overlay">
-            <div class="sidebar-banner-content">
-              <h3>MASA</h3>
-              <p>Electrical Subteam Member</p>
-              <ul>
-                <li>Autonomous Systems</li>
-                <li>Flight Controls</li>
-                <li>Computer Vision</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+<!-- Add your video banner here -->
+<div class="sidebar-video-banner">
+  <video class="sidebar-banner" autoplay loop muted playsinline>
+    <source src="/assets/videos/masa-banner.webm" type="video/webm">
+    <source src="/assets/videos/masa-banner.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="sidebar-banner-overlay">
+    <div class="sidebar-banner-content">
+      <h3>MASA</h3>
+      <p>Electrical Subteam Member</p>
+      <ul>
+        <li>Autonomous Systems</li>
+        <li>Flight Controls</li>
+        <li>Computer Vision</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
         {% if site.github.is_project_page %}
         <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
