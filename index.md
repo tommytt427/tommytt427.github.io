@@ -12,25 +12,6 @@ title: Home
  Hello! My name is Thomas and I am currently a senior undergraduate student studying Computer Engineering at the University of Michigan College of Engineering. I have a passion for the hardware side of things, pursuing a path in computer systems architecture. You can look around and see what projects I have or am working on!
 </div>
 
-<div class="video-banner-container">
-  <video class="video-banner" autoplay loop muted playsinline>
-    <source src="/assets/videos/masa-banner.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="banner-overlay">
-    <div class="banner-title">Michigan Autonomous Aerial Systems</div>
-    <div class="banner-role">Electrical Subteam Member</div>
-    <div class="banner-duration">September 2023 - Present</div>
-    <div class="banner-description">
-      <ul class="banner-highlights">
-        <li>Developed autonomous flight control systems for UAV competitions</li>
-        <li>Collaborated with interdisciplinary team of 50+ members</li>
-        <li>Implemented computer vision algorithms for object detection</li>
-        <li>Contributed to system architecture design and integration</li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 ## Projects
 <div class="project-grid">
