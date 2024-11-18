@@ -770,7 +770,7 @@ header {
 // PNG Overlay styles
 .banner-png-overlay {
   position: absolute;
-  top: 10%;          // Center vertically
+  top: 20%;          // Center vertically
   left: 50%;         // Center horizontally
   transform: translate(-50%, -50%);  // Perfect centering
   width: 60%;        // Adjust size as needed
@@ -790,17 +790,9 @@ header {
   z-index: 1;
 }
 
-.banner-png-overlay {
-  pointer-events: none;  // Allows clicking through to the hover effect
-  animation: float 3s ease-in-out infinite;
+.sidebar-banner-overlay {
+  z-index: 3;  // Ensure hover overlay stays on top
 }
-
-@keyframes float {
-  pointer-events: none;  // Allows clicking through to the hover effect
-  0%, 100% {
-    transform: translate(-50%, -50%);
-  }
-  50% {
     transform: translate(-50%, -55%);  // Gentle floating effect
   }
 }
