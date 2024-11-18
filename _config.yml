@@ -5,6 +5,35 @@ theme: jekyll-theme-minimal
 # Asset configuration
 logo: /assets/images/logo.png
 
+# Skills and interests sections
+skills:
+  - name: Programming
+    icon: fa-code
+  - name: Web Development
+    icon: fa-globe
+  - name: VS Code
+    icon: fa-code-branch
+  - name: Computer Engineering
+    icon: fa-microchip
+  - name: Linux
+    icon: fa-linux
+  - name: Python
+    icon: fa-python
+  - name: GitHub
+    icon: fa-github
+  - name: Machine Learning
+    icon: fa-brain
+
+interests:
+  - name: Gaming
+    icon: fa-gamepad
+  - name: Photography
+    icon: fa-camera
+  - name: Music
+    icon: fa-music
+  - name: Reading
+    icon: fa-book
+
 # Add Font Awesome via CDN
 font_awesome_kit: # your kit code if you have one, or leave empty to use the free CDN
 
