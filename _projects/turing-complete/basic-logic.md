@@ -45,10 +45,8 @@ In this section, we will go through all the Basic Logic levels. These include di
 ### NAND Gate {#nand-gate}
 What is a NAND gate? Think of a NAND gate like a doorman at a club with two switches. Both switches must be turned ON (we call them 1 and 2) for the doorman to say NO (our output, which would be 0). In any other situation - if either switch or both switches are OFF - the doorman says YES (which would output 1). It's one of the most basic building blocks in computers which you can use these simple yes/no decisions to create all the complex operations that happen in modern electronics.
 
-<div class="image-grid">
-  ![Circuit Design](/assets/images/BasicLogic/NANDGATE.png)
-  {: .grid-image}
-</div>
+![Circuit Design](/assets/images/BasicLogic/NANDGATE.png)
+{: .project-image}
 
 
 ### AND Gate {#and-gate}
