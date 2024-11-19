@@ -689,6 +689,7 @@ a.custom-link {
 .sidebar-video-banner {
   position: relative;
   width: 100%;
+  max-width: 100%;
   margin: 20px 0;
   border-radius: 8px;
   overflow: hidden;
@@ -819,15 +820,17 @@ header {
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 8px; // Reduced gap
   margin-top: 15px;
   position: relative;
+  width: 100%;
+  max-width: 100%;
 }
 
 .skill-item {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 35px; // Slightly smaller
+  height: 35px; // Slightly smaller
   display: flex;
   align-items: center;
   justify-content: center;
@@ -838,43 +841,42 @@ header {
   border: 1px solid #e1e4e8;
 
   i {
-    font-size: 22px;
+    font-size: 18px; // Slightly smaller icons
     transition: transform 0.3s ease;
   }
+}
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 100;
+// Improved hover states
+.skill-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 100;
 
-    i {
-      transform: scale(1.1);
-    }
-
-    .skill-tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      visibility: visible;
-    }
+  .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
   }
 }
 
 .skill-tooltip {
   position: absolute;
-  bottom: -30px;
+  top: 100%; // Position below the icon
   left: 50%;
-  transform: translateX(-50%) translateY(-10px);
+  transform: translateX(-50%);
   background: rgba(0,0,0,0.8);
   color: white;
-  padding: 5px 10px;
+  padding: 5px 8px;
   border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
+  font-size: 11px; // Slightly smaller font
+  white-space: normal; // Allow text wrapping
+  max-width: 150px; // Maximum width for tooltip
+  text-align: center;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   pointer-events: none;
-  z-index: 101;
+  z-index: 1000;
+  margin-top: 5px; // Space between icon and tooltip
 }
 
 // Sidebar social links
@@ -909,7 +911,10 @@ header {
 // Fix layout issues with sidebar and content
 .wrapper {
   display: flex;
-  gap: 50px;
+  gap: 30px; // Reduced gap
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 header {
@@ -917,31 +922,37 @@ header {
   margin-right: 0;
   flex-shrink: 0;
   overflow-y: auto;
+  overflow-x: hidden; // Prevent horizontal scroll
   max-height: 100vh;
   position: sticky;
   top: 0;
+  padding-right: 20px; // Add padding to account for scrollbar
+  box-sizing: border-box;
 }
 
 section {
   flex: 1;
   max-width: calc(100% - 320px); // 270px sidebar + 50px gap
   padding: 20px;
+  overflow-x: hidden;
 }
 
 // Responsive adjustments
 @media screen and (max-width: 960px) {
-  .wrapper {
-    flex-direction: column;
-  }
-
   header {
     width: 100%;
+    padding-right: 0;
     position: relative;
     max-height: none;
   }
 
-  section {
+  .skills-grid {
+    grid-template-columns: repeat(6, 1fr); // More columns on mobile
     max-width: 100%;
+  }
+
+  .skill-tooltip {
+    max-width: 200px; // Wider tooltips on mobile
   }
 
   .sidebar-video-banner {
