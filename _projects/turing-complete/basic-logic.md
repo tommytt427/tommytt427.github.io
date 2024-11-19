@@ -124,6 +124,20 @@ Let us say we want the opposite of OR's outputs, in this case, a NOR gate. How d
 ![Circuit Design](/assets/images/BasicLogic/NORGATE.png)
 {: .project-image}
 
+### OR Gate {#or-gate}
+Of course, we cannot forget about the OR gate. To make this with just NOT and NAND gates we can simply NOT both inputs just like before. That way we are able to get the outputs!
+
+![Circuit Design](/assets/images/BasicLogic/ORGATE.png)
+{: .project-image}
+
+### ALWAYS On {#always-on}
+For this, we simply just want to create a circuit that is always on. We also get NOR, NAND, OR, AND, and NOT gates at our disposal. So how do we make an always-on circuit? Think about how a NAND gate works if we just have two ticks(brief signals). One tick will output low (0), the next tick will output high (1). We want the desired output of both ticks to be high. If we recall from implementing our NOT gate, we know that both inputs into NAND will create a behavior where the low input will produce a high output, while a high input will create a low output. This time we will simply just NOT one of the wires to create a situation where because both inputs are high and low, since they are neither high or low, they will always be producing a high output!
+
+![Circuit Design](/assets/images/BasicLogic/ALWAYSON.png)
+{: .project-image}
+
+
+
 
 
 
