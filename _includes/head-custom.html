@@ -382,3 +382,31 @@ function handleContactSubmit(event) {
     }
 }
 </style>
+
+
+<div id="club-banner-root"></div>
+
+<script type="module">
+  import { createElement } from 'react';
+  import { createRoot } from 'react-dom/client';
+  import ClubBanner from './components/ClubBanner.jsx';
+
+  const container = document.getElementById('club-banner-root');
+  const root = createRoot(container);
+  root.render(createElement(ClubBanner));
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const skillItems = document.querySelectorAll('.skill-item');
+  
+  skillItems.forEach(item => {
+    const tooltip = item.querySelector('.skill-tooltip');
+    
+    item.addEventListener('mouseenter', (e) => {
+      const rect = item.getBoundingClientRect();
+      tooltip.style.left = `${rect.left + (rect.width / 2)}px`;
+      tooltip.style.top = `${rect.bottom + 5}px`;
+    });
+  });
+});
