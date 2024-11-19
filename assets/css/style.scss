@@ -727,11 +727,35 @@ a.custom-link {
 .sidebar-banner-content {
   color: white;
   text-align: center;
-  padding: 15px;
+  padding: 10px; // Reduced padding
   transform: translateY(10px);
   opacity: 0;
   transition: all 0.3s ease;
-  z-index: 4; // Highest z-index to ensure text is visible
+  z-index: 4;
+
+  h3 {
+    margin: 0 0 3px 0; // Reduced margin
+    color: #fff;
+    font-size: 14px; // Smaller font size
+  }
+
+  p {
+    margin: 3px 0; // Reduced margin
+    font-size: 12px; // Smaller font size
+    color: #64ffda;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0; // Reduced margin
+    font-size: 11px; // Smaller font size
+  }
+
+  li {
+    margin: 2px 0; // Reduced margin
+    color: #8892b0;
+  }
 }
 
 .sidebar-video-banner:hover .sidebar-banner-content {
@@ -860,23 +884,34 @@ header {
 
 .skill-tooltip {
   position: absolute;
-  top: 100%; // Position below the icon
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0; // Align to the left instead of center
+  top: 50%; // Center vertically
+  transform: translateY(-50%) translateX(-100%); // Move to the left of the icon
   background: rgba(0,0,0,0.8);
   color: white;
   padding: 5px 8px;
   border-radius: 4px;
-  font-size: 11px; // Slightly smaller font
-  white-space: normal; // Allow text wrapping
-  max-width: 150px; // Maximum width for tooltip
-  text-align: center;
+  font-size: 11px;
+  white-space: normal;
+  max-width: 150px;
+  text-align: right; // Align text to the right since it's on the left
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   pointer-events: none;
   z-index: 1000;
-  margin-top: 5px; // Space between icon and tooltip
+  margin-left: -5px; // Small gap between tooltip and icon
+}
+
+.skill-tooltip:after {
+  content: '';
+  position: absolute;
+  right: -4px; // Position arrow on the right
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 5px 0 5px 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(0,0,0,0.8);
 }
 
 // Sidebar social links
@@ -922,11 +957,12 @@ header {
   margin-right: 0;
   flex-shrink: 0;
   overflow-y: auto;
-  overflow-x: hidden; // Prevent horizontal scroll
+  overflow-x: visible; // Allow tooltips to overflow
   max-height: 100vh;
   position: sticky;
   top: 0;
-  padding-right: 20px; // Add padding to account for scrollbar
+  padding-right: 20px;
+  padding-left: 20px; // Add padding for tooltips
   box-sizing: border-box;
 }
 
@@ -939,25 +975,22 @@ section {
 
 // Responsive adjustments
 @media screen and (max-width: 960px) {
-  header {
-    width: 100%;
-    padding-right: 0;
-    position: relative;
-    max-height: none;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(6, 1fr); // More columns on mobile
-    max-width: 100%;
-  }
-
   .skill-tooltip {
-    max-width: 200px; // Wider tooltips on mobile
-  }
+    top: 100%; // Position below on mobile
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    text-align: center;
+    margin-left: 0;
+    margin-top: 5px;
 
-  .sidebar-video-banner {
-    max-width: 400px;
-    margin: 20px auto;
+    &:after {
+      right: auto;
+      left: 50%;
+      top: -4px;
+      transform: translateX(-50%);
+      border-width: 0 5px 5px 5px;
+      border-color: transparent transparent rgba(0,0,0,0.8) transparent;
+    }
   }
 }
 
