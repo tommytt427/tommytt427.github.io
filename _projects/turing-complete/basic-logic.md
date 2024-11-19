@@ -163,6 +163,11 @@ Similar to before, we combine inputs 1 & 2 with an AND gate. We then have a seco
 {: .project-image}
 
 
+### XNOR Gate {#xnor-gate}
+We can just take the XOR gate and NOT its output to produce an XNOR gate table!
+
+![Circuit Design](/assets/images/BasicLogic/XNORGATE.png)
+{: .project-image}
 
 
 <!-- Back to main guide link -->
