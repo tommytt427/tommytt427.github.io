@@ -74,7 +74,28 @@ function handleContactSubmit(event) {
     // Reset form
     event.target.reset();
 }
-</script>
+<script>
+// Tooltip positioning handler
+document.addEventListener('DOMContentLoaded', function() {
+  const skillItems = document.querySelectorAll('.skill-item');
+  
+  skillItems.forEach(item => {
+    const tooltip = item.querySelector('.skill-tooltip');
+    
+    item.addEventListener('mouseenter', (e) => {
+      const rect = item.getBoundingClientRect();
+      tooltip.style.left = rect.left + (rect.width / 2) + 'px';
+      tooltip.style.top = rect.bottom + 10 + 'px';
+      tooltip.style.opacity = '1';
+      tooltip.style.visibility = 'visible';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      tooltip.style.opacity = '0';
+      tooltip.style.visibility = 'hidden';
+    });
+  });
+});
 
 <!-- Custom styles -->
 <style>
