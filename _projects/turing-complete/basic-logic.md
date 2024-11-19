@@ -70,6 +70,12 @@ Now let's say this - we only have NOT and NAND gates at our disposal and we want
 {: .project-image}
 *A clever way of creating an AND gate with just a NOT and a NAND gate!*
 
+### NOR Gate {#nor-gate}
+Let us say we want the opposite of OR's outputs, in this case, a NOR gate. How do we make this with just NAND and NOT gates? We can first NOT both inputs of NAND to flip our outputs, and then NOT the output of NAND to get the opposite of our outputs!
+
+![Circuit Design](/assets/images/BasicLogic/NORGATE.png)
+{: .project-image}
+
 
 
 
