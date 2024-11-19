@@ -689,7 +689,6 @@ a.custom-link {
 .sidebar-video-banner {
   position: relative;
   width: 100%;
-  max-width: 100%;
   margin: 20px 0;
   border-radius: 8px;
   overflow: hidden;
@@ -727,35 +726,11 @@ a.custom-link {
 .sidebar-banner-content {
   color: white;
   text-align: center;
-  padding: 10px; // Reduced padding
+  padding: 15px;
   transform: translateY(10px);
   opacity: 0;
   transition: all 0.3s ease;
-  z-index: 4;
-
-  h3 {
-    margin: 0 0 3px 0; // Reduced margin
-    color: #fff;
-    font-size: 14px; // Smaller font size
-  }
-
-  p {
-    margin: 3px 0; // Reduced margin
-    font-size: 12px; // Smaller font size
-    color: #64ffda;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 5px 0 0 0; // Reduced margin
-    font-size: 11px; // Smaller font size
-  }
-
-  li {
-    margin: 2px 0; // Reduced margin
-    color: #8892b0;
-  }
+  z-index: 4; // Highest z-index to ensure text is visible
 }
 
 .sidebar-video-banner:hover .sidebar-banner-content {
@@ -844,17 +819,15 @@ header {
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px; // Reduced gap
+  gap: 12px;
   margin-top: 15px;
   position: relative;
-  width: 100%;
-  max-width: 100%;
 }
 
 .skill-item {
   position: relative;
-  width: 35px; // Slightly smaller
-  height: 35px; // Slightly smaller
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -865,53 +838,43 @@ header {
   border: 1px solid #e1e4e8;
 
   i {
-    font-size: 18px; // Slightly smaller icons
+    font-size: 22px;
     transition: transform 0.3s ease;
   }
-}
 
-// Improved hover states
-.skill-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 100;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
 
-  .skill-tooltip {
-    opacity: 1;
-    visibility: visible;
+    i {
+      transform: scale(1.1);
+    }
+
+    .skill-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      visibility: visible;
+    }
   }
 }
 
 .skill-tooltip {
   position: absolute;
-  left: 0; // Align to the left instead of center
-  top: 50%; // Center vertically
-  transform: translateY(-50%) translateX(-100%); // Move to the left of the icon
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
   background: rgba(0,0,0,0.8);
   color: white;
-  padding: 5px 8px;
+  padding: 5px 10px;
   border-radius: 4px;
-  font-size: 11px;
-  white-space: normal;
-  max-width: 150px;
-  text-align: right; // Align text to the right since it's on the left
+  font-size: 12px;
+  white-space: nowrap;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
   pointer-events: none;
-  z-index: 1000;
-  margin-left: -5px; // Small gap between tooltip and icon
-}
-
-.skill-tooltip:after {
-  content: '';
-  position: absolute;
-  right: -4px; // Position arrow on the right
-  top: 50%;
-  transform: translateY(-50%);
-  border-width: 5px 0 5px 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent rgba(0,0,0,0.8);
+  z-index: 101;
 }
 
 // Sidebar social links
@@ -946,10 +909,7 @@ header {
 // Fix layout issues with sidebar and content
 .wrapper {
   display: flex;
-  gap: 30px; // Reduced gap
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  gap: 50px;
 }
 
 header {
@@ -957,40 +917,36 @@ header {
   margin-right: 0;
   flex-shrink: 0;
   overflow-y: auto;
-  overflow-x: visible; // Allow tooltips to overflow
   max-height: 100vh;
   position: sticky;
   top: 0;
-  padding-right: 20px;
-  padding-left: 20px; // Add padding for tooltips
-  box-sizing: border-box;
 }
 
 section {
   flex: 1;
   max-width: calc(100% - 320px); // 270px sidebar + 50px gap
   padding: 20px;
-  overflow-x: hidden;
 }
 
 // Responsive adjustments
 @media screen and (max-width: 960px) {
-  .skill-tooltip {
-    top: 100%; // Position below on mobile
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    text-align: center;
-    margin-left: 0;
-    margin-top: 5px;
+  .wrapper {
+    flex-direction: column;
+  }
 
-    &:after {
-      right: auto;
-      left: 50%;
-      top: -4px;
-      transform: translateX(-50%);
-      border-width: 0 5px 5px 5px;
-      border-color: transparent transparent rgba(0,0,0,0.8) transparent;
-    }
+  header {
+    width: 100%;
+    position: relative;
+    max-height: none;
+  }
+
+  section {
+    max-width: 100%;
+  }
+
+  .sidebar-video-banner {
+    max-width: 400px;
+    margin: 20px auto;
   }
 }
 
