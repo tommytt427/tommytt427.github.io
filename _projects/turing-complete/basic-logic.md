@@ -136,7 +136,31 @@ For this, we simply just want to create a circuit that is always on. We also get
 ![Circuit Design](/assets/images/BasicLogic/ALWAYSON.png)
 {: .project-image}
 
+### Second Tick {#second-tick}
+Again, recall that ticks are brief signals. We want to output high on the second tick only. How do we do that? We can implement this by using NOR gate logic! Remember, when neither inputs are high, the output will be high. So we can use a NOT gate as input 1 and an AND gate as input 2. A NOT gate will ensure that on second tick, in which input 1 is high, we will get it to be low to pass for one part of NOR. For the AND gate, at the second tick, we have the input set as low. That means our AND gate will be able to also produce a low signal. As for the next ticks, the AND gate can cover us by staying high since the last inputs for input 2 are high!
 
+![Circuit Design](/assets/images/BasicLogic/SECONDTICK.png)
+{: .project-image}
+
+### XOR Gate {#xor-gate}
+First, observe the XOR truth table. We can see that the output is high when either input 1 or input 2 is high, but not when it is both. This is almost similar to an OR gate except the XOR gate does not like it when both inputs are high. So what do we do? Well we do know that the OR gate is almost giving us what we want, it's just that the last output is wrong. We can also recall the truth table for NAND gate. That also gives us almost what we want, but its first output is wrong. The solution? Let's just use them both and combine their outputs with an AND gate! This works since the AND gate outputs high when both NAND and OR agree!
+
+![Circuit Design](/assets/images/BasicLogic/XORGATE.png)
+{: .project-image}
+
+
+### Bigger OR Gate {#bigger-or-gate}
+For this, we are simply creating an OR gate with three inputs. We can create this by combining inputs 1 & 2, while the second OR gate combines the result with input 3. So if any input is high, the final output will be high.
+
+![Circuit Design](/assets/images/BasicLogic/BIGGERORGATE.png)
+{: .project-image}
+
+
+### Bigger AND Gate {#bigger-and-gate}
+Similar to before, we combine inputs 1 & 2 with an AND gate. We then have a second AND gate to combine the result with input 3. Now the output is high only when ALL inputs are high.
+
+![Circuit Design](/assets/images/BasicLogic/BIGGERANDGATE.png)
+{: .project-image}
 
 
 
