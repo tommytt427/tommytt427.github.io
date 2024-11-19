@@ -836,6 +836,8 @@ header {
   transition: all 0.3s ease;
   cursor: pointer;
   border: 1px solid #e1e4e8;
+  /* Add isolation to create a new stacking context */
+  isolation: isolate;
 
   i {
     font-size: 22px;
@@ -919,7 +921,7 @@ header {
   overflow-y: auto;
   max-height: 100vh;
   position: sticky;
-  padding-left: 50px;
+  padding-left: 10px;
   top: 0;
 }
 
