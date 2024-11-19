@@ -42,6 +42,54 @@ In this section, we will go through all the Basic Logic levels. These include di
     <p>Basic Logic Level 4</p>
     <a href="#and-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
   </div>
+
+  <div class="subsection-card">
+    <h3>NOR Gate</h3>
+    <p>Basic Logic Level 5</p>
+    <a href="#nor-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>OR Gate</h3>
+    <p>Basic Logic Level 6</p>
+    <a href="#or-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>ALWAYS On</h3>
+    <p>Basic Logic Level 7</p>
+    <a href="#always-on" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>Second Tick</h3>
+    <p>Basic Logic Level 8</p>
+    <a href="#second-tick" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>XOR Gate</h3>
+    <p>Basic Logic Level 9</p>
+    <a href="#xor-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>Bigger OR Gate</h3>
+    <p>Basic Logic Level 10</p>
+    <a href="#bigger-or-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>Bigger AND Gate</h3>
+    <p>Basic Logic Level 11</p>
+    <a href="#bigger-and-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
+    <h3>XNOR Gate</h3>
+    <p>Basic Logic Level 12</p>
+    <a href="#xnor-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
   
 
   <!-- Add more subsection cards as needed -->
