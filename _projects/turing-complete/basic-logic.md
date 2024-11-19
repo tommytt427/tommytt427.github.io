@@ -32,10 +32,17 @@ In this section, we will go through all the Basic Logic levels. These include di
   </div>
 
   <div class="subsection-card">
+    <h3>NOT Gate</h3>
+    <p>Basic Logic Level 3</p>
+    <a href="#not-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="subsection-card">
     <h3>AND Gate</h3>
-    <p>Combining inputs with AND logic</p>
+    <p>Basic Logic Level 4</p>
     <a href="#and-gate" class="subsection-link">Jump to solution <i class="fas fa-arrow-right"></i></a>
   </div>
+  
 
   <!-- Add more subsection cards as needed -->
 </div>
@@ -47,23 +54,24 @@ What is a NAND gate? Think of a NAND gate like a doorman at a club with two swit
 
 ![Circuit Design](/assets/images/BasicLogic/NANDGATE.png)
 {: .project-image}
+*NAND gates are the introverts of logic—they prefer NOT to AND together.*
 
+
+### NOT Gate {#not-gate}
+A NOT gate is like a light switch that does the opposite of what you tell it - when you say ON (1), it gives you OFF (0), and when you say OFF (0), it gives you ON (1). It's like opposite day, except a circuit!
+
+![Circuit Design](/assets/images/BasicLogic/NOTGATE.png)
+{: .project-image}
 
 ### AND Gate {#and-gate}
-Description of the challenge and solution...
+Now let's say this - we only have NOT and NAND gates at our disposal and we want to create a gate where when both inputs are 1, then our output is ON. Think of an AND gate as a clever combination of gates: we take a NAND gate and then add a NOT gate after it. This flips the NAND's output to give us what we want - now we only get YES (1) when both inputs are ON (1), and NO (0) for everything else.
 
-[Insert circuit diagram or screenshot]
+![Circuit Design](/assets/images/BasicLogic/ANDGATE.png)
+{: .project-image}
+*A clever way of creating an AND gate with just a NOT and a NAND gate!*
 
-```verilog
-// Example circuit code or explanation
-module AND_Gate (
-  input a,
-  input b,
-  output out
-);
-  assign out = a & b;
-endmodule
-```
+
+
 
 <!-- Back to main guide link -->
 <div class="guide-navigation">
