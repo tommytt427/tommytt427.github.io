@@ -74,6 +74,44 @@ function handleContactSubmit(event) {
     // Reset form
     event.target.reset();
 }
+
+
+    // Image Modal Functions
+function openImageModal(imgSrc) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    modal.style.display = 'block';
+    modalImg.src = imgSrc;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('imageModal');
+    const pdfModal = document.getElementById('pdfModal');
+    if (event.target === modal) {
+        closeImageModal();
+    } else if (event.target === pdfModal) {
+        closePdfViewer();
+    }
+}
+
+// Add click handlers to all project images
+document.addEventListener('DOMContentLoaded', function() {
+    const projectImages = document.querySelectorAll('.project-image img');
+    projectImages.forEach(img => {
+        img.addEventListener('click', function() {
+            openImageModal(this.src);
+        });
+        img.style.cursor = 'pointer';
+    });
+});
 </script>
 
 <!-- Custom styles -->
@@ -381,4 +419,87 @@ function handleContactSubmit(event) {
         max-width: 1000px;
     }
 }
+
+/* Image Modal Styles */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    margin: auto;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    margin: auto;
+    display: block;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.close-image-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-image-modal:hover,
+.close-image-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+/* Add zoom effect */
+.project-image img {
+    transition: transform 0.3s ease;
+}
+
+.project-image img:hover {
+    transform: scale(1.02);
+}
+
+/* Add a subtle indicator that images are clickable */
+.project-image::after {
+    content: '🔍';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-image:hover::after {
+    opacity: 1;
+}
+
+/* Make project-image position relative for the zoom indicator */
+.project-image {
+    position: relative;
+    cursor: pointer;
+}
+
+    
 </style>
