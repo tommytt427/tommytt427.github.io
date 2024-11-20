@@ -47,16 +47,28 @@ function toggleContactForm() {
     }
 }
 
-// Close contact form when clicking outside
-document.addEventListener('click', function(event) {
-    const contactForm = document.querySelector('.sliding-contact-form');
-    const contactPanel = document.querySelector('.contact-panel');
+// Contact Form Handlers
+document.addEventListener('DOMContentLoaded', function() {
     const contactButton = document.querySelector('.contact-button');
+    const contactPanel = document.querySelector('.contact-panel');
     
-    if (!contactForm.contains(event.target) && contactPanel.classList.contains('open')) {
-        contactPanel.classList.remove('open');
-        contactButton.classList.remove('active');
-    }
+    contactButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        contactPanel.classList.toggle('open');
+        contactButton.classList.toggle('active');
+    });
+
+    // Close form when clicking outside
+    document.addEventListener('click', function(e) {
+        const contactForm = document.querySelector('.sliding-contact-form');
+        const contactPanel = document.querySelector('.contact-panel');
+        const contactButton = document.querySelector('.contact-button');
+        
+        if (!contactForm.contains(e.target) && contactPanel.classList.contains('open')) {
+            contactPanel.classList.remove('open');
+            contactButton.classList.remove('active');
+        }
+    });
 });
 
 function handleContactSubmit(event) {
@@ -183,19 +195,12 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Sliding Contact Form Styles */
 .sliding-contact-form {
     position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
+    right: 2rem;
+    bottom: 2rem;
     z-index: 1000;
 }
 
 .contact-button {
-    position: absolute;
-    left: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
@@ -209,36 +214,36 @@ document.addEventListener('DOMContentLoaded', function() {
     font-size: 1.5rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
-    z-index: 2;
+    z-index: 1002;
+    position: fixed;
 }
 
 .contact-button:hover {
     background-color: #0052a3;
-    transform: translateY(-50%) scale(1.05);
+    transform: scale(1.05);
 }
 
 .contact-panel {
-    position: absolute;
-    left: 0;
+    position: fixed;
     top: 0;
-    height: 100vh;
-    width: 75vw;
-    background: white;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.98);
     padding: 2rem;
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
     opacity: 0;
-    transform: translateX(-100%);
-    pointer-events: none;
+    visibility: hidden;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    z-index: 1001;
 }
 
 .contact-panel.open {
     opacity: 1;
-    transform: translateX(0);
-    pointer-events: all;
+    visibility: visible;
 }
 
 .contact-button.active {
@@ -249,10 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
 .form-group {
     position: relative;
     margin-bottom: 1.5rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
+    max-width: 600px;
 }
 
 .form-group i {
@@ -276,8 +279,8 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .form-group textarea {
-    padding: 1rem;
     min-height: 200px;
+    padding: 1rem;
     resize: vertical;
 }
 
@@ -288,16 +291,15 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .contact-panel h2 {
-    text-align: center;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
     color: #0066cc;
-    font-size: 2rem;
+    text-align: center;
 }
 
 .submit-button {
-    max-width: 800px;
-    margin: 0 auto;
     width: 100%;
+    max-width: 600px;
     padding: 1rem;
     background-color: #0066cc;
     color: white;
@@ -319,22 +321,22 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     .contact-panel {
-        background: #1a1a1a;
+        background: rgba(0, 0, 0, 0.98);
+    }
+
+    .contact-panel h2 {
+        color: #66b3ff;
     }
 
     .form-group input,
     .form-group textarea {
-        background-color: #2d2d2d;
-        border-color: #404040;
+        background-color: #1a1a1a;
+        border-color: #333;
         color: white;
     }
 
     .form-group i {
         color: #888;
-    }
-
-    .contact-panel h2 {
-        color: #66b3ff;
     }
 }
 
