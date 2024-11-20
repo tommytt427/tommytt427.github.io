@@ -5,6 +5,18 @@
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
+
+<!-- React render for sliding contact form -->
+<script type="module">
+  import { createElement } from 'react';
+  import { createRoot } from 'react-dom/client';
+  import SlidingContactForm from '@/components/SlidingContactForm';
+
+  const container = document.getElementById('sliding-contact-form-root');
+  const root = createRoot(container);
+  root.render(createElement(SlidingContactForm));
+</script>
+
 <!-- JavaScript for PDF Viewer and Contact Form -->
 <script>
 // PDF Viewer Functions
