@@ -40,4 +40,13 @@ layout: default
   <div class="project-content">
     {{ content }}
   </div>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+    <span class="close-image-modal" onclick="closeImageModal()">&times;</span>
+    <div class="image-modal-content">
+      <img id="modalImage" class="modal-image" alt="Modal Image">
+    </div>
+  </div>
+
 </div>
