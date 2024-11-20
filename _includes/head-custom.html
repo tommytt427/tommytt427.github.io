@@ -58,23 +58,16 @@ document.addEventListener('DOMContentLoaded', function() {
         contactButton.classList.toggle('active');
     });
 
-    // Updated click handler to prevent accidental closes
+    // Close form when clicking outside
     document.addEventListener('click', function(e) {
         const contactForm = document.querySelector('.sliding-contact-form');
         const contactPanel = document.querySelector('.contact-panel');
         const contactButton = document.querySelector('.contact-button');
         
-        // Only close if clicking directly on the background (contact-panel)
-        if (e.target === contactPanel) {
+        if (!contactForm.contains(e.target) && contactPanel.classList.contains('open')) {
             contactPanel.classList.remove('open');
             contactButton.classList.remove('active');
         }
-    });
-
-    // Prevent form clicks from bubbling to the panel
-    const form = document.querySelector('.contact-panel form');
-    form.addEventListener('click', function(e) {
-        e.stopPropagation();
     });
 });
 
@@ -262,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     position: relative;
     margin-bottom: 1.5rem;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .form-group i {
@@ -289,8 +282,6 @@ document.addEventListener('DOMContentLoaded', function() {
     min-height: 200px;
     padding: 1rem;
     resize: vertical;
-    width: 100%;
-    max-width: 500px; /* Match form-group width */
 }
 
 .form-group input:focus,
@@ -308,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .submit-button {
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     padding: 1rem;
     background-color: #0066cc;
     color: white;
@@ -387,10 +378,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     .contact-button {
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    margin: 0;
+        width: 3rem;
+        height: 3rem;
+        left: 1rem;
+        font-size: 1.2rem;
     }
 }
 
