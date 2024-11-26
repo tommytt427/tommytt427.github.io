@@ -6,7 +6,7 @@ permalink: /projects/turing-complete/arithmetic-memory/
 section: "turing-complete"
 status: "Completed"
 last_updated: "2024-11-26"
-project_image: "/assets/images/turing-complete/arithmetic-memory-banner.jpg"
+project_image: "/assets/images/turing-complete/arithmetic-memory-banner.png"
 sections:
   - id: overview
     title: "Section Overview"
