@@ -53,9 +53,9 @@ In this section, we explore arithmetic operations and memory components - the bu
 ### Arithmetic Operations
 <div class="subsection-grid">
   <div class="subsection-card">
-    <h3>Half Adder</h3>
-    <p>Basic 1-bit addition</p>
-    <a href="#half-adder" class="subsection-link">View solution <i class="fas fa-arrow-right"></i></a>
+    <h3>Double Trouble</h3>
+    <p>This level has 4 inputs. Output is high when 2 or more of them are high.</p>
+    <a href="#double-trouble" class="subsection-link">View solution <i class="fas fa-arrow-right"></i></a>
   </div>
 
   <div class="subsection-card">
@@ -97,10 +97,10 @@ In this section, we explore arithmetic operations and memory components - the bu
 
 ## Arithmetic Operations {#arithmetic}
 
-### Half Adder {#half-adder}
+### Half Adder {#double-trouble}
 The half adder is the simplest arithmetic circuit, adding two 1-bit numbers and producing a sum and carry output.
 
-![Half Adder Circuit](/assets/images/ArithmeticMemory/half-adder.png)
+![Half Adder Circuit](/assets/images/ArithmeticMemory/DOUBLETROUBLE.png)
 {: .project-image}
 *Half adder implementation using XOR and AND gates*
 
