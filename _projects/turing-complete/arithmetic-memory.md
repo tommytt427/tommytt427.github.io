@@ -17,8 +17,8 @@ sections:
     subsections:
       - id: double-trouble
         title: "Double Trouble"
-      - id: full-adder
-        title: "Full Adder"
+      - id: odd-number-of-signals
+        title: "Odd Number of Signals"
       - id: multi-bit-adder
         title: "Multi-Bit Adder"
       - id: subtractor
@@ -59,9 +59,9 @@ In this section, we explore arithmetic operations and memory components - the bu
   </div>
 
   <div class="subsection-card">
-    <h3>Full Adder</h3>
-    <p>1-bit addition with carry</p>
-    <a href="#full-adder" class="subsection-link">View solution <i class="fas fa-arrow-right"></i></a>
+    <h3>Odd Number of Signals</h3>
+    <p>A parity checker</p>
+    <a href="#odd-number-of-signals" class="subsection-link">View solution <i class="fas fa-arrow-right"></i></a>
   </div>
   
   <!-- Add other arithmetic subsections -->
@@ -98,7 +98,7 @@ In this section, we explore arithmetic operations and memory components - the bu
 ## Arithmetic Operations {#arithmetic}
 
 ### Double Trouble {#double-trouble}
-In this level, we are tasked to create a circuit that outputs high if at least two inputs are on. This is also known as a majority logic circuit! These are commonly used for fault-tolerant systems or for decision making processes such as a voting system or controls!
+At this level, we are tasked to create a circuit that outputs high if at least two inputs are on. This is also known as a majority logic circuit! These are commonly used for fault-tolerant systems or decision-making processes such as a voting system or controls!
 
 ![Half Adder Circuit](/assets/images/ArithmeticMemory/DOUBLETROUBLE.png)
 {: .project-image}
@@ -109,8 +109,10 @@ In this level, we are tasked to create a circuit that outputs high if at least t
 2. We use OR gates to combine the outputs of all pairs, so if any pair is high, the output is high.
 3. We connect the final OR gate to the output.
 
-### Full Adder {#full-adder}
-[Content for full adder...]
+### Odd Number of Signals {#odd-number-of-signals}
+Here we want to use a maximum of 3 components to create an output where it is high only when an odd number of inputs are high. This is also known as a parity checker, commonly used for verifying data integrity in communication protocols or memory systems!
+
+![Odd Number of Signals circuit](/assets/images/ArithmeticMemory/ODDNUMBEROFSIGNALS.png)
 
 ## Memory Components {#memory}
 
