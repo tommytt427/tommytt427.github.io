@@ -15,8 +15,8 @@ sections:
     title: "Arithmetic Operations"
     icon: "fa-calculator"
     subsections:
-      - id: half-adder
-        title: "Half Adder"
+      - id: double-trouble
+        title: "Double Trouble"
       - id: full-adder
         title: "Full Adder"
       - id: multi-bit-adder
@@ -97,17 +97,17 @@ In this section, we explore arithmetic operations and memory components - the bu
 
 ## Arithmetic Operations {#arithmetic}
 
-### Half Adder {#double-trouble}
-The half adder is the simplest arithmetic circuit, adding two 1-bit numbers and producing a sum and carry output.
+### Double Trouble {#double-trouble}
+In this level, we are tasked to create a circuit that outputs high if at least two inputs are on. This is also known as a majority logic circuit! These are commonly used for fault-tolerant systems or for decision making processes such as a voting system or controls!
 
 ![Half Adder Circuit](/assets/images/ArithmeticMemory/DOUBLETROUBLE.png)
 {: .project-image}
-*Half adder implementation using XOR and AND gates*
+
 
 #### Design Steps
-1. Use XOR gate for sum output
-2. Use AND gate for carry output
-3. Connect inputs A and B to both gates
+1. We use six AND gates to detect when each pair of inputs is high
+2. We use OR gates to combine the outputs of all pairs, so if any pair is high, the output is high.
+3. We connect the final OR gate to the output.
 
 ### Full Adder {#full-adder}
 [Content for full adder...]
