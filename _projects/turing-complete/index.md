@@ -46,7 +46,7 @@ This simulator has a lot to handle. Many components may seem confusing because i
   </div>
 
   <div class="section-card">
-    <a href="arithmetic-memory" class="section-link">
+    <a href="{{ site.baseurl }}/projects/turing-complete/arithmetic-memory" class="section-link">
       <h3><i class="fas fa-calculator"></i> Arithmetic & Memory</h3>
       <p>Building adders, counters, and memory units</p>
       <span class="section-status completed">Completed</span>
