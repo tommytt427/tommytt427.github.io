@@ -113,11 +113,14 @@ At this level, we are tasked to create a circuit that outputs high if at least t
 Here we want to use a maximum of 3 components to create an output where it is high only when an odd number of inputs are high. This is also known as a parity checker, commonly used for verifying data integrity in communication protocols or memory systems!
 
 ![Odd Number of Signals circuit](/assets/images/ArithmeticMemory/ODDNUMBEROFSIGNALS.png)
+{: .project-image}
 
 #### Design Steps
 1. We first connect inputs 1 and 2 to the first XOR gate. Then connect inputs 3 and 4 to the second XOR gate.
 2. We take the outputs of the first two XOR gates and connect them to a third XOR gate.
 3. This works because XOR gates can output high when an odd number of their inputs are high!
+
+
 
 ## Memory Components {#memory}
 
