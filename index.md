@@ -9,7 +9,7 @@ title: Home
 
 ## About Me
 <div class="featured-content">
- Hello! My name is Thomas and I am currently a senior undergraduate student studying Computer Engineering at the University of Michigan College of Engineering. I have a passion for the hardware side of things, pursuing a path in computer systems architecture. You can look around and see what projects I have or am working on!
+ Hello! My name is Thomas and I am currently a 4th undergraduate student studying Computer Engineering at the University of Michigan College of Engineering. I have a passion for the hardware side of things, pursuing a path in embedded systems and avionics. You can look around and see what projects I have or am working on!
 </div>
 
 
