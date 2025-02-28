@@ -58,3 +58,47 @@ float virtualSpring(float angle)
     float torque = -k_spring * angle;
     return torque;
 }
+```
+
+This creates a sensation of pushing against a spring, with increasing resistance as the wheel rotates further from the center position.
+
+### Virtual Wall
+The wall model creates a rigid boundary at a specific angular position:
+
+```c
+float virtualWall(float angle)
+{
+    float torque = 0;
+    float k_wall = 500;  // Wall stiffness (N·mm/degree)
+    if (angle < WALL_POSITION)
+    {
+        torque = -k_wall * (angle - WALL_POSITION);
+    }
+    return torque;
+}
+```
+
+Users feel free movement on one side of the boundary, but encounter resistance when attempting to move through the virtual wall.
+
+![Virtual World Models](/assets/images/haptic-interface/virtual-world-models.jpg)
+{: .project-image}
+*Visualization of virtual spring (left) and virtual wall (right) force profiles*
+
+## Results & Analysis {#results}
+The implementation demonstrated several interesting findings:
+
+### Spring Oscillation Analysis
+For a spring constant of 5 N·mm/degree with a wheel moment of inertia of 6.4×10^-4 kg·m²/radian, the theoretical oscillation frequency was 1.4 Hz. In practice, the measured oscillation frequency was 1.2 Hz, with the difference attributed to:
+
+- Software execution time creating a delay in the control loop
+- Mechanical friction providing damping to the system
+- Motor dynamics affecting the response
+
+### Wall Stiffness Trade-offs
+While increasing the wall spring constant (k_wall) made the wall feel more rigid, extremely high values (>1000 N·mm/degree) resulted in oscillatory behavior as the system repeatedly corrected position. The optimal value was found to be approximately 500 N·mm/degree, providing a good balance between:
+
+- Wall rigidity and stability
+- Smooth transitions between free movement and wall contact
+- Prevention of torque saturation (limited to ±800 N·mm)
+
+The project successfully demonstrated that convincing haptic environments can be created with relatively simple control algorithms and careful tuning of system parameters.
