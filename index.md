@@ -29,16 +29,6 @@ title: Home
         </a>
       </div>
     </div>
- <div class="project-card">
-  <img src="/assets/images/mmio/banner.jpg" alt="MMIO Project" class="project-thumbnail">
-  <div class="project-card-content">
-    <h3>Memory-Mapped I/O Implementation</h3>
-    <p>Custom MMIO interface between STM32 and FPGA</p>
-    <a href="{{ site.baseurl }}/projects/mmio" class="project-link">
-      View Details <i class="fas fa-arrow-right"></i>
-    </a>
-  </div>
-</div>
     {% endif %}
   {% endfor %}
 </div>
