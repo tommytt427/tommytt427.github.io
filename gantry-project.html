@@ -48,13 +48,16 @@
             <!-- Project Overview -->
             <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-4 text-white">Project Overview</h2>
-                <div class="md:flex md:space-x-8">
+                <div class="md:flex md:space-x-8 items-center">
                     <div class="md:w-2/3 text-lg leading-relaxed">
                         <p>This project is a 2-axis robotic gantry system designed for ping-pong target practice. It integrates a real-time vision system for automated ball tracking and interception, alongside multiple manual control options.</p>
                         <p class="mt-4">The core objective was to create a versatile and responsive robotic system by interfacing various sensors, controllers, and microcontrollers, bridging the gap between high-level computer vision and low-level hardware control. The system is built on an 80/20 aluminum frame, driven by stepper motors, and controlled by an STM32 microcontroller.</p>
                     </div>
                     <div class="md:w-1/3 mt-6 md:mt-0">
-                        <source src="assets/videos/ps2controller.mp4" alt="Gantry System" class="rounded-lg shadow-lg w-full">
+                        <video autoplay loop muted playsinline class="rounded-lg shadow-lg w-full">
+                            <source src="assets/videos/ps2controller.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </section>
