@@ -6,17 +6,14 @@
     <title>Thomas Tran - Engineering Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark background */
-            color: #d1d5db; /* Light gray text */
+            background-color: #111827;
         }
         .project-card {
-            background-color: #1f2937; /* Slightly lighter dark shade */
+            background-color: #1f2937;
             border: 1px solid #374151;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -24,48 +21,38 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
         }
-        .btn {
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-        }
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.75);
-        }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-gray-300 antialiased">
 
-    <!-- Header Section -->
-    <header class="py-8">
-        <div class="container mx-auto px-6 text-center">
-            <img src="assets/images/ttrannEdit1.JPG" alt="Thomas Tran" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-sky-500 shadow-lg">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Header Section -->
+        <header class="text-center max-w-2xl mx-auto">
+            <img src="assets/images/ttrannEdit1.JPG" alt="Thomas Tran" class="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-gray-700 shadow-lg object-cover">
             <h1 class="text-4xl md:text-5xl font-bold text-white">Thomas Tran</h1>
-            <p class="mt-2 text-lg text-sky-300">Computer & Electrical Engineering Student at the University of Michigan</p>
-            <div class="mt-6 flex justify-center space-x-6">
-                <a href="mailto:ttrann@umich.edu" class="text-gray-300 hover:text-sky-400 transition-colors"><i class="fas fa-envelope fa-2x"></i></a>
-                <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-gray-300 hover:text-sky-400 transition-colors"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a href="https://github.com/tommytt427" target="_blank" class="text-gray-300 hover:text-sky-400 transition-colors"><i class="fab fa-github fa-2x"></i></a>
+            <p class="mt-2 text-xl text-sky-300">Computer & Electrical Engineering Student</p>
+            
+            <div class="mt-6 flex justify-center space-x-6 text-2xl">
+                <a href="https://linkedin.com/in/your-profile" target="_blank" class="text-gray-400 hover:text-sky-400 transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/tommytt427" target="_blank" class="text-gray-400 hover:text-sky-400 transition-colors"><i class="fab fa-github"></i></a>
+                <a href="mailto:ttrann@umich.edu" class="text-gray-400 hover:text-sky-400 transition-colors"><i class="fas fa-envelope"></i></a>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
         <!-- About Me Section -->
-        <section id="about" class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8 text-white">About Me</h2>
-            <p class="max-w-3xl mx-auto text-center text-lg leading-relaxed">
-                I am a passionate and driven engineering student with a focus on embedded systems, control systems, and robotics. My hands-on project experience includes developing complex multi-modal robotic systems, designing firmware for microcontrollers, and implementing real-time computer vision. I thrive on solving challenging problems and bridging the gap between hardware and software.
-            </p>
+        <section class="max-w-3xl mx-auto mt-12 text-center text-lg leading-relaxed">
+            <p>Driven and innovative engineering student with a passion for embedded systems, control theory, and robotics. My goal is to leverage my skills in C/C++, Python, and hardware design to create efficient and impactful solutions to complex problems. Currently seeking opportunities to contribute to cutting-edge projects in the aerospace or automotive industries.</p>
+             <button onclick="document.getElementById('resume-modal').classList.remove('hidden')" class="mt-6 bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-sky-700 transition-colors">
+                View My Resume
+            </button>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
+        <section class="mt-16">
+            <h2 class="text-3xl font-bold text-center text-white mb-10">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
+
                 <!-- Gantry Project Card -->
                 <div class="project-card rounded-lg overflow-hidden shadow-lg flex flex-col">
                     <img src="assets/images/IMG_3268.jpg" alt="Gantry Project" class="w-full h-48 object-cover">
@@ -90,66 +77,42 @@
                     </div>
                 </div>
 
-                <!-- MASA Project Card with Video -->
+                <!-- MASA Project Card -->
                 <div class="project-card rounded-lg overflow-hidden shadow-lg flex flex-col">
-                    <video autoplay loop muted playsinline class="w-full h-48 object-cover">
+                     <video autoplay loop muted playsinline class="w-full h-48 object-cover">
                         <source src="assets/videos/masa-banner.webm" type="video/webm">
-                        Your browser does not support the video tag. A preview of the MASA project.
+                        Your browser does not support the video tag.
                     </video>
                     <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold mb-2 text-white">MASA Avionics Telemetry System</h3>
-                        <p class="text-gray-300 flex-grow">Leading development of a 2.4GHz LoRa-based telemetry system for real-time rocket flight data transmission up to 75,000 feet.</p>
-                         <div class="mt-6">
-                            <a href="masa-project.html" class="btn bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg w-full text-center inline-block hover:bg-sky-700">View Project Details</a>
+                        <h3 class="text-2xl font-bold mb-2 text-white">MASA Avionics Telemetry</h3>
+                        <p class="text-gray-300 flex-grow">Developing a 2.4GHz LoRa-based telemetry system for real-time flight data transmission on high-altitude rockets.</p>
+                        <div class="mt-6">
+                             <a href="masa-project.html" class="btn bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg w-full text-center inline-block hover:bg-sky-700">View Project Details</a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
-
-        <!-- Resume Button -->
-        <section id="resume" class="text-center mt-16">
-            <button id="view-resume-btn" class="btn bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-green-700">
-                <i class="fas fa-file-pdf mr-2"></i> View My Resume
-            </button>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center py-6 mt-12 border-t border-gray-700">
-        <p class="text-gray-400">&copy; 2025 Thomas Tran. All Rights Reserved.</p>
-    </footer>
+        
+        <!-- Footer -->
+        <footer class="text-center py-6 mt-12 border-t border-gray-700">
+            <p class="text-gray-400">&copy; 2025 Thomas Tran. All Rights Reserved.</p>
+        </footer>
+    </div>
 
     <!-- Resume Modal -->
-    <div id="resume-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
-        <div class="modal-backdrop fixed inset-0"></div>
-        <div class="relative bg-gray-800 rounded-lg shadow-xl w-11/12 max-w-4xl h-5/6 flex flex-col">
+    <div id="resume-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-700">
-                <h3 class="text-lg font-semibold text-white">Thomas Tran - Resume</h3>
-                <button id="close-modal-btn" class="text-gray-300 hover:text-white text-2xl">&times;</button>
+                <h2 class="text-2xl font-bold text-white">My Resume</h2>
+                <button onclick="document.getElementById('resume-modal').classList.add('hidden')" class="text-gray-400 hover:text-white text-2xl">&times;</button>
             </div>
-            <div class="flex-grow p-2">
-                <iframe src="ThomasTranResume2526.pdf" class="w-full h-full" frameborder="0"></iframe>
+            <div class="flex-grow p-4">
+                <iframe src="ThomasTranResume2526V2 (1).pdf" class="w-full h-full" frameborder="0"></iframe>
             </div>
         </div>
     </div>
 
-    <script>
-        const viewResumeBtn = document.getElementById('view-resume-btn');
-        const resumeModal = document.getElementById('resume-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalBackdrop = document.querySelector('.modal-backdrop');
-
-        function toggleModal() {
-            resumeModal.classList.toggle('hidden');
-            resumeModal.classList.toggle('flex');
-        }
-
-        viewResumeBtn.addEventListener('click', toggleModal);
-        closeModalBtn.addEventListener('click', toggleModal);
-        modalBackdrop.addEventListener('click', toggleModal);
-    </script>
 </body>
 </html>
 
