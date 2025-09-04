@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gantry Project Details - Thomas Tran</title>
+    <title>Gantry Project - Thomas Tran</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,152 +17,167 @@
             background-color: #1f2937;
             border: 1px solid #374151;
         }
-        h2 {
-            border-bottom: 2px solid #38bdf8; /* sky-400 */
-            padding-bottom: 0.5rem;
-        }
         .code-block {
             background-color: #0d1117;
             border: 1px solid #30363d;
-            color: #c9d1d9;
         }
-        .code-block pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .btn {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Header -->
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Project Header -->
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-white">Multi-Modal Robotic Gantry</h1>
-            <p class="mt-2 text-lg text-sky-300">A Deep Dive into the Ping-Pong Target Practice System</p>
-            <a href="index.html" class="mt-6 inline-block text-sky-400 hover:text-sky-300 transition-colors">
-                <i class="fas fa-arrow-left mr-2"></i>Back to Portfolio
-            </a>
+            <p class="mt-2 text-lg text-sky-300">A Real-Time Vision-Based Target Practice System</p>
         </header>
 
-        <main class="space-y-12">
+        <div class="space-y-12">
+
             <!-- Project Overview -->
             <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-4 text-white">Project Overview</h2>
-                <div class="md:flex md:space-x-8">
+                <div class="md:flex md:space-x-8 items-center">
                     <div class="md:w-2/3 text-lg leading-relaxed">
                         <p>This project is a 2-axis robotic gantry system designed for ping-pong target practice. It integrates a real-time vision system for automated ball tracking and interception, alongside multiple manual control options.</p>
                         <p class="mt-4">The core objective was to create a versatile and responsive robotic system by interfacing various sensors, controllers, and microcontrollers, bridging the gap between high-level computer vision and low-level hardware control. The system is built on an 80/20 aluminum frame, driven by stepper motors, and controlled by an STM32 microcontroller.</p>
                     </div>
                     <div class="md:w-1/3 mt-6 md:mt-0">
-                        <source src="assets/videos/ps2controller.mp4" alt="Gantry System" class="rounded-lg shadow-lg w-full">
+                        <video autoplay loop muted playsinline class="rounded-lg shadow-lg w-full">
+                            <source src="assets/videos/ps2controller.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </section>
 
-            <!-- Control Modes -->
+            <!-- Key Features -->
             <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Control Modes</h2>
-                <p class="text-lg mb-6">A key feature of the project is its ability to switch between three distinct operational modes via a physical button, with the current mode displayed on an LCD screen.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gray-800 p-4 rounded">
-                        <h3 class="font-semibold text-xl text-sky-400"><i class="fas fa-robot mr-2"></i>Automated Mode</h3>
-                        <p class="mt-2">Real-time ball tracking using OpenCV for autonomous paddle positioning.</p>
+                <h2 class="text-3xl font-bold mb-6 text-white">Key Features</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="feature-item">
+                        <i class="fas fa-robot fa-3x text-sky-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-white">Automated Control</h3>
+                        <p>Real-time ball tracking using a Raspberry Pi with OpenCV.</p>
                     </div>
-                    <div class="bg-gray-800 p-4 rounded">
-                        <h3 class="font-semibold text-xl text-sky-400"><i class="fab fa-nintendo-switch mr-2"></i>Wii Remote Control</h3>
-                        <p class="mt-2">Custom wireless control using a Wii remote's IR camera and accelerometer.</p>
+                    <div class="feature-item">
+                        <i class="fas fa-gamepad fa-3x text-sky-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-white">Manual Control</h3>
+                        <p>User-operated control via a PS2 joystick or a custom wireless Wii remote.</p>
                     </div>
-                    <div class="bg-gray-800 p-4 rounded">
-                        <h3 class="font-semibold text-xl text-sky-400"><i class="fas fa-gamepad mr-2"></i>Joystick Control</h3>
-                        <p class="mt-2">Direct manual control of the gantry's X/Y axes via a PS2 joystick.</p>
+                    <div class="feature-item">
+                        <i class="fas fa-microchip fa-3x text-sky-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-white">Embedded System Core</h3>
+                        <p>STM32 microcontroller manages motor control, sensor data, and communication protocols.</p>
                     </div>
                 </div>
             </section>
-            
+
             <!-- Technical Implementation -->
             <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-4 text-white">Technical Implementation</h2>
-                <div class="space-y-8">
+                <div class="space-y-6 text-lg">
                     <div>
-                        <h3 class="text-2xl font-semibold text-white">Mechanical & Electrical Design</h3>
-                        <p class="mt-2 text-lg">The gantry frame is constructed from 80/20 aluminum extrusions for rigidity. NEMA stepper motors drive a chain and pulley system. For safety and calibration, physical limit switches are installed at the ends of each axis to halt motor movement.</p>
-                        <img src="https://i.imgur.com/rG45C2H.png" alt="Component Diagram" class="mt-4 rounded-lg shadow-lg w-full max-w-2xl mx-auto">
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">Vision System (Raspberry Pi)</h3>
+                        <p>A Raspberry Pi 4 is dedicated to the computer vision task. A Python script leverages the OpenCV library to continuously capture video frames, convert them to the HSV color space for robust detection, apply a color mask to isolate the ping-pong ball, and calculate its centroid coordinates (X, Y). These coordinates are then transmitted to the STM32 controller over SPI.</p>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-semibold text-white">Control Firmware (STM32)</h3>
-                        <p class="mt-2 text-lg">The system's brain is an STM32L4R5ZI-P microcontroller programmed in C. The firmware is highly interrupt-driven to ensure low-latency responses, managing motor control via PWM timers and multiple communication protocols (SPI, I2C, UART) simultaneously.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-white">Vision System (Raspberry Pi)</h3>
-                        <p class="mt-2 text-lg">A Raspberry Pi 4 is dedicated to the computer vision task. A Python script leverages OpenCV to capture video, isolate the ball using color thresholding in the HSV space, calculate its centroid, and transmit the coordinates to the STM32 over SPI.</p>
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">Firmware & Control (STM32)</h3>
+                        <p>The STM32 runs C-based firmware and acts as the central brain. It features a state machine to switch between control modes (Automated, Wii, PS2). It receives data from the Raspberry Pi (SPI) and the custom Wii remote (I2C/UART) and translates it into precise PWM signals for the stepper motor drivers. Interrupt-driven routines for limit switches ensure the gantry operates within safe physical boundaries.</p>
                     </div>
                 </div>
             </section>
-            
-             <!-- Documentation & Code -->
+
+            <!-- Documentation & Code -->
             <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-4 text-white">Documentation & Code</h2>
-                <div class="md:flex md:space-x-8">
-                    <!-- Documents -->
-                    <div class="md:w-1/2">
-                        <h3 class="text-2xl font-semibold text-white mb-4">Project Documents</h3>
-                        <p class="mb-4 text-lg">The original proposal and poster provide a comprehensive overview of the design goals and outcomes.</p>
-                        <div class="space-y-4">
-                            <a href="Project%20Proposal%20Final.pdf" target="_blank" class="block w-full text-center bg-sky-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-sky-700 transition-colors">
-                                <i class="fas fa-file-pdf mr-2"></i>View Full Project Proposal
-                            </a>
-                            <a href="Team%2010%20Poster.pptx.pdf" target="_blank" class="block w-full text-center bg-sky-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-sky-700 transition-colors">
-                                <i class="fas fa-file-powerpoint mr-2"></i>View Project Poster
-                            </a>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-3">Project Documents</h3>
+                        <div class="flex space-x-4">
+                            <a href="Project Proposal Final.pdf" target="_blank" class="btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg inline-flex items-center"><i class="fas fa-file-alt mr-2"></i>View Project Proposal</a>
+                            <a href="Team 10 Poster.pptx.pdf" target="_blank" class="btn bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg inline-flex items-center"><i class="fas fa-image mr-2"></i>View Project Poster</a>
                         </div>
                     </div>
-                    <!-- Code Snippet -->
-                    <div class="md:w-1/2 mt-8 md:mt-0">
-                        <h3 class="text-2xl font-semibold text-white mb-4">Firmware Snippet</h3>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">Firmware Code Snippet</h3>
+                        <p class="mb-3">Below is a snippet from <code>mainstepper.c</code>, which is the core firmware running on the STM32. This section shows the main loop, which handles the state machine for switching between control modes and processing the corresponding inputs.</p>
                         <div class="code-block rounded-lg overflow-hidden">
-                            <div class="bg-gray-900 p-2 text-sm text-gray-400">
-                                <i class="fas fa-code mr-2"></i>mainstepper.c
-                            </div>
-                            <pre class="p-4 text-sm"><code>/* Main control loop for Gantry System */
+                            <pre class="p-4 text-sm text-gray-300 overflow-x-auto"><code class="language-c">
+/* Main control loop for Gantry System */
+
+// ... (Includes and initializations) ...
+
 int main(void)
 {
-  // ... Initializations ...
-  
-  printf("Gantry Control System Initializing...\\r\\n");
-  
-  // ... Peripheral Inits ...
-  
-  HAL_SPI_Receive_IT(&hspi1, spi_rx_buf, SPI_BUFFER_SIZE);
+  // ... (HAL Init, Clock Config, Peripheral Init) ...
+
+  printf("System Initialized. Entering main loop.\\n\\r");
 
   while (1)
   {
-    // Main state machine loop
-    switch(current_mode) {
-        case MODE_PI:
-            process_pi_coords();
+    // --- Check for mode switch button press ---
+    GPIO_PinState current_button_state = HAL_GPIO_ReadPin(MODE_BUTTON_PORT, MODE_BUTTON_PIN);
+    if (current_button_state == GPIO_PIN_SET && last_button_state == GPIO_PIN_RESET) {
+        if (!button_pressed_flag) {
+            button_pressed_flag = 1;
+            
+            // Cycle through control modes
+            current_control_mode = (ControlMode_t)(((int)current_control_mode + 1) % (int)NUM_CONTROL_MODES);
+            display_show_mode(current_control_mode);
+            
+            // Stop motors and handle de-initialization/re-initialization of peripherals
+            // ...
+        }
+    }
+    last_button_state = current_button_state;
+
+
+    // --- Process Input Based on Current Mode ---
+    switch(current_control_mode) {
+        case CONTROL_MODE_OPENCV:
+            if (new_spi_data_ready) {
+                process_spi3_data_direct_control();
+                new_spi_data_ready = 0;
+                // Restart SPI DMA for next transaction
+            }
             break;
 
-        case MODE_WII:
-            process_wii_inputs();
+        case CONTROL_MODE_PS2:
+            handle_ps2_control();
             break;
-
-        case MODE_PS2:
-            process_ps2_inputs();
+            
+        case CONTROL_MODE_USART2: // Wii Remote
+            handle_usart2_control();
             break;
     }
-    HAL_Delay(1); 
+
+    HAL_Delay(1);
   }
-}</code></pre>
+}
+                            </code></pre>
                         </div>
                     </div>
                 </div>
             </section>
-        </main>
-        
-        <!-- Footer -->
-        <footer class="text-center py-6 mt-12 border-t border-gray-700">
-            <p class="text-gray-400">&copy; 2025 Thomas Tran. All Rights Reserved.</p>
-        </footer>
-    </div>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="text-center mt-16">
+            <a href="index.html" class="btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full text-lg">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+            </a>
+        </div>
+    </main>
+
 </body>
 </html>
+
