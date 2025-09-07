@@ -10,43 +10,92 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base styling */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark background */
-            color: #d1d5db; /* Light gray text */
+            background-color: #0d1117;
+            background-image: linear-gradient(180deg, #111827 0%, #0d1117 100%);
+            color: #d1d5db;
         }
+
+        /* Particle Canvas Styling */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Header content needs to be on top of the canvas */
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Project card enhancements */
         .project-card {
-            background-color: #1f2937; /* Slightly lighter dark shade */
+            background-color: rgba(31, 41, 55, 0.7); /* Slightly transparent */
+            backdrop-filter: blur(10px);
             border: 1px solid #374151;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
+
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 191, 255, 0.1), 0 10px 10px -5px rgba(0, 191, 255, 0.08);
+            border-color: #38bdf8; /* sky-400 */
         }
-        .btn {
-            transition: background-color 0.3s ease, transform 0.3s ease;
+        
+        /* Tech tag styling */
+        .tech-tag {
+            background-color: rgba(55, 65, 81, 0.8);
+            backdrop-filter: blur(5px);
+            transition: background-color 0.3s;
         }
-        .btn:hover {
-            transform: scale(1.05);
+        .project-card:hover .tech-tag {
+             background-color: rgba(56, 189, 248, 0.3);
         }
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.75);
+
+        /* Typing animation cursor */
+        .typing-cursor {
+            animation: blink 0.7s infinite;
         }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Scroll reveal animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header Section -->
-    <header class="py-8">
+    <!-- Header Section with particle animation -->
+    <header class="relative py-12 min-h-[60vh] flex items-center justify-center overflow-hidden">
+        <canvas id="particle-canvas"></canvas>
         <div class="container mx-auto px-6 text-center">
-            <img src="assets/images/ttrannEdit1.JPG" alt="Thomas Tran" class="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-gray-700 shadow-lg object-cover">
-            <h1 class="text-4xl md:text-5xl font-bold text-white">Thomas Tran</h1>
-            <p class="mt-2 text-lg text-sky-300">Computer & Electrical Engineering Student at the University of Michigan</p>
-            <div class="mt-6 flex justify-center space-x-6">
-                <a href="mailto:ttrann@umich.edu" class="text-gray-300 hover:text-sky-400 transition-colors"><i class="fas fa-envelope fa-2x"></i></a>
-                <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-gray-300 hover:text-sky-400 transition-colors"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a href="https://github.com/tommytt427" target="_blank" class="text-gray-300 hover:text-sky-400 transition-colors"><i class="fab fa-github fa-2x"></i></a>
+            <img src="assets/images/ttrannEdit1.JPG" alt="Thomas Tran" class="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-gray-700 shadow-lg object-cover transform transition-transform duration-500 hover:scale-110">
+            <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight">Thomas Tran</h1>
+            <p class="mt-4 text-lg text-sky-300"><span id="typing-text"></span><span class="typing-cursor">|</span></p>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="mailto:ttrann@umich.edu" class="text-gray-300 hover:text-sky-400 transition-transform duration-300 transform hover:scale-125"><i class="fas fa-envelope fa-2x"></i></a>
+                <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-gray-300 hover:text-sky-400 transition-transform duration-300 transform hover:scale-125"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://github.com/tommytt427" target="_blank" class="text-gray-300 hover:text-sky-400 transition-transform duration-300 transform hover:scale-125"><i class="fab fa-github fa-2x"></i></a>
             </div>
         </div>
     </header>
@@ -54,7 +103,7 @@
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
         <!-- About Me Section -->
-        <section id="about" class="mb-16">
+        <section id="about" class="mb-24 scroll-animate">
             <h2 class="text-3xl font-bold text-center mb-8 text-white">About Me</h2>
             <p class="max-w-3xl mx-auto text-center text-lg leading-relaxed">
                 I am a passionate and driven engineering student with a focus on embedded systems, control systems, and robotics. My hands-on project experience includes developing complex multi-modal robotic systems, designing firmware for microcontrollers, and implementing real-time computer vision. I thrive on solving challenging problems and bridging the gap between hardware and software.
@@ -62,45 +111,65 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects">
+        <section id="projects" class="scroll-animate">
             <h2 class="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 
                 <!-- Gantry Project Card -->
-                <div class="project-card rounded-lg overflow-hidden shadow-lg flex flex-col">
+                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <img src="assets/images/IMG_3268.jpg" alt="Gantry Project" class="w-full h-48 object-cover">
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-white">Multi-Modal Robotic Gantry</h3>
                         <p class="text-gray-300 flex-grow">A 2-axis gantry for ping-pong target practice featuring automated control via OpenCV, and manual control with a Wii remote or PS2 joystick.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">STM32</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">OpenCV</span>
+                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">SPI/I2C</span>
+                        </div>
                         <div class="mt-6">
-                            <a href="gantry-project.html" class="btn bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg w-full text-center inline-block hover:bg-sky-700">View Project Details</a>
+                            <a href="gantry-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- ACC Project Card -->
-                <div class="project-card rounded-lg overflow-hidden shadow-lg flex flex-col">
+                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <img src="assets/images/461-car.png" alt="ACC Project" class="w-full h-48 object-cover">
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-white">Adaptive Cruise Control & Steering</h3>
                         <p class="text-gray-300 flex-grow">Developed a multi-mode ACC system in Simulink for an NXP S32K144, including a PD controller for stable autonomous lane-keeping.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Simulink</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">NXP S32K144</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">CAN Bus</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
+                        </div>
                          <div class="mt-6">
-                            <a href="acc-project.html" class="btn bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg w-full text-center inline-block hover:bg-sky-700">View Project Details</a>
+                            <a href="acc-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- MASA Project Card with Video -->
-                <div class="project-card rounded-lg overflow-hidden shadow-lg flex flex-col">
-                    <video autoplay loop muted playsinline class="w-full h-48 object-cover">
-                        <source src="assets/videos/masa-banner.webm" type="video/webm">
-                        Your browser does not support the video tag. A preview of the MASA project.
-                    </video>
+                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
+                    <div class="relative w-full h-48">
+                        <video autoplay loop muted playsinline class="w-full h-full object-cover absolute top-0 left-0">
+                            <source src="assets/videos/masa-banner.webm" type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="absolute inset-0 bg-black opacity-20"></div>
+                    </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-white">MASA Avionics Telemetry System</h3>
                         <p class="text-gray-300 flex-grow">Leading development of a 2.4GHz LoRa-based telemetry system for real-time rocket flight data transmission up to 75,000 feet.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">LoRa</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">RF Design</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Embedded C</span>
+                        </div>
                          <div class="mt-6">
-                            <a href="masa-project.html" class="btn bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg w-full text-center inline-block hover:bg-sky-700">View Project Details</a>
+                            <a href="masa-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
                         </div>
                     </div>
                 </div>
@@ -109,46 +178,146 @@
         </section>
 
         <!-- Resume Button -->
-        <section id="resume" class="text-center mt-16">
-            <button id="view-resume-btn" class="btn bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-green-700">
+        <section id="resume" class="text-center mt-24 scroll-animate">
+            <button id="view-resume-btn" class="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-green-500/50">
                 <i class="fas fa-file-pdf mr-2"></i> View My Resume
             </button>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-6 mt-12 border-t border-gray-700">
-        <p class="text-gray-400">&copy; 2025 Thomas Tran. All Rights Reserved.</p>
+    <footer class="text-center py-8 mt-12 border-t border-gray-800">
+        <p class="text-gray-500">&copy; 2025 Thomas Tran. All Rights Reserved.</p>
     </footer>
 
     <!-- Resume Modal -->
-    <div id="resume-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
-        <div class="modal-backdrop fixed inset-0"></div>
-        <div class="relative bg-gray-800 rounded-lg shadow-xl w-11/12 max-w-4xl h-5/6 flex flex-col">
+    <div id="resume-modal" class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-75 backdrop-blur-sm">
+        <div class="relative bg-gray-800 rounded-lg shadow-xl w-11/12 max-w-4xl h-5/6 flex flex-col border border-gray-700">
             <div class="flex justify-between items-center p-4 border-b border-gray-700">
                 <h3 class="text-lg font-semibold text-white">Thomas Tran - Resume</h3>
-                <button id="close-modal-btn" class="text-gray-300 hover:text-white text-2xl">&times;</button>
+                <button id="close-modal-btn" class="text-gray-300 hover:text-white text-3xl leading-none">&times;</button>
             </div>
-            <div class="flex-grow p-2">
-                <iframe src="ThomasTranResume2526V3.pdf" class="w-full h-full" frameborder="0"></iframe>
+            <div class="flex-grow p-1">
+                <iframe src="ThomasTranResume2526V3.pdf" class="w-full h-full rounded-b-lg" frameborder="0"></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        const viewResumeBtn = document.getElementById('view-resume-btn');
-        const resumeModal = document.getElementById('resume-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalBackdrop = document.querySelector('.modal-backdrop');
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Resume Modal Logic ---
+            const viewResumeBtn = document.getElementById('view-resume-btn');
+            const resumeModal = document.getElementById('resume-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            
+            function toggleModal() {
+                resumeModal.classList.toggle('hidden');
+                resumeModal.classList.toggle('flex');
+            }
 
-        function toggleModal() {
-            resumeModal.classList.toggle('hidden');
-            resumeModal.classList.toggle('flex');
-        }
+            viewResumeBtn.addEventListener('click', toggleModal);
+            closeModalBtn.addEventListener('click', toggleModal);
+            resumeModal.addEventListener('click', (e) => {
+                if (e.target === resumeModal) {
+                    toggleModal();
+                }
+            });
 
-        viewResumeBtn.addEventListener('click', toggleModal);
-        closeModalBtn.addEventListener('click', toggleModal);
-        modalBackdrop.addEventListener('click', toggleModal);
+            // --- Typing Animation ---
+            const typingTextElement = document.getElementById('typing-text');
+            const textToType = "Computer & Electrical Engineering Student at the University of Michigan";
+            let charIndex = 0;
+
+            function type() {
+                if (charIndex < textToType.length) {
+                    typingTextElement.textContent += textToType.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 50); // Adjust typing speed here
+                }
+            }
+            type();
+
+            // --- Particle Animation ---
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            
+            let particlesArray;
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.directionX = directionX;
+                    this.directionY = directionY;
+                    this.size = size;
+                    this.color = color;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) {
+                        this.directionX = -this.directionX;
+                    }
+                    if (this.y > canvas.height || this.y < 0) {
+                        this.directionY = -this.directionY;
+                    }
+                    this.x += this.directionX;
+                    this.y += this.directionY;
+                    this.draw();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .4) - .2;
+                    let directionY = (Math.random() * .4) - .2;
+                    let color = 'rgba(56, 189, 248, 0.5)';
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            function animateParticles() {
+                requestAnimationFrame(animateParticles);
+                ctx.clearRect(0, 0, innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+            }
+
+            initParticles();
+            animateParticles();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+                initParticles();
+            });
+
+            // --- Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const elementsToAnimate = document.querySelectorAll('.scroll-animate');
+            elementsToAnimate.forEach(el => observer.observe(el));
+        });
     </script>
 </body>
 </html>
