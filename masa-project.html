@@ -38,7 +38,7 @@
         <!-- Header -->
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-white">MASA Avionics Telemetry System</h1>
-            <p class="mt-2 text-lg text-sky-300">Long-Range 2.4GHz LoRa Communication for High-Altitude Rockets</p>
+            <p class="mt-2 text-lg text-sky-300">Project Lead for Radio Firmware & Telemetry</p>
         </header>
 
         <main class="space-y-12">
@@ -51,8 +51,7 @@
                         <p class="mt-4">The system utilizes LoRa (Long Range) communication in the 2.4GHz band, leveraging Chirp Spread Spectrum (CSS) modulation to achieve a resilient communication link. This is critical for post-flight analysis, especially in scenarios where the primary black box data recorder may be unrecoverable. This project addresses a key failure point from past launches by creating a redundant, live telemetry backup.</p>
                     </div>
                     <div class="md:w-1/3 mt-6 md:mt-0">
-                        <!-- Placeholder for hardware image -->
-                        <img src="https://placehold.co/600x400/1f2937/38bdf8?text=Hardware\nComing+Soon" alt="Avionics Hardware Placeholder" class="rounded-lg shadow-lg w-full">
+                         <img src="https://placehold.co/600x400/1f2937/38bdf8?text=Radio+Hardware" alt="Avionics Hardware Placeholder" class="rounded-lg shadow-lg w-full">
                     </div>
                 </div>
             </section>
@@ -95,86 +94,43 @@
                 </div>
             </section>
 
-            <!-- Code Snippets -->
+            <!-- Firmware Development Section -->
             <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Firmware Snippets</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Transmitter Code -->
-                    <div>
-                        <h3 class="text-2xl font-semibold text-white mb-4">Transmitter Code</h3>
-                        <div class="code-block rounded-lg overflow-hidden">
-                            <div class="bg-gray-900 p-2 text-sm text-gray-400"><i class="fas fa-arrow-up mr-2"></i>TransmitterCodeLoRa.txt</div>
-                            <pre class="p-4 text-sm"><code>
-void loop() {
-  // Prepare message and buffer
-  const char* message = "Hello to MASA!";
-  size_t msgLen = strlen(message);
-  uint8_t buffer[128] = {0};
+                <h2 class="text-3xl font-bold mb-4 text-white">Firmware Driver Development</h2>
+                 <p class="text-lg mb-6">As the Radio Lead, I am pioneering the development of a bare-metal C driver for the Semtech SX1280 transceiver. A key challenge is ensuring data integrity in a multi-threaded environment. The firmware is architected for radio configuration, packet handling, and data buffering, and leverages FreeRTOS critical sections for thread-safe SPI communication.</p>
+                <div class="code-block rounded-lg overflow-hidden">
+                    <div class="bg-gray-900 p-2 text-sm text-gray-400"><i class="fas fa-shield-alt mr-2"></i>SX1280.c - Thread-Safe SPI</div>
+                    <pre class="p-4 text-sm"><code>
+static void SX1280_SPI_TransmitReceive(uint8_t *pTxData, uint8_t *pRxData, uint16_t size)
+{
+    // wait for radio to not be busy before starting SPI transaction
+    SX1280_WaitForReady(100); // 100ms timeout
 
-  // Prepend packet counter to the message
-  memcpy(buffer, &packetCounter, sizeof(packetCounter));
-  memcpy(buffer + sizeof(packetCounter), message, msgLen);
+    // enter critical section for thread safety
+    taskENTER_CRITICAL();
 
-  size_t totalLen = sizeof(packetCounter) + msgLen;
+    // set NSS low to select the radio
+    HAL_GPIO_WritePin(sx1280_hal_config->nssPort, sx1280_hal_config->nssPin, GPIO_PIN_RESET);
 
-  Serial.print("[SX1280] Transmitting packet #");
-  Serial.print(packetCounter);
-  
-  // Transmit data using RadioLib
-  int state = radio.transmit(buffer, totalLen);
-
-  if (state == RADIOLIB_ERR_NONE) {
-    Serial.println("Success!");
-    packetCounter++; 
-  } else {
-    Serial.print("Transmission failed, code ");
-    Serial.println(state);
-  }
-
-  delay(1000);  
-}
-                            </code></pre>
-                        </div>
-                    </div>
-                    <!-- Receiver Code -->
-                    <div>
-                        <h3 class="text-2xl font-semibold text-white mb-4">Receiver Code</h3>
-                        <div class="code-block rounded-lg overflow-hidden">
-                            <div class="bg-gray-900 p-2 text-sm text-gray-400"><i class="fas fa-arrow-down mr-2"></i>ReceiverCodeLoRa.txt</div>
-                            <pre class="p-4 text-sm"><code>
-void handleReceivedPacket() {
-    uint8_t buffer[128] = {0}; 
-    int state = radio.readData(buffer, sizeof(buffer));
-    
-    float rssi = radio.getRSSI();
-    float snr = radio.getSNR();
-
-    if (state == RADIOLIB_ERR_NONE) { 
-        uint32_t packetCounter;
-        memcpy(&packetCounter, buffer, sizeof(packetCounter));
-
-        metrics.totalPackets++;
-
-        if (metrics.totalPackets == 1) {
-            metrics.expectedPacketCounter = packetCounter + 1;
-        } else {
-            if (packetCounter != (metrics.expectedPacketCounter - 1)) {
-                // Logic to detect and count lost packets
-                uint32_t lost = packetCounter - metrics.expectedPacketCounter;
-                metrics.lostPackets += lost;
-            }
-            metrics.expectedPacketCounter = packetCounter + 1;
-        }
-        
-        // Update signal metrics (RSSI, SNR, Power)
-        updateSignalMetrics(rssi, snr);
+    // perform SPI transaction
+    if (pRxData == NULL)
+    {
+        HAL_SPI_Transmit(sx1280_hal_config->spiHandle, pTxData, size, HAL_MAX_DELAY);
     }
+    else
+    {
+        HAL_SPI_TransmitReceive(sx1280_hal_config->spiHandle, pTxData, pRxData, size, HAL_MAX_DELAY);
+    }
+    // set NSS high to deselect the radio
+    HAL_GPIO_WritePin(sx1280_hal_config->nssPort, sx1280_hal_config->nssPin, GPIO_PIN_SET);
     
-    radio.startReceive(); // Re-enter receive mode
+    // exit critical section
+    taskEXIT_CRITICAL();
+
+    // wait for radio to be ready after transaction
+    SX1280_WaitForReady(100); // 100ms timeout
 }
-                            </code></pre>
-                        </div>
-                    </div>
+                    </code></pre>
                 </div>
             </section>
         </main>
@@ -188,4 +144,3 @@ void handleReceivedPacket() {
 
 </body>
 </html>
-
