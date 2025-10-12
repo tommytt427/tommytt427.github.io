@@ -115,6 +115,25 @@
             <h2 class="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 
+                <!-- Autonomous Parafoil Project Card -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
+                    <img src="https://placehold.co/600x400/1f2937/38bdf8?text=Parafoil+System" alt="Autonomous Parafoil Project" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Autonomous Parafoil Guidance</h3>
+                        <p class="text-gray-300 flex-grow">Work-in-progress autonomous parafoil for precision payload recovery, featuring a custom GNC architecture with an IMU, GPS, and an Extended Kalman Filter.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">STM32</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">FreeRTOS</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">EKF</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">GPS/IMU</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="parafoil-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Gantry Project Card -->
                 <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
                     <img src="assets/images/IMG_3268.jpg" alt="Gantry Project" class="w-full h-48 object-cover">
@@ -129,24 +148,6 @@
                         </div>
                         <div class="mt-6">
                             <a href="gantry-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ACC Project Card -->
-                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
-                    <img src="assets/images/461-car.png" alt="ACC Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold mb-2 text-white">Adaptive Cruise Control & Steering</h3>
-                        <p class="text-gray-300 flex-grow">Developed a multi-mode ACC system in Simulink for an NXP S32K144, including a PD controller for stable autonomous lane-keeping.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Simulink</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">NXP S32K144</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">CAN Bus</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
-                        </div>
-                         <div class="mt-6">
-                            <a href="acc-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
                         </div>
                     </div>
                 </div>
@@ -166,10 +167,28 @@
                         <div class="mt-4 flex flex-wrap gap-2">
                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">LoRa</span>
                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">RF Design</span>
+                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">FreeRTOS</span>
                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Embedded C</span>
                         </div>
                          <div class="mt-6">
                             <a href="masa-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
+                        </div>
+                    </div>
+                </div>
+                 <!-- ACC Project Card -->
+                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
+                    <img src="assets/images/461-car.png" alt="ACC Project" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Adaptive Cruise Control & Steering</h3>
+                        <p class="text-gray-300 flex-grow">Developed a multi-mode ACC system in Simulink for an NXP S32K144, including a PD controller for stable autonomous lane-keeping.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Simulink</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">NXP S32K144</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">CAN Bus</span>
+                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
+                        </div>
+                         <div class="mt-6">
+                            <a href="acc-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
                         </div>
                     </div>
                 </div>
