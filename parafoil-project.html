@@ -60,8 +60,8 @@
                         <p class="mt-4">The system consists of an Airborne Guidance Unit (AGU) and a Ground Control Station (GCS). The AGU uses an integrated sensor suite and a sophisticated Guidance, Navigation, and Control (GNC) architecture to steer the parafoil to a precise landing zone.</p>
                     </div>
                     <div class="md:w-1/3 mt-6 md:mt-0">
-                        <img src="assets/images/parafoilsystemdiagram.png" alt="System Diagram Placeholder" class="rounded-lg shadow-lg w-full">
-                         <p class="text-center text-sm mt-2 text-gray-400"><strong>Image Suggestion:</strong> A great image here would be a high-level system block diagram, similar to the one in the project proposal.</p>
+                        <img src="assets/images/breadboardprototypeimu.jpg" alt="System Diagram Placeholder" class="rounded-lg shadow-lg w-full">
+                         <p class="text-center text-sm mt-2 text-gray-400">The current breadboard prototype, featuring the STM32 development board and the 9-axis IMU.</p>
                     </div>
                 </div>
             </section>
@@ -91,16 +91,17 @@
             <!-- Technical Implementation -->
             <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-4 text-white">Technical Implementation</h2>
-                 <div class="md:flex md:space-x-8 items-center">
+                 <div class="md:flex md:space-x-8 items-start">
                     <div class="md:w-1/2 text-lg leading-relaxed">
                         <h3 class="text-2xl font-semibold text-sky-300 mb-2">GNC Architecture</h3>
                         <p>The core of the autonomous capability lies in the Guidance, Navigation, and Control (GNC) architecture. The system uses an Extended Kalman Filter (EKF) to fuse high-frequency data from the IMU (accelerometer, gyroscope) with absolute position data from the GPS. This provides a robust and drift-free state estimate (position, velocity, attitude) that is critical for the guidance algorithm.</p>
+                        <p class="mt-4">I've successfully established communication with the IMU, which is now streaming quaternion and linear acceleration data over the COM port, as shown in the adjacent image. This data is foundational for the state estimation.</p>
                         <h3 class="text-2xl font-semibold text-sky-300 mt-6 mb-2">Future Work: PCB Design</h3>
                         <p>The next major step is to design a custom PCB to integrate all the components, including the STM32, IMU, GPS, altimeter, and servo connections. This will move the project from a breadboard prototype to a compact, flight-ready system suitable for deployment and field testing.</p>
                     </div>
                     <div class="md:w-1/2 mt-6 md:mt-0">
-                        <img src="https://placehold.co/600x400/1f2937/38bdf8?text=Hardware+Prototype" alt="Hardware Prototype Placeholder" class="rounded-lg shadow-lg w-full">
-                        <p class="text-center text-sm mt-2 text-gray-400"><strong>Image Suggestion:</strong> A photo of the current breadboard or protoboard setup would be perfect here to show the work in progress.</p>
+                        <img src="assets/images/parafoilcomportimage.png" alt="IMU Data from COM Port" class="rounded-lg shadow-lg w-full">
+                        <p class="text-center text-sm mt-2 text-gray-400">Live IMU data streaming from the device, showing quaternion (Q) and linear acceleration (A) vectors.</p>
                     </div>
                 </div>
             </section>
