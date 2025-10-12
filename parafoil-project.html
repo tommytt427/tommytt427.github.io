@@ -21,21 +21,65 @@
             border-bottom: 2px solid #38bdf8; /* sky-400 */
             padding-bottom: 0.5rem;
         }
-        .code-block {
-            background-color: #0d1117;
-            border: 1px solid #30363d;
-            color: #c9d1d9;
-        }
-        .code-block pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
         .btn {
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .btn:hover {
             transform: scale(1.05);
         }
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+            min-height: 70vh; /* Adjust as needed */
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0.4 }
+            to { opacity: 1 }
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -30px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.3s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(56, 189, 248, 0.5);
+        }
+        
+        /* Slide counter */
+        .slide-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -44,15 +88,16 @@
     <main class="container mx-auto px-6 py-12">
 
         <!-- Project Header -->
-        <header class="text-center mb-12">
+        <header class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-white">Autonomous Parafoil Guidance & Control System</h1>
             <p class="mt-2 text-lg text-sky-300">A GNC system for precision payload recovery.</p>
         </header>
 
-        <div class="space-y-12">
+        <!-- Slideshow Container -->
+        <div class="slideshow-container content-section rounded-lg p-6 md:p-10">
 
-            <!-- Project Overview -->
-            <section class="content-section p-6 rounded-lg">
+            <!-- Slide 1: Project Overview -->
+            <div class="slide">
                 <h2 class="text-3xl font-bold mb-4 text-white">Project Overview</h2>
                 <div class="md:flex md:space-x-8 items-center">
                     <div class="md:w-2/3 text-lg leading-relaxed">
@@ -64,58 +109,66 @@
                          <p class="text-center text-sm mt-2 text-gray-400">The current breadboard prototype, featuring the STM32 development board and the 9-axis IMU.</p>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Key Features -->
-            <section class="content-section p-6 rounded-lg">
+            <!-- Slide 2: Key Features -->
+            <div class="slide">
                 <h2 class="text-3xl font-bold mb-6 text-white">Key Features</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div class="feature-item">
-                        <i class="fas fa-satellite-dish fa-3x text-sky-400 mb-3"></i>
-                        <h3 class="text-xl font-semibold text-white">Sensor Fusion</h3>
-                        <p>An Extended Kalman Filter (EKF) fuses data from a 9-axis IMU and GPS for accurate state estimation.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center pt-8">
+                    <div class="feature-item flex flex-col items-center">
+                        <i class="fas fa-satellite-dish fa-4x text-sky-400 mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-white">Sensor Fusion</h3>
+                        <p class="mt-2">An Extended Kalman Filter (EKF) fuses data from a 9-axis IMU and GPS for accurate state estimation.</p>
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-cogs fa-3x text-sky-400 mb-3"></i>
-                        <h3 class="text-xl font-semibold text-white">Real-Time Control</h3>
-                        <p>FreeRTOS is used to manage sensor data acquisition, state estimation, and control loops concurrently.</p>
+                    <div class="feature-item flex flex-col items-center">
+                        <i class="fas fa-cogs fa-4x text-sky-400 mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-white">Real-Time Control</h3>
+                        <p class="mt-2">FreeRTOS is used to manage sensor data acquisition, state estimation, and control loops concurrently.</p>
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-microchip fa-3x text-sky-400 mb-3"></i>
-                        <h3 class="text-xl font-semibold text-white">Embedded Hardware</h3>
-                        <p>The system is built around an STM32 microcontroller, controlling servo actuators to steer the parafoil.</p>
+                    <div class="feature-item flex flex-col items-center">
+                        <i class="fas fa-microchip fa-4x text-sky-400 mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-white">Embedded Hardware</h3>
+                        <p class="mt-2">The system is built around an STM32 microcontroller, controlling servo actuators to steer the parafoil.</p>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Technical Implementation -->
-            <section class="content-section p-6 rounded-lg">
+            <!-- Slide 3: Technical Implementation -->
+            <div class="slide">
                 <h2 class="text-3xl font-bold mb-4 text-white">Technical Implementation</h2>
                  <div class="md:flex md:space-x-8 items-start">
                     <div class="md:w-1/2 text-lg leading-relaxed">
                         <h3 class="text-2xl font-semibold text-sky-300 mb-2">GNC Architecture</h3>
-                        <p>The core of the autonomous capability lies in the Guidance, Navigation, and Control (GNC) architecture. The system uses an Extended Kalman Filter (EKF) to fuse high-frequency data from the IMU (accelerometer, gyroscope) with absolute position data from the GPS. This provides a robust and drift-free state estimate (position, velocity, attitude) that is critical for the guidance algorithm.</p>
+                        <p>The core of the autonomous capability lies in the Guidance, Navigation, and Control (GNC) architecture. The system uses an Extended Kalman Filter (EKF) to fuse high-frequency data from the IMU (accelerometer, gyroscope) with absolute position data from the GPS. This provides a robust and drift-free state estimate that is critical for the guidance algorithm.</p>
                         <p class="mt-4">I've successfully established communication with the IMU, which is now streaming quaternion and linear acceleration data over the COM port, as shown in the adjacent image. This data is foundational for the state estimation.</p>
                         <h3 class="text-2xl font-semibold text-sky-300 mt-6 mb-2">Future Work: PCB Design</h3>
-                        <p>The next major step is to design a custom PCB to integrate all the components, including the STM32, IMU, GPS, altimeter, and servo connections. This will move the project from a breadboard prototype to a compact, flight-ready system suitable for deployment and field testing.</p>
+                        <p>The next major step is to design a custom PCB to integrate all the components. This will move the project from a breadboard prototype to a compact, flight-ready system suitable for deployment and field testing.</p>
                     </div>
                     <div class="md:w-1/2 mt-6 md:mt-0">
                         <img src="assets/images/parafoilcomportimage.png" alt="IMU Data from COM Port" class="rounded-lg shadow-lg w-full">
                         <p class="text-center text-sm mt-2 text-gray-400">Live IMU data streaming from the device, showing quaternion (Q) and linear acceleration (A) vectors.</p>
                     </div>
                 </div>
-            </section>
+            </div>
             
-            <!-- Project Documents -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Project Documents</h2>
+            <!-- Slide 4: Project Documents -->
+            <div class="slide flex flex-col justify-center items-center h-full">
+                <h2 class="text-3xl font-bold mb-8 text-white">Project Documents</h2>
                 <div class="text-center">
-                    <a href="assets/docs/parafoilprojectproposal.pdf" target="_blank" class="btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full text-lg inline-flex items-center">
+                    <a href="assets/docs/parafoilprojectproposal.pdf" target="_blank" class="btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 px-8 rounded-full text-xl inline-flex items-center">
                         <i class="fas fa-file-pdf mr-3"></i> View Full Project Proposal
                     </a>
                 </div>
-            </section>
+            </div>
 
+            <!-- Navigation -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            
+            <!-- Slide Counter -->
+            <div class="slide-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">4</span>
+            </div>
         </div>
 
         <!-- Back to Home Button -->
@@ -125,6 +178,30 @@
             </a>
         </div>
     </main>
+    
+    <script>
+        let slideIndex = 1;
+        const slides = document.getElementsByClassName("slide");
+        const currentSlideElem = document.getElementById("current-slide");
+        const totalSlidesElem = document.getElementById("total-slides");
+
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+            currentSlideElem.textContent = slideIndex;
+            totalSlidesElem.textContent = slides.length;
+        }
+    </script>
 
 </body>
 </html>
