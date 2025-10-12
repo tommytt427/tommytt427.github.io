@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Parafoil Project - Thomas Tran</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #d1d5db;
+        }
+        .content-section {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+        }
+        h2 {
+            border-bottom: 2px solid #38bdf8; /* sky-400 */
+            padding-bottom: 0.5rem;
+        }
+        .code-block {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+        .code-block pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .btn {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Project Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-white">Autonomous Parafoil Guidance & Control System</h1>
+            <p class="mt-2 text-lg text-sky-300">A GNC system for precision payload recovery.</p>
+        </header>
+
+        <div class="space-y-12">
+
+            <!-- Project Overview -->
+            <section class="content-section p-6 rounded-lg">
+                <h2 class="text-3xl font-bold mb-4 text-white">Project Overview</h2>
+                <div class="md:flex md:space-x-8 items-center">
+                    <div class="md:w-2/3 text-lg leading-relaxed">
+                        <p>This is a work-in-progress project to design, build, and validate a prototype autonomous parafoil guidance system. The primary objective is to land a 5kg payload within a designated target area from a release altitude of at least 50 feet. This system aims to provide a low-cost, reliable solution for recovering high-altitude payloads like scientific instruments and CubeSats.</p>
+                        <p class="mt-4">The system consists of an Airborne Guidance Unit (AGU) and a Ground Control Station (GCS). The AGU uses an integrated sensor suite and a sophisticated Guidance, Navigation, and Control (GNC) architecture to steer the parafoil to a precise landing zone.</p>
+                    </div>
+                    <div class="md:w-1/3 mt-6 md:mt-0">
+                        <img src="https://placehold.co/600x400/1f2937/38bdf8?text=System+Diagram" alt="System Diagram Placeholder" class="rounded-lg shadow-lg w-full">
+                         <p class="text-center text-sm mt-2 text-gray-400"><strong>Image Suggestion:</strong> A great image here would be a high-level system block diagram, similar to the one in the project proposal.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Features -->
+            <section class="content-section p-6 rounded-lg">
+                <h2 class="text-3xl font-bold mb-6 text-white">Key Features</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="feature-item">
+                        <i class="fas fa-satellite-dish fa-3x text-sky-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-white">Sensor Fusion</h3>
+                        <p>An Extended Kalman Filter (EKF) fuses data from a 9-axis IMU and GPS for accurate state estimation.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-cogs fa-3x text-sky-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-white">Real-Time Control</h3>
+                        <p>FreeRTOS is used to manage sensor data acquisition, state estimation, and control loops concurrently.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-microchip fa-3x text-sky-400 mb-3"></i>
+                        <h3 class="text-xl font-semibold text-white">Embedded Hardware</h3>
+                        <p>The system is built around an STM32 microcontroller, controlling servo actuators to steer the parafoil.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Implementation -->
+            <section class="content-section p-6 rounded-lg">
+                <h2 class="text-3xl font-bold mb-4 text-white">Technical Implementation</h2>
+                 <div class="md:flex md:space-x-8 items-center">
+                    <div class="md:w-1/2 text-lg leading-relaxed">
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">GNC Architecture</h3>
+                        <p>The core of the autonomous capability lies in the Guidance, Navigation, and Control (GNC) architecture. The system uses an Extended Kalman Filter (EKF) to fuse high-frequency data from the IMU (accelerometer, gyroscope) with absolute position data from the GPS. This provides a robust and drift-free state estimate (position, velocity, attitude) that is critical for the guidance algorithm.</p>
+                        <h3 class="text-2xl font-semibold text-sky-300 mt-6 mb-2">Future Work: PCB Design</h3>
+                        <p>The next major step is to design a custom PCB to integrate all the components, including the STM32, IMU, GPS, altimeter, and servo connections. This will move the project from a breadboard prototype to a compact, flight-ready system suitable for deployment and field testing.</p>
+                    </div>
+                    <div class="md:w-1/2 mt-6 md:mt-0">
+                        <img src="https://placehold.co/600x400/1f2937/38bdf8?text=Hardware+Prototype" alt="Hardware Prototype Placeholder" class="rounded-lg shadow-lg w-full">
+                        <p class="text-center text-sm mt-2 text-gray-400"><strong>Image Suggestion:</strong> A photo of the current breadboard or protoboard setup would be perfect here to show the work in progress.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="text-center mt-16">
+            <a href="index.html" class="btn bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-full text-lg">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>
