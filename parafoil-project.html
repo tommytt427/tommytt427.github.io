@@ -37,7 +37,12 @@
         <!-- Project Header -->
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-white">Autonomous Parafoil Guidance & Control System</h1>
-            <p class="mt-2 text-lg text-sky-300">A GNC system for precision payload recovery.</p>
+            <p class="mt-2 text-lg text-sky-300">A custom PCB-based GNC system for precision payload recovery.</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <span class="bg-green-900 text-green-300 text-xs font-semibold px-3 py-1 rounded-full">Completed Fall 2025</span>
+                <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-3 py-1 rounded-full">STM32H7</span>
+                <span class="bg-purple-900 text-purple-300 text-xs font-semibold px-3 py-1 rounded-full">Altium Designer</span>
+            </div>
         </header>
 
         <div class="space-y-12">
@@ -47,73 +52,92 @@
                 <h2 class="text-3xl font-bold mb-4 text-white">Project Overview</h2>
                 <div class="md:flex md:space-x-8 items-center">
                     <div class="md:w-2/3 text-lg leading-relaxed">
-                        <p>This is a work-in-progress project to design, build, and validate a prototype autonomous parafoil guidance system. The primary objective is to land a 5kg payload within a designated target area from a release altitude of at least 50 feet. This system aims to provide a low-cost, reliable solution for recovering high-altitude payloads like scientific instruments and CubeSats.</p>
-                        <p class="mt-4">The system consists of an Airborne Guidance Unit (AGU) and a Ground Control Station (GCS). The AGU uses an integrated sensor suite and a sophisticated Guidance, Navigation, and Control (GNC) architecture to steer the parafoil to a precise landing zone.</p>
+                        <p>This project involved designing, building, and validating an autonomous guidance unit (AGU) capable of navigating a 5kg payload to a designated GPS coordinate. The system was designed to address the problem of recovering high-altitude scientific payloads, which often drift off-course during descent.</p>
+                        <p class="mt-4">The final system features a custom 4-layer PCB, a high-fidelity sensor suite, and a robust Guidance, Navigation, and Control (GNC) algorithm. During final field testing, the system successfully navigated from a drop height of 75 meters to land within <span class="text-sky-300 font-bold">5 meters</span> of the target coordinate.</p>
                     </div>
                     <div class="md:w-1/3 mt-6 md:mt-0">
-                        <img src="assets/images/breadboardprototypeimu.jpg" alt="Breadboard Prototype" class="rounded-lg shadow-lg w-full">
-                         <p class="text-center text-sm mt-2 text-gray-400">The current breadboard prototype, featuring the STM32 development board and the 9-axis IMU.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- System Architecture -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white text-center">System Architecture</h2>
-                <div class="flex justify-center items-center">
-                    <div class="w-full max-w-3xl">
-                        <img src="assets/images/parafoilsystemdiagram.png" alt="System Architecture Diagram" class="rounded-lg shadow-lg w-full">
-                        <p class="text-center text-sm mt-4 text-gray-400">High-level diagram showing the interaction between the on-board components (PCB) and the ground Base Station.</p>
+                        <img src="assets/images/pcbstructure.jpg" alt="Final Assembly" class="rounded-lg shadow-lg w-full object-cover h-64 border border-gray-600">
+                        <p class="text-center text-sm mt-2 text-gray-400">The final AGU assembly showing the servo actuation system and parachute rigging.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Key Features -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-6 text-white">Key Features</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                    <div class="feature-item">
-                        <i class="fas fa-satellite-dish fa-3x text-sky-400 mb-3"></i>
-                        <h3 class="text-xl font-semibold text-white">Sensor Fusion</h3>
-                        <p>An Extended Kalman Filter (EKF) fuses data from a 9-axis IMU and GPS for accurate state estimation.</p>
+            <!-- PCB Design Spotlight -->
+            <section class="content-section p-6 rounded-lg border-l-4 border-sky-500">
+                <h2 class="text-3xl font-bold mb-6 text-white text-center">Custom PCB Architecture</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div>
+                        <img src="assets/images/pcbimage1.jpg" alt="Custom PCB Top View" class="rounded-lg shadow-xl w-full border border-gray-600 mb-4 transform hover:scale-105 transition-transform duration-300">
+                        <img src="assets/images/pcbimage2.jpg" alt="Custom PCB Bottom View" class="rounded-lg shadow-xl w-full border border-gray-600 transform hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-cogs fa-3x text-sky-400 mb-3"></i>
-                        <h3 class="text-xl font-semibold text-white">Real-Time Control</h3>
-                        <p>FreeRTOS is used to manage sensor data acquisition, state estimation, and control loops concurrently.</p>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-microchip fa-3x text-sky-400 mb-3"></i>
-                        <h3 class="text-xl font-semibold text-white">Embedded Hardware</h3>
-                        <p>The system is built around an STM32 microcontroller, controlling servo actuators to steer the parafoil.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-sky-400 mb-2">Layer Stackup & Signal Integrity</h3>
+                            <p class="text-gray-300">Designed a custom 4-layer PCB in Altium Designer using a <span class="text-white font-semibold">Ground-Signal-Power-Ground</span> stackup. This configuration shields sensitive internal signal traces from external EMI, crucial for the high-frequency GPS and RF modules. I utilized <span class="text-white font-semibold">2oz copper</span> for internal layers to handle high current density from the servo motors and minimize resistive heating.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-sky-400 mb-2">Power Distribution Network</h3>
+                            <p class="text-gray-300">Implemented a <span class="text-white font-semibold">"Star Routing" topology</span> to isolate the noisy high-current servo power rails from the sensitive 3.3V logic rails. This prevents voltage drops and ground bounce caused by servo stall currents from resetting the microcontroller.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-sky-400 mb-2">RF & Component Integration</h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                <li><strong>MCU:</strong> STM32H7 High-Performance Microcontroller.</li>
+                                <li><strong>GPS:</strong> Integrated NEO-M9N module with a custom bias-tee circuit (27nH inductor + 100nF cap network) to inject DC power into the active antenna while isolating the RF path.</li>
+                                <li><strong>Sensors:</strong> BNO085 9-Axis IMU for attitude estimation.</li>
+                                <li><strong>Protection:</strong> Reverse polarity protection via Schottky diodes and dedicated status LEDs for all power rails.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Technical Implementation -->
+            <!-- Firmware & Control -->
             <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Technical Implementation</h2>
-                 <div class="md:flex md:space-x-8 items-start">
-                    <div class="md:w-1/2 text-lg leading-relaxed">
-                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">GNC Architecture</h3>
-                        <p>The core of the autonomous capability lies in the Guidance, Navigation, and Control (GNC) architecture. The system uses an Extended Kalman Filter (EKF) to fuse high-frequency data from the IMU (accelerometer, gyroscope) with absolute position data from the GPS. This provides a robust and drift-free state estimate that is critical for the guidance algorithm.</p>
-                        <p class="mt-4">I've successfully established communication with the IMU, which is now streaming quaternion and linear acceleration data over the COM port, as shown in the adjacent image. This data is foundational for the state estimation.</p>
-                        <h3 class="text-2xl font-semibold text-sky-300 mt-6 mb-2">Future Work: PCB Design</h3>
-                        <p>The next major step is to design a custom PCB to integrate all the components. This will move the project from a breadboard prototype to a compact, flight-ready system suitable for deployment and field testing.</p>
+                <h2 class="text-3xl font-bold mb-6 text-white">Firmware & Autonomy</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="text-lg leading-relaxed">
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-3">FreeRTOS Architecture</h3>
+                        <p class="mb-4">The firmware is built on FreeRTOS to manage asynchronous sensor data and control loops. The system is architected into three primary prioritized tasks:</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300 mb-6">
+                            <li><strong>Sensor Acquisition (High Priority):</strong> Polls IMU data at 100Hz via a custom SPI driver handling the SHTP protocol.</li>
+                            <li><strong>Navigation (DMA-Driven):</strong> Parses binary UBX GPS packets using Direct Memory Access (DMA) to extract velocity vectors without blocking the CPU.</li>
+                            <li><strong>Telemetry & Control:</strong> Manages XBee communication and servo PWM generation.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-semibold text-sky-300 mb-3">Extended Kalman Filter (EKF)</h3>
+                        <p class="text-gray-300">
+                            I implemented a <strong>7-state EKF</strong> (Position N/E/D, Velocity N/E/D, Heading Bias) to fuse the 100Hz inertial data with lower-frequency GPS updates. To optimize for the microcontroller, I developed a <strong>Sequential Update</strong> method, processing GPS scalars (North, East, Down) independently to avoid computationally expensive 7x7 matrix inversions.
+                        </p>
                     </div>
-                    <div class="md:w-1/2 mt-6 md:mt-0">
-                        <img src="assets/images/parafoilcomportimage.png" alt="IMU Data from COM Port" class="rounded-lg shadow-lg w-full">
-                        <p class="text-center text-sm mt-2 text-gray-400">Live IMU data streaming from the device, showing quaternion (Q) and linear acceleration (A) vectors.</p>
+                    
+                    <div class="flex flex-col justify-center space-y-4">
+                        <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                            <h4 class="text-lg font-bold text-white mb-2"><i class="fas fa-code-branch text-sky-400 mr-2"></i>Key Driver Features</h4>
+                            <ul class="text-sm text-gray-400 space-y-2">
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Custom SPI driver for BNO085 SHTP</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Binary UBX GPS Parser (vs. slow NMEA)</li>
+                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Hardware-in-the-loop simulation mode</li>
+                            </ul>
+                        </div>
+                        <img src="assets/images/image_7fa179.png" alt="GitHub Repository Structure" class="rounded-lg shadow-lg border border-gray-600 opacity-80 hover:opacity-100 transition-opacity">
                     </div>
                 </div>
             </section>
             
             <!-- Project Documents -->
             <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Project Documents</h2>
-                <div class="text-center">
-                    <a href="assets/docs/parafoilprojectproposal.pdf" target="_blank" class="btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full text-lg inline-flex items-center">
-                        <i class="fas fa-file-pdf mr-3"></i> View Full Project Proposal
+                <h2 class="text-3xl font-bold mb-4 text-white">Project Resources</h2>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="assets/docs/EECS_473_Final_Report_Draft__1_ (1).pdf" target="_blank" class="btn bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center">
+                        <i class="fas fa-file-pdf mr-3 text-red-400"></i> Read Final Report
+                    </a>
+                    <a href="https://github.com/mjcapo/EECS473-Parafoilers.git" target="_blank" class="btn bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center border border-gray-600">
+                        <i class="fab fa-github mr-3 text-white"></i> View Source Code
                     </a>
                 </div>
             </section>
@@ -130,4 +154,3 @@
 
 </body>
 </html>
-
