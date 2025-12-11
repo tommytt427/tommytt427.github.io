@@ -27,6 +27,35 @@
         .btn:hover {
             transform: scale(1.05);
         }
+        /* Architecture Diagram Styles */
+        .arch-box {
+            background: rgba(31, 41, 55, 0.8);
+            border: 1px solid #4b5563;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .arch-box:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+        .arrow-down {
+            width: 2px;
+            height: 20px;
+            background: #4b5563;
+            margin: 0 auto;
+            position: relative;
+        }
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -4px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #4b5563;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -66,12 +95,20 @@
             <section class="content-section p-6 rounded-lg border-l-4 border-sky-500">
                 <h2 class="text-3xl font-bold mb-6 text-white text-center">Custom PCB Architecture</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                    <div>
-                        <img src="assets/images/pcbimage1.jpg" alt="Custom PCB Top View" class="rounded-lg shadow-xl w-full border border-gray-600 mb-4 transform hover:scale-105 transition-transform duration-300">
-                        <img src="assets/images/pcbimage2.jpg" alt="Custom PCB Bottom View" class="rounded-lg shadow-xl w-full border border-gray-600 transform hover:scale-105 transition-transform duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- PCB Images Grid -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-800 p-2 rounded-lg border border-gray-700">
+                            <img src="assets/images/pcbimage1.jpg" alt="Custom PCB Top View" class="rounded shadow-md w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300">
+                            <p class="text-center text-xs text-gray-500 mt-2">Top Layer (Signal/Components)</p>
+                        </div>
+                        <div class="bg-gray-800 p-2 rounded-lg border border-gray-700">
+                            <img src="assets/images/pcbimage2.jpg" alt="Custom PCB Bottom View" class="rounded shadow-md w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300">
+                            <p class="text-center text-xs text-gray-500 mt-2">Bottom Layer (GND/Connectors)</p>
+                        </div>
                     </div>
                     
+                    <!-- PCB Details -->
                     <div class="space-y-6">
                         <div>
                             <h3 class="text-xl font-bold text-sky-400 mb-2">Layer Stackup & Signal Integrity</h3>
@@ -85,7 +122,7 @@
 
                         <div>
                             <h3 class="text-xl font-bold text-sky-400 mb-2">RF & Component Integration</h3>
-                            <ul class="list-disc list-inside text-gray-300 space-y-2">
+                            <ul class="list-disc list-inside text-gray-300 space-y-2 text-sm">
                                 <li><strong>MCU:</strong> STM32H7 High-Performance Microcontroller.</li>
                                 <li><strong>GPS:</strong> Integrated NEO-M9N module with a custom bias-tee circuit (27nH inductor + 100nF cap network) to inject DC power into the active antenna while isolating the RF path.</li>
                                 <li><strong>Sensors:</strong> BNO085 9-Axis IMU for attitude estimation.</li>
@@ -100,31 +137,91 @@
             <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-6 text-white">Firmware & Autonomy</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="text-lg leading-relaxed">
-                        <h3 class="text-2xl font-semibold text-sky-300 mb-3">FreeRTOS Architecture</h3>
-                        <p class="mb-4">The firmware is built on FreeRTOS to manage asynchronous sensor data and control loops. The system is architected into three primary prioritized tasks:</p>
-                        <ul class="list-disc list-inside space-y-2 text-gray-300 mb-6">
-                            <li><strong>Sensor Acquisition (High Priority):</strong> Polls IMU data at 100Hz via a custom SPI driver handling the SHTP protocol.</li>
-                            <li><strong>Navigation (DMA-Driven):</strong> Parses binary UBX GPS packets using Direct Memory Access (DMA) to extract velocity vectors without blocking the CPU.</li>
-                            <li><strong>Telemetry & Control:</strong> Manages XBee communication and servo PWM generation.</li>
-                        </ul>
+                    <div class="text-lg leading-relaxed flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-sky-300 mb-3">FreeRTOS Architecture</h3>
+                            <p class="mb-4 text-gray-300">
+                                The firmware operates on an STM32H7, utilizing FreeRTOS to manage the asynchronous nature of sensor data. The system is architected into three primary prioritized tasks:
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-300 mb-6 pl-2">
+                                <li><strong class="text-white">Startbno085 (High Priority):</strong> Polls IMU data at 100Hz via a custom SPI driver. It handles the SHTP protocol's fragmentation and reassembly to ensure zero data loss.</li>
+                                <li><strong class="text-white">readGPS (DMA-Driven):</strong> Parses binary UBX GPS packets using Direct Memory Access (DMA). This allows extraction of precise velocity vectors without blocking the CPU, unlike standard NMEA parsing.</li>
+                                <li><strong class="text-white">Telemetry & Control:</strong> Manages XBee communication and servo PWM generation in a lower-priority thread to maintain control loop stability.</li>
+                            </ul>
 
-                        <h3 class="text-2xl font-semibold text-sky-300 mb-3">Extended Kalman Filter (EKF)</h3>
-                        <p class="text-gray-300">
-                            I implemented a <strong>7-state EKF</strong> (Position N/E/D, Velocity N/E/D, Heading Bias) to fuse the 100Hz inertial data with lower-frequency GPS updates. To optimize for the microcontroller, I developed a <strong>Sequential Update</strong> method, processing GPS scalars (North, East, Down) independently to avoid computationally expensive 7x7 matrix inversions.
-                        </p>
+                            <h3 class="text-2xl font-semibold text-sky-300 mb-3">Extended Kalman Filter (EKF)</h3>
+                            <p class="text-gray-300 mb-4">
+                                I implemented a <strong>7-state EKF</strong> (tracking Position N/E/D, Velocity N/E/D, and Heading Bias) to fuse the 100Hz inertial data with lower-frequency GPS updates. To optimize for the microcontroller, I developed a <strong>Sequential Update</strong> method, processing GPS scalars independently to avoid computationally expensive 7x7 matrix inversions.
+                            </p>
+                            
+                            <div class="bg-red-900/30 border border-red-700/50 p-3 rounded mt-2">
+                                <h4 class="text-red-300 font-bold text-sm"><i class="fas fa-exclamation-triangle mr-2"></i>Safety Systems</h4>
+                                <p class="text-gray-400 text-xs mt-1">Includes a "Deadspin" failsafe mode that forces a spiral descent if critical sensors fail or the geofence is breached.</p>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="flex flex-col justify-center space-y-4">
-                        <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
-                            <h4 class="text-lg font-bold text-white mb-2"><i class="fas fa-code-branch text-sky-400 mr-2"></i>Key Driver Features</h4>
-                            <ul class="text-sm text-gray-400 space-y-2">
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Custom SPI driver for BNO085 SHTP</li>
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Binary UBX GPS Parser (vs. slow NMEA)</li>
-                                <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Hardware-in-the-loop simulation mode</li>
-                            </ul>
+                    <!-- Control Loop Visualization (Replaces GitHub Image) -->
+                    <div class="flex flex-col justify-center h-full">
+                        <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700 relative overflow-hidden">
+                            <!-- Header -->
+                            <div class="text-center mb-6">
+                                <h4 class="text-white font-bold text-lg">System Control Loop</h4>
+                                <p class="text-xs text-gray-500">100Hz Real-Time Execution</p>
+                            </div>
+
+                            <!-- Diagram Flow -->
+                            <div class="space-y-2">
+                                <!-- Inputs -->
+                                <div class="flex justify-between gap-2">
+                                    <div class="arch-box w-1/2">
+                                        <i class="fas fa-microchip text-sky-400 mb-1 text-2xl"></i>
+                                        <div class="text-white font-bold text-sm">IMU (BNO085)</div>
+                                        <div class="text-xs text-gray-400">100Hz SPI Stream</div>
+                                    </div>
+                                    <div class="arch-box w-1/2">
+                                        <i class="fas fa-satellite text-sky-400 mb-1 text-2xl"></i>
+                                        <div class="text-white font-bold text-sm">GPS (NEO-M9)</div>
+                                        <div class="text-xs text-gray-400">5Hz UBX / DMA</div>
+                                    </div>
+                                </div>
+
+                                <!-- Arrow -->
+                                <div class="arrow-down"></div>
+
+                                <!-- Processor -->
+                                <div class="arch-box border-sky-500/50 bg-sky-900/10">
+                                    <i class="fas fa-brain text-purple-400 mb-2 text-2xl"></i>
+                                    <div class="text-white font-bold">STM32H7 Core</div>
+                                    <div class="my-2 border-t border-gray-600"></div>
+                                    <div class="grid grid-cols-2 gap-2 text-xs">
+                                        <div class="bg-gray-900/80 p-2 rounded text-green-300">
+                                            <strong>EKF Fusion</strong><br>State Estimation
+                                        </div>
+                                        <div class="bg-gray-900/80 p-2 rounded text-blue-300">
+                                            <strong>GNC Logic</strong><br>Path Planning
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Arrow -->
+                                <div class="arrow-down"></div>
+
+                                <!-- Outputs -->
+                                <div class="flex justify-between gap-2">
+                                    <div class="arch-box w-full">
+                                        <i class="fas fa-gears text-orange-400 mb-1 text-2xl"></i>
+                                        <div class="text-white font-bold text-sm">Servo Actuation</div>
+                                        <div class="text-xs text-gray-400">PWM Output (TIM2)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Decor -->
+                            <div class="absolute top-0 right-0 p-4 opacity-10">
+                                <i class="fas fa-code text-6xl text-white"></i>
+                            </div>
                         </div>
-                        <img src="assets/images/image_7fa179.png" alt="GitHub Repository Structure" class="rounded-lg shadow-lg border border-gray-600 opacity-80 hover:opacity-100 transition-opacity">
                     </div>
                 </div>
             </section>
