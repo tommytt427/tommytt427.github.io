@@ -56,6 +56,31 @@
             border-right: 5px solid transparent;
             border-top: 5px solid #4b5563;
         }
+        /* PCB Grid Hover Effects */
+        .pcb-grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            border: 1px solid #4b5563;
+        }
+        .pcb-grid-item img {
+            transition: transform 0.5s ease;
+        }
+        .pcb-grid-item:hover img {
+            transform: scale(1.1);
+        }
+        .pcb-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem;
+            text-align: center;
+            backdrop-filter: blur(2px);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -95,21 +120,36 @@
             <section class="content-section p-6 rounded-lg border-l-4 border-sky-500">
                 <h2 class="text-3xl font-bold mb-6 text-white text-center">Custom PCB Architecture</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <!-- PCB Images Grid -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gray-800 p-2 rounded-lg border border-gray-700">
-                            <img src="assets/images/pcbimage1.jpg" alt="Custom PCB Top View" class="rounded shadow-md w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300">
-                            <p class="text-center text-xs text-gray-500 mt-2">Top Layer (Signal/Components)</p>
+                <div class="flex flex-col lg:flex-row gap-8">
+                    
+                    <!-- Left Column: Design Gallery (2x2 Grid) -->
+                    <div class="lg:w-1/2">
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Design Phase -->
+                            <div class="pcb-grid-item h-40 bg-gray-800">
+                                <img src="assets/images/pcb_design_3d.png" alt="Altium 3D Render" class="w-full h-full object-cover">
+                                <div class="pcb-caption">Altium 3D Render</div>
+                            </div>
+                            <div class="pcb-grid-item h-40 bg-gray-800">
+                                <img src="assets/images/pcb_design_layout.jpg" alt="Altium Layout Routing" class="w-full h-full object-cover">
+                                <div class="pcb-caption">Routing Topology</div>
+                            </div>
+                            
+                            <!-- Build Phase -->
+                            <div class="pcb-grid-item h-40 bg-gray-800">
+                                <img src="assets/images/pcbimage1.jpg" alt="Assembled Top" class="w-full h-full object-cover">
+                                <div class="pcb-caption">Assembled Top</div>
+                            </div>
+                            <div class="pcb-grid-item h-40 bg-gray-800">
+                                <img src="assets/images/pcbimage2.jpg" alt="Assembled Bottom" class="w-full h-full object-cover">
+                                <div class="pcb-caption">Assembled Bottom</div>
+                            </div>
                         </div>
-                        <div class="bg-gray-800 p-2 rounded-lg border border-gray-700">
-                            <img src="assets/images/pcbimage2.jpg" alt="Custom PCB Bottom View" class="rounded shadow-md w-full h-auto object-cover transform hover:scale-105 transition-transform duration-300">
-                            <p class="text-center text-xs text-gray-500 mt-2">Bottom Layer (GND/Connectors)</p>
-                        </div>
+                        <p class="text-center text-xs text-gray-500 mt-2 italic">From CAD Design to Physical Implementation</p>
                     </div>
                     
-                    <!-- PCB Details -->
-                    <div class="space-y-6">
+                    <!-- Right Column: Technical Details -->
+                    <div class="lg:w-1/2 space-y-6 flex flex-col justify-center">
                         <div>
                             <h3 class="text-xl font-bold text-sky-400 mb-2">Layer Stackup & Signal Integrity</h3>
                             <p class="text-gray-300">Designed a custom 4-layer PCB in Altium Designer using a <span class="text-white font-semibold">Ground-Signal-Power-Ground</span> stackup. This configuration shields sensitive internal signal traces from external EMI, crucial for the high-frequency GPS and RF modules. I utilized <span class="text-white font-semibold">2oz copper</span> for internal layers to handle high current density from the servo motors and minimize resistive heating.</p>
