@@ -132,7 +132,7 @@
             <h1 class="text-4xl md:text-5xl font-bold text-white">Autonomous Parafoil Guidance & Control System</h1>
             <p class="mt-2 text-lg text-sky-300">A custom PCB-based GNC system for precision payload recovery.</p>
             <div class="mt-4 flex justify-center space-x-4">
-                <span class="bg-green-900 text-green-300 text-xs font-semibold px-3 py-1 rounded-full">Completed Fall 2025</span>
+                <span class="bg-green-900 text-green-300 text-xs font-semibold px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i>Flight Proven</span>
                 <span class="bg-sky-900 text-sky-300 text-xs font-semibold px-3 py-1 rounded-full">STM32H7</span>
                 <span class="bg-purple-900 text-purple-300 text-xs font-semibold px-3 py-1 rounded-full">Altium Designer</span>
             </div>
@@ -155,8 +155,51 @@
                 </div>
             </section>
 
+            <!-- Flight Demonstration (New Section) -->
+            <section class="content-section p-6 rounded-lg border-t-4 border-green-500">
+                <h2 class="text-3xl font-bold mb-6 text-white"><i class="fas fa-video mr-3 text-green-400"></i>Flight Demonstration</h2>
+                <p class="text-lg text-gray-300 mb-6">On December 6, 2025, the system was validated in a live field test. Despite winter conditions, the AGU successfully steered the parafoil to the target landing zone.</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Video 1: The Descent -->
+                    <div class="bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+                        <div class="relative w-full pb-[177.78%] lg:pb-[56.25%] overflow-hidden rounded-lg bg-black">
+                            <!-- Using style to force aspect ratio for vertical video if needed, or standard -->
+                            <video controls playsinline class="absolute top-0 left-0 w-full h-full object-contain">
+                                <source src="assets/videos/parafoil_flight.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-xl font-bold text-white">Autonomous Descent</h3>
+                            <p class="text-sm text-gray-400 mt-1">
+                                <span class="text-sky-400 font-semibold">Altitude:</span> 75m Drop<br>
+                                <span class="text-sky-400 font-semibold">Action:</span> The AGU detects freefall, deploys the parafoil, and begins actuating control lines to correct heading against the wind.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Video 2: The Landing -->
+                    <div class="bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-700">
+                        <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg bg-black">
+                            <video controls playsinline class="absolute top-0 left-0 w-full h-full object-contain">
+                                <source src="assets/videos/parafoil_landing.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-xl font-bold text-white">Precision Landing</h3>
+                            <p class="text-sm text-gray-400 mt-1">
+                                <span class="text-sky-400 font-semibold">Result:</span> < 5m from target center.<br>
+                                <span class="text-sky-400 font-semibold">Outcome:</span> Successful autonomous flare and touchdown, followed by team celebration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- PCB Design Spotlight -->
-            <section class="content-section p-6 rounded-lg border-l-4 border-sky-500">
+            <section class="content-section p-6 rounded-lg">
                 <h2 class="text-3xl font-bold mb-6 text-white text-center">Custom PCB Architecture</h2>
                 
                 <div class="flex flex-col lg:flex-row gap-8">
