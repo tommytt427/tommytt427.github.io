@@ -1,146 +1,608 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MASA Avionics Telemetry Project - Thomas Tran</title>
+    <title>MASA Avionics Telemetry | Thomas Tran</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0a0a0f',
+                        surface: '#13131a',
+                        surface2: '#1c1c26',
+                        accent: '#38bdf8',
+                        accentDark: '#0284c7',
+                        // Ground Station specific colors
+                        gsBg: '#0d1117',
+                        gsPanel: '#161b22',
+                        gsGreen: '#3fb950',
+                        gsCyan: '#58a6ff',
+                        gsRed: '#f85149',
+                        gsYellow: '#d29922'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827;
-            color: #d1d5db;
+            background-color: #0a0a0f;
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
-        .content-section {
-            background-color: #1f2937;
-            border: 1px solid #374151;
+
+        /* Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(19, 19, 26, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
-        h2 {
-            border-bottom: 2px solid #38bdf8; /* sky-400 */
-            padding-bottom: 0.5rem;
+
+        /* Hardware Traces Animation */
+        .pcb-trace {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawTrace 4s ease forwards infinite;
         }
+        @keyframes drawTrace {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Hover Effects */
+        .hover-glow {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-glow:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.15);
+        }
+
+        .tech-pill {
+            transition: all 0.3s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Code Block Styling */
         .code-block {
             background-color: #0d1117;
-            border: 1px solid #30363d;
-            color: #c9d1d9;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .code-block pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            color: #c9d1d9;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            overflow-x: auto;
         }
+        
+        .bg-trace-pattern {
+            background-image: radial-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Ground Station Simulation Specifics */
+        #gs-log::-webkit-scrollbar { width: 6px; }
+        #gs-log::-webkit-scrollbar-track { background: #010409; }
+        #gs-log::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-accent selection:text-dark">
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Header -->
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-white">MASA Avionics Telemetry System</h1>
-            <p class="mt-2 text-lg text-sky-300">Project Lead for Radio Firmware & Telemetry</p>
-        </header>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 bg-dark/80 backdrop-blur-md border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-slate-300 hover:text-accent font-mono text-sm flex items-center gap-2 transition-colors">
+                <i class="fas fa-arrow-left"></i> cd ../portfolio
+            </a>
+            <div class="font-mono text-xs text-slate-500 hidden sm:block">
+                SYS_STATUS: <span class="text-yellow-400">ACTIVE_DEVELOPMENT</span>
+            </div>
+        </div>
+    </nav>
 
-        <main class="space-y-12">
-            <!-- Project Overview -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Project Overview</h2>
-                <div class="md:flex md:space-x-8 items-center">
-                    <div class="md:w-2/3 text-lg leading-relaxed">
-                        <p>This project, as part of the Michigan Aeronautical Science Association (MASA), focuses on developing a robust, long-range telemetry system for high-altitude rockets. The primary goal is to ensure reliable, real-time data transmission from the rocket to a ground station, even at altitudes up to 75,000 feet.</p>
-                        <p class="mt-4">The system utilizes LoRa (Long Range) communication in the 2.4GHz band, leveraging Chirp Spread Spectrum (CSS) modulation to achieve a resilient communication link. This is critical for post-flight analysis, especially in scenarios where the primary black box data recorder may be unrecoverable. This project addresses a key failure point from past launches by creating a redundant, live telemetry backup.</p>
-                    </div>
-                    <div class="md:w-1/3 mt-6 md:mt-0">
-                         <img src="https://placehold.co/600x400/1f2937/38bdf8?text=Radio+Hardware" alt="Avionics Hardware Placeholder" class="rounded-lg shadow-lg w-full">
+    <!-- Project Hero -->
+    <header class="relative pt-32 pb-20 overflow-hidden border-b border-white/5">
+        <!-- Abstract RF Waves -->
+        <svg class="absolute inset-0 w-full h-full opacity-15 pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path class="pcb-trace" d="M0,100 C300,300 500,-100 1000,100 C1500,300 1800,0 2000,100" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+            <path class="pcb-trace" d="M0,150 C300,350 500,-50 1000,150 C1500,350 1800,50 2000,150" fill="none" stroke="#a855f7" stroke-width="1" style="animation-delay: 1s;"/>
+        </svg>
+        
+        <!-- Glowing Backplate -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-96 bg-accent/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card text-yellow-400 font-mono text-sm mb-6 border-yellow-500/20">
+                <i class="fas fa-satellite-dish"></i> Avionics Radio Lead
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4">MASA Telemetry Architecture</h1>
+            <p class="text-xl text-slate-400 font-light max-w-3xl mx-auto mb-8">Designing a 2.4GHz LoRa RF link, bare-metal C drivers, and a custom ground station interface for real-time payload tracking at 75,000 feet.</p>
+            
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">SX1280 (LoRa)</span>
+                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">RF Hardware Debugging</span>
+                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">Link Budget Analysis</span>
+                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">Embedded C</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 space-y-16">
+
+        <!-- Live Ground Station Simulation -->
+        <section class="glass-card p-6 md:p-8 rounded-2xl border border-accent/20 hover-glow shadow-[0_0_30px_rgba(56,189,248,0.05)]">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="fab fa-python text-yellow-400 text-3xl"></i>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Live Ground Station Preview</h2>
+                        <p class="text-slate-400 text-sm mt-1 max-w-xl">A web-based simulation of my Python (Tkinter + Matplotlib) telemetry tool. Actively plots dynamic RSSI/SNR data, parses hex payloads, and validates configuration.</p>
                     </div>
                 </div>
-            </section>
+                <div class="font-mono text-xs text-accent border border-accent/30 px-3 py-1.5 rounded bg-accent/10 animate-pulse whitespace-nowrap">
+                    LIVE_SIMULATION
+                </div>
+            </div>
 
-            <!-- Technical Approach -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Technical Approach</h2>
-                <div class="space-y-6 text-lg">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">LoRa Communication & Antennas</h3>
-                        <p>The core of the system is built around the SX1280 LoRa transceiver module. On the rocket, a patch antenna is integrated into one of the tailfins to provide a compact and aerodynamic solution for transmitting data. This placement helps maintain a clear signal path, especially during the rocket's descent phase.</p>
-                        <p class="mt-4">LoRa modulation provides excellent resilience to interference and requires low power, making it ideal for a rocket's constrained environment. Our target is a 40Kbps telemetry data rate, which is a balance between data throughput and link reliability over long distances.</p>
+            <!-- The Python UI Clone -->
+            <div class="bg-gsBg rounded-lg border border-slate-700 overflow-hidden shadow-2xl font-sans text-slate-300">
+                <!-- Top Connection Bar -->
+                <div class="bg-gsPanel p-3 border-b border-slate-700 flex flex-wrap items-center gap-4 text-sm">
+                    <div class="font-bold text-white text-lg font-mono">MASA Ground Station</div>
+                    <div class="flex items-center gap-2">Port: 
+                        <select class="bg-gsBg border border-slate-600 text-white rounded px-2 py-1"><option>COM3</option></select> 
+                        <button class="bg-gsBg px-2 py-1 border border-slate-600 hover:bg-slate-700 rounded transition-colors">↻</button>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">Dual-Antenna Ground Station</h3>
-                        <p>To maximize signal reception, the ground station employs a dual-antenna setup. This includes a high-gain directional Yagi antenna that must be aimed at the rocket and a semi-omni-directional dome antenna. This diversity helps mitigate signal loss due to rocket orientation changes during flight. An antenna splitter combines the signals before they are processed.</p>
+                    <div class="flex items-center gap-2">Baud: 
+                        <select class="bg-gsBg border border-slate-600 text-white rounded px-2 py-1"><option>115200</option></select>
                     </div>
-                     <div>
-                        <h3 class="text-2xl font-semibold text-sky-300 mb-2">Link Budget Analysis</h3>
-                        <p>A critical part of the design process is the RF link budget analysis. By accounting for transmitter power (12.5 dBm), antenna gains (8 dBi ground, 6 dBi rocket), free-space path loss at 20km, and other system losses, we calculated a received power of -108.9 dBm. This is well within the SX1280's receive sensitivity of -132 dBm, providing a healthy link margin to ensure reliable communication.</p>
+                    <button id="sim-toggle-btn" class="bg-gsCyan hover:bg-blue-500 text-gsBg font-bold px-4 py-1.5 rounded transition-colors ml-auto md:ml-0">Disconnect</button>
+                    <div id="sim-status" class="text-gsGreen font-bold font-mono">● Connected</div>
+                    <div class="ml-auto font-mono text-xs hidden sm:block" id="sim-uptime">Uptime: 00:00:00</div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 p-4">
+                    
+                    <!-- Left Column (Telemetry & Plots) -->
+                    <div class="lg:col-span-3 flex flex-col gap-4">
+                        <!-- Cards Row -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-gsPanel border border-slate-700 rounded p-3 relative overflow-hidden">
+                                <div class="text-slate-400 text-xs font-bold mb-1 uppercase tracking-wider">RSSI (Signal)</div>
+                                <div id="sim-rssi" class="text-gsGreen font-mono text-2xl font-bold">-- dBm</div>
+                                <div id="sim-rssi-qual" class="text-slate-400 text-xs mt-1">Waiting...</div>
+                            </div>
+                            <div class="bg-gsPanel border border-slate-700 rounded p-3 relative overflow-hidden">
+                                <div class="text-slate-400 text-xs font-bold mb-1 uppercase tracking-wider">SNR (Noise)</div>
+                                <div id="sim-snr" class="text-gsCyan font-mono text-2xl font-bold">-- dB</div>
+                                <div id="sim-snr-qual" class="text-slate-400 text-xs mt-1">Waiting...</div>
+                            </div>
+                            <div class="bg-gsPanel border border-slate-700 rounded p-3 flex flex-col justify-between">
+                                <div class="flex justify-between text-xs"><span class="text-slate-400">Packets RX:</span> <span id="sim-pkts" class="font-mono text-white font-bold">0</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span class="text-slate-400">Pkt Rate:</span> <span id="sim-rate" class="font-mono text-white font-bold">0.00 /s</span></div>
+                                <div class="flex justify-between text-xs mt-1"><span class="text-slate-400">CRC Errors:</span> <span class="font-mono text-gsGreen font-bold">0</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Plot Area -->
+                        <div class="bg-gsPanel border border-slate-700 rounded p-3 flex-grow flex flex-col h-64">
+                            <div class="text-white text-xs mb-2 font-mono border-b border-slate-700 pb-2 flex justify-between">
+                                <span>Signal Diagnostics</span>
+                                <span class="text-slate-500">Last 100 points</span>
+                            </div>
+                            <div class="flex-grow relative mt-2">
+                                <canvas id="sim-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column (Config, Hex, Log) -->
+                    <div class="lg:col-span-2 flex flex-col gap-4">
+                        <!-- Config -->
+                        <div class="bg-gsPanel border border-slate-700 rounded p-3 relative overflow-hidden">
+                            <div class="text-gsCyan text-xs font-mono font-bold border-b border-slate-700 pb-1 mb-2">EXPECTED_RADIO_CONFIG</div>
+                            <div class="grid grid-cols-2 gap-y-1 text-xs font-mono relative z-10">
+                                <span class="text-slate-400">Frequency:</span> <span class="text-white">2400 MHz</span>
+                                <span class="text-slate-400">Spreading:</span> <span class="text-white">SF8</span>
+                                <span class="text-slate-400">Bandwidth:</span> <span class="text-white">406.25 kHz</span>
+                                <span class="text-slate-400">TX Power:</span> <span class="text-white">9 dBm</span>
+                            </div>
+                            <i class="fas fa-satellite absolute -bottom-4 -right-4 text-6xl text-white opacity-5 z-0"></i>
+                        </div>
+
+                        <!-- Hex Viewer -->
+                        <div class="bg-gsPanel border border-slate-700 rounded p-3 flex flex-col h-32">
+                            <div class="text-gsCyan text-xs font-mono font-bold border-b border-slate-700 pb-1 mb-2">PAYLOAD_INSPECTOR (HEX)</div>
+                            <div id="sim-hex" class="bg-[#010409] flex-grow text-gsGreen font-mono text-[10px] p-2 overflow-hidden whitespace-pre">
+                                Waiting for data...
+                            </div>
+                        </div>
+
+                        <!-- Log -->
+                        <div class="bg-gsPanel border border-slate-700 rounded p-3 flex-grow flex flex-col h-40">
+                            <div class="text-gsCyan text-xs font-mono font-bold border-b border-slate-700 pb-1 mb-2">SYSTEM_LOG</div>
+                            <div id="gs-log" class="bg-[#010409] flex-grow text-slate-300 font-mono text-[10px] p-2 overflow-y-auto leading-relaxed border border-slate-800">
+                                <span class="text-gsGreen">[00:00:00] Connected to COM3 @ 115200 baud</span><br>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware & Link Budget Deep Dive -->
+        <section class="grid lg:grid-cols-2 gap-8">
+            
+            <!-- Impedance Debugging -->
+            <div class="glass-card p-8 rounded-2xl border border-white/10 hover-glow">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <i class="fas fa-fire text-orange-500 text-2xl"></i>
+                    <h3 class="text-2xl font-bold text-white font-mono">Hardware Debugging</h3>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                    During initial prototype testing, I identified severe thermal issues with the SX1280 transceiver, which began overheating whenever output power exceeded +10 dBm. 
+                </p>
+                <div class="bg-surface2 p-4 rounded-lg border border-white/5 mb-4 shadow-inner">
+                    <h4 class="text-accent text-sm font-bold font-mono mb-2">// Root Cause Analysis</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Utilized Vector Network Analyzer (VNA) measurements and Altium stack-up analysis to trace the reflection loss. Discovered that the PCB manufacturer had altered the dielectric thickness during fabrication, resulting in <strong class="text-red-400">30 Ω RF traces on a design matched for 50 Ω</strong>. This massive VSWR mismatch caused the RF energy to reflect back and dissipate as extreme heat within the IC.
+                    </p>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    To mitigate the trace losses on the compromised boards, I recommended and outlined the specifications for integrating an external transmit-path <strong>Power Amplifier (PA)</strong>. This would ensure the system hits the +17.5 dBm EIRP target without stressing the primary transceiver's internal amplifier.
+                </p>
+            </div>
+
+            <!-- Link Budget Analysis -->
+            <div class="glass-card p-8 rounded-2xl border border-white/10 hover-glow bg-trace-pattern">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <i class="fas fa-chart-line text-purple-400 text-2xl"></i>
+                    <h3 class="text-2xl font-bold text-white font-mono">Link Budget Analysis</h3>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                    To guarantee telemetry reception at a 20km range (65,000+ feet), I performed a comprehensive 2.4 GHz link budget analysis, evaluating Free Space Path Loss (FSPL) and rocket plume attenuation.
+                </p>
+                
+                <!-- Math Table -->
+                <div class="space-y-2 font-mono text-xs mb-4 bg-dark/50 p-4 rounded-lg border border-white/5">
+                    <div class="flex justify-between border-b border-white/5 pb-2">
+                        <span class="text-slate-400">EIRP (TX Pow + TX Gain - Loss)</span> <span class="text-white">+17.5 dBm</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 py-2">
+                        <span class="text-slate-400">FSPL @ 20km</span> <span class="text-red-400">-126.1 dB</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 py-2">
+                        <span class="text-slate-400">Plume Attenuation (Worst Case)</span> <span class="text-red-400">-20.0 dB</span>
+                    </div>
+                    <div class="flex justify-between border-b border-white/5 py-2">
+                        <span class="text-slate-400">RX Gain - RX Loss</span> <span class="text-green-400">+3.0 dB</span>
+                    </div>
+                    <div class="flex justify-between pt-2 font-bold text-sm">
+                        <span class="text-accent">Calculated Received Power ($P_{RX}$)</span> <span class="text-accent">-125.6 dBm</span>
                     </div>
                 </div>
-            </section>
 
-             <!-- Data Analysis & Results -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Data Analysis & Results</h2>
-                <p class="text-lg mb-6">Initial testing of the transmitter and receiver test boards has yielded promising data. The following plots show the Received Signal Strength Indicator (RSSI) and Signal-to-Noise Ratio (SNR) over time during a hotfire test, demonstrating a stable link against rocket plume.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">RSSI Over Time</h3>
-                        <img src="assets/images/rssiplume.png" alt="RSSI Plume Data" class="rounded-lg shadow-lg w-full">
-                        <p class="text-center mt-2 text-gray-400">RSSI remains consistently around -75 dBm, indicating a strong signal.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-white mb-2 text-center">SNR Over Time</h3>
-                        <img src="assets/images/snrplume.png" alt="SNR Plume Data" class="rounded-lg shadow-lg w-full">
-                        <p class="text-center mt-2 text-gray-400">SNR is stable above 10 dB, indicating a clear signal with low noise.</p>
-                    </div>
+                <div class="bg-red-500/10 p-4 rounded-lg border border-red-500/20">
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        With the SX1280 receiver sensitivity at <strong class="text-white">-116 dBm</strong> (SF8/406kHz), the initial calculation yielded a critical <strong class="text-red-400">-9.6 dB margin deficit</strong>. 
+                        <br><br>
+                        <strong class="text-accent font-mono">// Recovery Solution:</strong><br> I mathematically modeled a reconfiguration to SF12/200kHz to improve base sensitivity, and specified the integration of a receive-path Low Noise Amplifier (LNA) yielding +12 dB gain to push the final link margin into the positive.
+                    </p>
                 </div>
-            </section>
+            </div>
 
-            <!-- Firmware Development Section -->
-            <section class="content-section p-6 rounded-lg">
-                <h2 class="text-3xl font-bold mb-4 text-white">Firmware Driver Development</h2>
-                 <p class="text-lg mb-6">As the Radio Lead, I am pioneering the development of a bare-metal C driver for the Semtech SX1280 transceiver. A key challenge is ensuring data integrity in a multi-threaded environment. The firmware is architected for radio configuration, packet handling, and data buffering, and leverages FreeRTOS critical sections for thread-safe SPI communication.</p>
-                <div class="code-block rounded-lg overflow-hidden">
-                    <div class="bg-gray-900 p-2 text-sm text-gray-400"><i class="fas fa-shield-alt mr-2"></i>SX1280.c - Thread-Safe SPI</div>
-                    <pre class="p-4 text-sm"><code>
-static void SX1280_SPI_TransmitReceive(uint8_t *pTxData, uint8_t *pRxData, uint16_t size)
+        </section>
+
+        <!-- Firmware Development -->
+        <section class="glass-card p-8 md:p-10 rounded-2xl border border-white/10 hover-glow">
+            <div class="flex items-center gap-3 mb-8">
+                <i class="fas fa-microchip text-green-400 text-2xl"></i>
+                <h3 class="text-2xl font-bold text-white font-mono">Bare-Metal Firmware Driver</h3>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4 text-sm text-slate-300 leading-relaxed flex flex-col justify-center">
+                    <p>
+                        Instead of relying on heavy abstractions or third-party libraries, I directed the team to develop a bare-metal C driver from scratch for the Semtech SX1280.
+                    </p>
+                    <ul class="space-y-3 font-mono text-xs bg-dark/50 p-4 rounded-lg border border-white/5">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                            <span>Register-level radio configuration and initialization.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                            <span>Hardware FIFO data buffering and parsing logic.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-400 mt-0.5"></i>
+                            <span>Interrupt-driven packet handling (DIO pins).</span>
+                        </li>
+                    </ul>
+                    <p>
+                        Low-level SPI transactions were optimized to avoid RTOS scheduler blocking. Instead of relying on critical sections—which degraded system responsiveness—I implemented precise hardware timeout handling (`HAL_TIMEOUT`) and busy-wait polling (`SX1280_WaitForReady`) to ensure transaction integrity without halting other crucial avionic tasks.
+                    </p>
+                </div>
+                
+                <div class="lg:col-span-2 code-block rounded-xl overflow-hidden shadow-2xl">
+                    <div class="bg-[#161b22] p-3 border-b border-[#30363d] text-xs font-mono text-slate-400 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-file-code"></i> SX1280.c - Low-Level SPI Implementation
+                        </div>
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                    <pre class="p-5 text-[13px]"><code><span class="text-purple-400">static</span> <span class="text-blue-400">SX1280_Status_t</span> <span class="text-blue-400">SX1280_SPI_TransmitReceive</span>(<span class="text-purple-400">uint8_t</span> *pTxData, <span class="text-purple-400">uint8_t</span> *pRxData, <span class="text-purple-400">uint16_t</span> size)
 {
-    // wait for radio to not be busy before starting SPI transaction
-    SX1280_WaitForReady(100); // 100ms timeout
+    HAL_StatusTypeDef hal_status;
 
-    // enter critical section for thread safety
-    taskENTER_CRITICAL();
+    <span class="text-slate-500">/* Wait for radio to not be busy before starting SPI transaction */</span>
+    <span class="text-purple-400">if</span> (SX1280_WaitForReady(100) != SX1280_OK) <span class="text-purple-400">return</span> SX1280_TIMEOUT;
 
-    // set NSS low to select the radio
+    <span class="text-slate-500">/* Set NSS low to select the radio */</span>
     HAL_GPIO_WritePin(sx1280_hal_config->nssPort, sx1280_hal_config->nssPin, GPIO_PIN_RESET);
 
-    // perform SPI transaction
-    if (pRxData == NULL)
-    {
-        HAL_SPI_Transmit(sx1280_hal_config->spiHandle, pTxData, size, HAL_MAX_DELAY);
+    <span class="text-purple-400">if</span> (pRxData == <span class="text-orange-400">NULL</span>) {
+        hal_status = HAL_SPI_Transmit(sx1280_hal_config->spiHandle, pTxData, size, SX1280_SPI_TIMEOUT_MS);
+    } <span class="text-purple-400">else</span> {
+        hal_status = HAL_SPI_TransmitReceive(sx1280_hal_config->spiHandle, pTxData, pRxData, size, SX1280_SPI_TIMEOUT_MS);
     }
-    else
-    {
-        HAL_SPI_TransmitReceive(sx1280_hal_config->spiHandle, pTxData, pRxData, size, HAL_MAX_DELAY);
-    }
-    // set NSS high to deselect the radio
+    
+    <span class="text-slate-500">/* Set NSS high to deselect the radio */</span>
     HAL_GPIO_WritePin(sx1280_hal_config->nssPort, sx1280_hal_config->nssPin, GPIO_PIN_SET);
     
-    // exit critical section
-    taskEXIT_CRITICAL();
+    <span class="text-purple-400">if</span> (hal_status != HAL_OK) <span class="text-purple-400">return</span> SX1280_ERROR;
 
-    // wait for radio to be ready after transaction
-    SX1280_WaitForReady(100); // 100ms timeout
-}
-                    </code></pre>
+    <span class="text-purple-400">return</span> SX1280_WaitForReady(100);
+}</code></pre>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
+        
         <!-- Back to Home Button -->
-        <div class="text-center mt-16">
-            <a href="index.html" class="btn bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-full text-lg">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
+        <div class="text-center mt-12 pb-12">
+            <a href="index.html" class="inline-flex items-center gap-2 px-8 py-3 glass-card hover:bg-white/10 text-white font-bold rounded-full text-lg transition-colors border border-white/10">
+                <i class="fas fa-arrow-left"></i> Return to Portfolio
             </a>
         </div>
+
     </main>
 
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-dark py-8 text-center relative z-10">
+        <p class="text-slate-500 font-mono text-sm">&copy; 2026 Thomas Tran. Engineering Portfolio.</p>
+    </footer>
+
+    <!-- Ground Station Simulation Script (No external dependencies) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const simCanvas = document.getElementById('sim-canvas');
+            const simCtx = simCanvas.getContext('2d');
+            const simLog = document.getElementById('gs-log');
+            const btnToggle = document.getElementById('sim-toggle-btn');
+            
+            let simRunning = true;
+            let simTime = 0;
+            let simPkts = 0;
+            let crcErrors = 0;
+            let dataRssi = [];
+            let dataSnr = [];
+            const MAX_PTS = 50;
+
+            // Handle strict canvas sizing
+            function resizeCanvas() {
+                // Get the exact dimensions of the parent container
+                const rect = simCanvas.parentElement.getBoundingClientRect();
+                simCanvas.width = rect.width;
+                simCanvas.height = rect.height;
+                drawPlot(); // Redraw immediately on resize
+            }
+            window.addEventListener('resize', resizeCanvas);
+            // Run once on load
+            resizeCanvas();
+
+            function addLog(msg, type) {
+                if(!simRunning) return;
+                const now = new Date();
+                const ms = String(now.getMilliseconds()).padStart(3, '0').substring(0,3);
+                const time = now.toTimeString().split(' ')[0] + '.' + ms;
+                
+                let color = '#c9d1d9'; // default text
+                if(type === 'rx') color = '#58a6ff'; // cyan
+                if(type === 'warn') color = '#d29922'; // yellow
+                if(type === 'err') color = '#f85149'; // red
+                if(type === 'success') color = '#3fb950'; // green
+                
+                const span = document.createElement('span');
+                span.style.color = color;
+                span.innerText = `[${time}] ${msg}\n`;
+                simLog.appendChild(span);
+                
+                // Keep log short to prevent DOM bloat
+                if(simLog.childNodes.length > 40) {
+                    simLog.removeChild(simLog.firstChild);
+                }
+                simLog.scrollTop = simLog.scrollHeight;
+            }
+
+            function updateHex() {
+                const hexChars = "0123456789ABCDEF";
+                let hex = "";
+                let ascii = "";
+                for(let i=0; i<16; i++) {
+                    let r1 = hexChars[Math.floor(Math.random() * 16)];
+                    let r2 = hexChars[Math.floor(Math.random() * 16)];
+                    hex += r1+r2 + " ";
+                    let val = parseInt(r1+r2, 16);
+                    ascii += (val > 31 && val < 127) ? String.fromCharCode(val) : ".";
+                }
+                const chunkId = Math.floor(Math.random() * 255);
+                const hexChunk = chunkId.toString(16).toUpperCase().padStart(2, '0');
+                
+                const formatted = `0000  ${hexChunk} ${hex.substring(3)} |.${ascii.substring(1)}|\n0010  ${hex.split('').reverse().join('')} |${ascii.split('').reverse().join('')}|`;
+                document.getElementById('sim-hex').innerText = formatted;
+            }
+
+            function drawPlot() {
+                if(simCanvas.width === 0 || simCanvas.height === 0) return;
+                
+                simCtx.clearRect(0, 0, simCanvas.width, simCanvas.height);
+                
+                const drawLine = (data, color, min, max, topHalf) => {
+                    if(data.length < 2) return;
+                    simCtx.beginPath();
+                    simCtx.strokeStyle = color;
+                    simCtx.lineWidth = 1.5;
+                    
+                    const stepX = simCanvas.width / (MAX_PTS - 1);
+                    const h = simCanvas.height / 2;
+                    const yOffset = topHalf ? 0 : h;
+                    
+                    for(let i=0; i<data.length; i++) {
+                        const x = i * stepX;
+                        // normalize y (clamp to 0-1)
+                        let normalizedY = (data[i] - min) / (max - min);
+                        if(normalizedY > 1) normalizedY = 1;
+                        if(normalizedY < 0) normalizedY = 0;
+                        
+                        // invert because canvas y goes down. Pad slightly.
+                        const y = yOffset + (h - (normalizedY * h * 0.8) - (h*0.1)); 
+                        
+                        if(i===0) simCtx.moveTo(x, y);
+                        else simCtx.lineTo(x, y);
+                    }
+                    simCtx.stroke();
+                    
+                    // Draw fill underneath
+                    simCtx.lineTo((data.length-1)*stepX, yOffset + h);
+                    simCtx.lineTo(0, yOffset + h);
+                    simCtx.fillStyle = color + '15'; // Hex opacity ~8%
+                    simCtx.fill();
+                };
+
+                // Middle grid line
+                simCtx.strokeStyle = '#30363d';
+                simCtx.lineWidth = 1;
+                simCtx.beginPath();
+                simCtx.moveTo(0, simCanvas.height/2);
+                simCtx.lineTo(simCanvas.width, simCanvas.height/2);
+                simCtx.stroke();
+
+                // Draw Data (RSSI top, SNR bottom)
+                drawLine(dataRssi, '#3fb950', -120, -40, true);
+                drawLine(dataSnr, '#58a6ff', -10, 15, false);
+            }
+
+            function simLoop() {
+                if(!simRunning) return;
+                
+                simTime++;
+                let newPkts = Math.floor(Math.random() * 3) + 8; // 8-10 pkts per second
+                simPkts += newPkts;
+                
+                // Random walk RSSI around -75
+                let lastRssi = dataRssi.length ? dataRssi[dataRssi.length-1] : -75;
+                let rssi = lastRssi + (Math.random() * 6 - 3);
+                if(rssi > -50) rssi = -50;
+                if(rssi < -110) rssi = -110;
+                
+                // Random walk SNR around 8
+                let lastSnr = dataSnr.length ? dataSnr[dataSnr.length-1] : 8;
+                let snr = lastSnr + (Math.random() * 3 - 1.5);
+                if(snr > 12) snr = 12;
+                if(snr < -2) snr = -2;
+
+                dataRssi.push(rssi);
+                dataSnr.push(snr);
+                if(dataRssi.length > MAX_PTS) dataRssi.shift();
+                if(dataSnr.length > MAX_PTS) dataSnr.shift();
+
+                // Update DOM Elements
+                const rssiEl = document.getElementById('sim-rssi');
+                const rssiQual = document.getElementById('sim-rssi-qual');
+                rssiEl.innerText = `${rssi.toFixed(1)} dBm`;
+                
+                if(rssi > -60) { rssiEl.style.color = '#3fb950'; rssiQual.innerText='EXCELLENT'; }
+                else if(rssi > -90) { rssiEl.style.color = '#58a6ff'; rssiQual.innerText='GOOD'; }
+                else { rssiEl.style.color = '#d29922'; rssiQual.innerText='FAIR / MARGINAL'; }
+
+                const snrEl = document.getElementById('sim-snr');
+                snrEl.innerText = `${snr.toFixed(1)} dB`;
+
+                document.getElementById('sim-pkts').innerText = simPkts.toLocaleString();
+                document.getElementById('sim-rate').innerText = (newPkts + Math.random()).toFixed(2) + " /s";
+                
+                // Uptime Formatting
+                const h = Math.floor(simTime / 3600).toString().padStart(2, '0');
+                const m = Math.floor((simTime % 3600) / 60).toString().padStart(2, '0');
+                const s = Math.floor(simTime % 60).toString().padStart(2, '0');
+                const uptimeEl = document.getElementById('sim-uptime');
+                if(uptimeEl) uptimeEl.innerText = `Uptime: ${h}:${m}:${s}`;
+
+                updateHex();
+                drawPlot();
+
+                // Trigger Logs
+                if(Math.random() > 0.4) {
+                    addLog(`RX [32B] RSSI:${rssi.toFixed(1)} SNR:${snr.toFixed(1)} | Packet Parsed`, 'rx');
+                }
+                
+                // Occasional CRC error simulation
+                if(Math.random() > 0.96) {
+                    crcErrors++;
+                    document.querySelector('#sim-rate').parentElement.nextElementSibling.lastElementChild.innerText = crcErrors;
+                    document.querySelector('#sim-rate').parentElement.nextElementSibling.lastElementChild.style.color = '#f85149';
+                    addLog(`CRC Checksum Mismatch. Dropped packet.`, "warn");
+                }
+            }
+
+            // Start Loop
+            setInterval(simLoop, 1000);
+            
+            // Button Interaction
+            btnToggle.addEventListener('click', (e) => {
+                simRunning = !simRunning;
+                const statusEl = document.getElementById('sim-status');
+                
+                if(simRunning) {
+                    e.target.innerText = "Disconnect";
+                    e.target.className = "bg-gsCyan hover:bg-blue-500 text-gsBg font-bold px-4 py-1.5 rounded transition-colors ml-auto md:ml-0";
+                    statusEl.innerText = "● Connected";
+                    statusEl.style.color = "#3fb950";
+                    addLog("Serial port COM3 opened at 115200 baud", "success");
+                } else {
+                    e.target.innerText = "Connect";
+                    e.target.className = "bg-gsPanel border border-slate-600 hover:bg-slate-700 text-white font-bold px-4 py-1.5 rounded transition-colors ml-auto md:ml-0";
+                    statusEl.innerText = "● Disconnected";
+                    statusEl.style.color = "#f85149";
+                    document.getElementById('sim-rate').innerText = "-- /s";
+                    addLog("Serial port closed by user.", "err");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
