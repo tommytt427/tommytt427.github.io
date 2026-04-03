@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thomas Tran - Engineering Portfolio</title>
+    <title>Thomas Tran | Hardware & Embedded Systems Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0a0a0f',
+                        surface: '#13131a',
+                        surface2: '#1c1c26',
+                        accent: '#38bdf8',
+                        accentDark: '#0284c7',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Base styling */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            background-image: linear-gradient(180deg, #111827 0%, #0d1117 100%);
-            color: #d1d5db;
+            background-color: #0a0a0f;
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
-        /* Particle Canvas Styling */
+        /* Interactive Particle Background */
         #particle-canvas {
             position: absolute;
             top: 0;
@@ -26,329 +43,541 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.5;
+            pointer-events: none;
         }
 
-        /* Header content needs to be on top of the canvas */
-        header .container {
-            position: relative;
-            z-index: 1;
+        /* Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(19, 19, 26, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* Project card enhancements */
-        .project-card {
-            background-color: rgba(31, 41, 55, 0.7); /* Slightly transparent */
-            backdrop-filter: blur(10px);
-            border: 1px solid #374151;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        /* Hardware Traces Animation */
+        .pcb-trace {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawTrace 3s ease forwards infinite;
+        }
+        @keyframes drawTrace {
+            to { stroke-dashoffset: 0; }
         }
 
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 191, 255, 0.1), 0 10px 10px -5px rgba(0, 191, 255, 0.08);
-            border-color: #38bdf8; /* sky-400 */
-        }
-        
-        /* Tech tag styling */
-        .tech-tag {
-            background-color: rgba(55, 65, 81, 0.8);
-            backdrop-filter: blur(5px);
-            transition: background-color 0.3s;
-        }
-        .project-card:hover .tech-tag {
-             background-color: rgba(56, 189, 248, 0.3);
-        }
-
-        /* Typing animation cursor */
-        .typing-cursor {
-            animation: blink 0.7s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        /* Scroll reveal animation */
-        .scroll-animate {
+        /* Smooth Scroll Reveals */
+        .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .scroll-animate.visible {
+        .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
+        .reveal-delay-1 { transition-delay: 100ms; }
+        .reveal-delay-2 { transition-delay: 200ms; }
 
+        /* Hover Effects */
+        .hover-glow {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-glow:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.15);
+        }
+
+        .tech-pill {
+            transition: all 0.3s ease;
+        }
+        .hover-glow:hover .tech-pill {
+            background-color: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Abstract trace background for capability cards */
+        .bg-trace-pattern {
+            background-image: radial-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-accent selection:text-dark">
 
-    <!-- Header Section with particle animation -->
-    <header class="relative py-12 min-h-[60vh] flex items-center justify-center overflow-hidden">
+    <!-- Hero Section -->
+    <header class="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-white/5">
         <canvas id="particle-canvas"></canvas>
-        <div class="container mx-auto px-6 text-center">
-            <img src="assets/images/ttrannEdit1.JPG" alt="Thomas Tran" class="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-gray-700 shadow-lg object-cover transform transition-transform duration-500 hover:scale-110">
-            <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight">Thomas Tran</h1>
-            <p class="mt-4 text-lg text-sky-300"><span id="typing-text"></span><span class="typing-cursor">|</span></p>
-            <div class="mt-8 flex justify-center space-x-6">
-                <a href="mailto:ttrann@umich.edu" class="text-gray-300 hover:text-sky-400 transition-transform duration-300 transform hover:scale-125"><i class="fas fa-envelope fa-2x"></i></a>
-                <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-gray-300 hover:text-sky-400 transition-transform duration-300 transform hover:scale-125"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a href="https://github.com/tommytt427" target="_blank" class="text-gray-300 hover:text-sky-400 transition-transform duration-300 transform hover:scale-125"><i class="fab fa-github fa-2x"></i></a>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-dark/50 to-dark z-0"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center pt-20 pb-12">
+            <div class="text-left space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card text-accent font-mono text-sm mb-4 border-accent/20">
+                    <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                    Available for 2026 Engineering Roles
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight">
+                    Thomas <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">Tran</span>
+                </h1>
+                <h2 class="text-xl md:text-2xl text-slate-400 font-light h-8">
+                    <span id="typewriter"></span><span class="cursor-blink text-accent">_</span>
+                </h2>
+                <p class="text-lg text-slate-300 max-w-xl leading-relaxed mt-4">
+                    Computer & Electrical Engineering student at the University of Michigan, building the bridge between physical hardware and low-level software. Specializing in PCB design, electrical hardware, and bare-metal firmware.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#projects" class="px-6 py-3 bg-white text-dark font-semibold rounded-lg hover:bg-slate-200 transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                        View Hardware <i class="fas fa-microchip"></i>
+                    </a>
+                    <button onclick="toggleModal('resume-modal')" class="px-6 py-3 glass-card text-white font-semibold rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <i class="fas fa-file-pdf text-red-400"></i> Resume
+                    </button>
+                </div>
+                <div class="flex gap-6 pt-4">
+                    <a href="mailto:ttrann@umich.edu" class="text-slate-400 hover:text-accent transition-all hover:-translate-y-1"><i class="fas fa-envelope text-2xl"></i></a>
+                    <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-slate-400 hover:text-accent transition-all hover:-translate-y-1"><i class="fab fa-linkedin text-2xl"></i></a>
+                    <a href="https://github.com/tommytt427" target="_blank" class="text-slate-400 hover:text-accent transition-all hover:-translate-y-1"><i class="fab fa-github text-2xl"></i></a>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex justify-center relative">
+                <!-- Abstract Technical Graphic -->
+                <div class="relative w-80 h-80">
+                    <!-- Glowing back-plate -->
+                    <div class="absolute inset-0 bg-accent/20 rounded-full blur-3xl animate-pulse"></div>
+                    <!-- Profile Image -->
+                    <img src="assets/images/ttrannEdit1.JPG" alt="Thomas Tran" onerror="this.src='https://ui-avatars.com/api/?name=Thomas+Tran&background=0284c7&color=fff&size=512'" class="relative z-10 w-full h-full object-cover rounded-full border-2 border-white/10 shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                    <!-- Tech Ring -->
+                    <div class="absolute inset-[-20px] border border-white/5 rounded-full animate-[spin_15s_linear_infinite] pointer-events-none"></div>
+                    <div class="absolute inset-[-40px] border border-dashed border-accent/20 rounded-full animate-[spin_25s_linear_infinite_reverse] pointer-events-none"></div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
-        <!-- About Me Section -->
-        <section id="about" class="mb-24 scroll-animate">
-            <h2 class="text-3xl font-bold text-center mb-8 text-white">About Me</h2>
-            <p class="max-w-3xl mx-auto text-center text-lg leading-relaxed">
-                I am a passionate and driven engineering student with a focus on embedded systems, control systems, and robotics. My hands-on project experience includes developing complex multi-modal robotic systems, designing firmware for microcontrollers, and implementing real-time computer vision. I thrive on solving challenging problems and bridging the gap between hardware and software.
-            </p>
-        </section>
+    <!-- Core Capabilities (Hardware Alignment) -->
+    <section id="capabilities" class="py-20 bg-surface2 relative overflow-hidden border-b border-white/5">
+        <!-- Background SVG Trace Decor -->
+        <svg class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+            <path class="pcb-trace" d="M0,50 L200,50 L250,100 L500,100" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <path class="pcb-trace" d="M50,150 L150,150 L200,200 L600,200" fill="none" stroke="#38bdf8" stroke-width="2" style="animation-delay: 1s;"/>
+        </svg>
 
-        <!-- Projects Section -->
-        <section id="projects" class="scroll-animate">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                
-                <!-- Autonomous Parafoil Project Card -->
-                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col border-t-4 border-green-500">
-                    <img src="assets/images/pcbimage1.jpg" alt="Autonomous Parafoil Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-white">Autonomous Parafoil</h3>
-                            <span class="bg-green-900 text-green-300 text-xs font-bold px-2 py-1 rounded flex items-center gap-1"><i class="fas fa-check-circle"></i> Completed</span>
-                        </div>
-                        <p class="text-gray-300 flex-grow">Precision payload recovery system featuring a custom 4-layer STM32 flight computer. Successfully validated with a <5m landing accuracy drop.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Altium</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">STM32H7</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">FreeRTOS</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">EKF</span>
-                        </div>
-                        <div class="mt-6 flex gap-2">
-                            <a href="parafoil-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg flex-1 text-center inline-block transition-all duration-300 transform hover:scale-105">View Details</a>
-                            <a href="parafoil-project.html" class="font-semibold text-white bg-green-700 hover:bg-green-600 py-2 px-4 rounded-lg inline-flex items-center justify-center transition-all duration-300 transform hover:scale-105" title="Watch Demo Video"><i class="fas fa-play"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gantry Project Card -->
-                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
-                    <img src="assets/images/IMG_3268.jpg" alt="Gantry Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-white">Multi-Modal Robotic Gantry</h3>
-                            <span class="bg-green-900 text-green-300 text-xs font-bold px-2 py-1 rounded flex items-center gap-1"><i class="fas fa-check-circle"></i> Completed</span>
-                        </div>
-                        <p class="text-gray-300 flex-grow">A 2-axis gantry for ping-pong target practice featuring automated control via OpenCV, and manual control with a Wii remote or PS2 joystick.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">STM32</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">OpenCV</span>
-                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">SPI/I2C</span>
-                        </div>
-                        <div class="mt-6">
-                            <a href="gantry-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MASA Project Card with Video -->
-                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
-                    <div class="relative w-full h-48">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover absolute top-0 left-0">
-                            <source src="assets/videos/masa-banner.webm" type="video/webm">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="absolute inset-0 bg-black opacity-20"></div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-white">MASA Avionics Telemetry</h3>
-                            <span class="bg-yellow-900 text-yellow-300 text-xs font-bold px-2 py-1 rounded flex items-center gap-1"><i class="fas fa-sync-alt"></i> Active</span>
-                        </div>
-                        <p class="text-gray-300 flex-grow">Leading development of a 2.4GHz LoRa-based telemetry system for real-time rocket flight data transmission up to 75,000 feet.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">LoRa</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">RF Design</span>
-                             <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">FreeRTOS</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Embedded C</span>
-                        </div>
-                         <div class="mt-6">
-                            <a href="masa-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
-                        </div>
-                    </div>
-                </div>
-                 <!-- ACC Project Card -->
-                <div class="project-card rounded-xl overflow-hidden shadow-lg flex flex-col">
-                    <img src="assets/images/461-car.png" alt="ACC Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-white">Adaptive Cruise Control</h3>
-                            <span class="bg-green-900 text-green-300 text-xs font-bold px-2 py-1 rounded flex items-center gap-1"><i class="fas fa-check-circle"></i> Completed</span>
-                        </div>
-                        <p class="text-gray-300 flex-grow">Developed a multi-mode ACC system in Simulink for an NXP S32K144, including a PD controller for stable autonomous lane-keeping.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">Simulink</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">NXP S32K144</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">CAN Bus</span>
-                            <span class="tech-tag text-xs font-semibold text-sky-300 py-1 px-3 rounded-full">C</span>
-                        </div>
-                         <div class="mt-6">
-                            <a href="acc-project.html" class="font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 py-2 px-4 rounded-lg w-full text-center inline-block transition-all duration-300 transform hover:scale-105">View Project Details</a>
-                        </div>
-                    </div>
-                </div>
-
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-sm font-mono text-accent uppercase tracking-widest mb-2">// Engineering Arsenal</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-white">Core Capabilities</h3>
             </div>
-        </section>
 
-        <!-- Resume Button -->
-        <section id="resume" class="text-center mt-24 scroll-animate">
-            <button id="view-resume-btn" class="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-green-500/50">
-                <i class="fas fa-file-pdf mr-2"></i> View My Resume
-            </button>
-        </section>
-    </main>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Capability 1 -->
+                <div class="glass-card bg-trace-pattern p-8 rounded-xl border border-white/10 hover-glow reveal relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-accent transform origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+                    <i class="fas fa-layer-group text-4xl text-accent mb-6"></i>
+                    <h4 class="text-xl font-bold text-white mb-3">PCB & Hardware Design</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Designing robust, multi-layer mixed-signal boards in Altium. Focused on signal integrity, star-routed power topologies, and high-current isolation for mechatronics.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">Altium</span>
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">Stackup Design</span>
+                    </div>
+                </div>
+
+                <!-- Capability 2 -->
+                <div class="glass-card bg-trace-pattern p-8 rounded-xl border border-white/10 hover-glow reveal reveal-delay-1 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-purple-500 transform origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+                    <i class="fas fa-microchip text-4xl text-purple-400 mb-6"></i>
+                    <h4 class="text-xl font-bold text-white mb-3">Embedded Firmware</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Writing highly-optimized, bare-metal C/C++ drivers and architecting RTOS systems for STM32 and ESP32 microcontrollers. DMA parsing and non-blocking SPI/I2C.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">C / C++</span>
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">FreeRTOS</span>
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">STM32</span>
+                    </div>
+                </div>
+
+                <!-- Capability 3 -->
+                <div class="glass-card bg-trace-pattern p-8 rounded-xl border border-white/10 hover-glow reveal reveal-delay-2 relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-green-500 transform origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+                    <i class="fas fa-satellite-dish text-4xl text-green-400 mb-6"></i>
+                    <h4 class="text-xl font-bold text-white mb-3">RF & Control Systems</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Implementing state estimation (Extended Kalman Filters), automated pathing, and calculating long-range RF link budgets for telemetry systems via LoRa and XBee.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">LoRa</span>
+                        <span class="text-xs font-mono text-slate-300 bg-black/40 px-2 py-1 rounded">Sensor Fusion (EKF)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section id="projects" class="py-24 container mx-auto px-6">
+        <div class="mb-16 reveal">
+            <h2 class="text-sm font-mono text-accent uppercase tracking-widest mb-2">// Systems in Action</h2>
+            <h3 class="text-3xl md:text-5xl font-bold text-white">Featured Engineering</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- ANCHOR PROJECT: Autonomous Parafoil (Spans 2 columns on large screens to stand out) -->
+            <div class="lg:col-span-2 glass-card rounded-xl overflow-hidden flex flex-col lg:flex-row hover-glow reveal border-t-2 border-t-accent">
+                <!-- Image Side -->
+                <div class="lg:w-1/2 relative bg-dark/50 overflow-hidden h-64 lg:h-auto border-r border-white/5">
+                    <img src="assets/images/pcbimage1.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM0NzU1NjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPklWQUdFIFAvQ0VMRU1FTlQgLSBQQ0I8L3RleHQ+PC9zdmc+'" alt="Autonomous Parafoil PCB" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent lg:bg-gradient-to-r pointer-events-none"></div>
+                    <div class="absolute top-4 left-4 bg-accent/20 text-accent text-xs font-mono px-3 py-1 rounded border border-accent/30 backdrop-blur-md">
+                        <i class="fas fa-star mr-1"></i> Featured Hardware
+                    </div>
+                </div>
+                <!-- Content Side -->
+                <div class="lg:w-1/2 p-8 flex flex-col flex-grow">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-2xl font-bold text-white">Autonomous Flight Computer</h3>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">
+                        Designed, built, and flight-tested a custom 4-layer PCB Guidance, Navigation, and Control (GNC) system to recover scientific payloads. Features heavy copper power-isolation for mechatronics, a 7-state EKF running on FreeRTOS (STM32H7), and a custom RF bias-tee front-end. Achieved < 5m landing accuracy from a 75m drop.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Altium</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">STM32H7</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">FreeRTOS</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">EKF</span>
+                    </div>
+                    <div class="mt-auto flex gap-4">
+                        <a href="parafoil-project.html" class="px-6 py-2 bg-accent/10 hover:bg-accent text-accent hover:text-dark font-semibold rounded-lg transition-all duration-300 border border-accent/50 text-center flex-grow text-sm flex items-center justify-center gap-2">
+                            Deep Dive & Hardware Specs <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MASA Avionics -->
+            <div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal reveal-delay-1 group">
+                <div class="relative h-48 bg-dark/50 border-b border-white/5 overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center font-mono text-white/20 text-xs bg-surface2">
+                         <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-500">
+                            <source src="assets/videos/masa-banner.webm" type="video/webm">
+                            [RF Telemetry Visualization]
+                        </video>
+                    </div>
+                    <div class="absolute top-4 right-4 bg-yellow-500/20 text-yellow-400 text-xs font-mono px-2 py-1 rounded border border-yellow-500/30 backdrop-blur-md">
+                        <i class="fas fa-circle-notch fa-spin mr-1"></i> Active
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">MASA Avionics Telemetry</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Leading the development of a 2.4GHz LoRa telemetry system to transmit rocket flight data from 75,000 feet. Wrote bare-metal C drivers for the Semtech SX1280 transceiver and performed link budget analysis to recover a -9.6 dBm deficit via LNA integration.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">LoRa / SX1280</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">RF Design</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Embedded C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gantry Project -->
+            <div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal group">
+                <div class="relative h-48 bg-dark/50 border-b border-white/5">
+                    <img src="assets/images/IMG_3268.jpg" onerror="this.style.display='none'" alt="Gantry" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500 grayscale group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent pointer-events-none"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">Multi-Modal Robotic Gantry</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Developed a 2-axis targeting gantry driven by an STM32. Implemented automated target tracking using OpenCV for computer vision, alongside manual multi-modal control interfaces parsed from Wii remotes and PS2 joysticks via SPI/I2C.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto mb-4">
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">OpenCV</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">STM32 C</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">SPI / I2C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACC Project -->
+            <div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal reveal-delay-1 group">
+                <div class="relative h-48 bg-dark/50 border-b border-white/5">
+                     <img src="assets/images/461-car.png" onerror="this.style.display='none'" alt="ACC" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500 grayscale group-hover:grayscale-0">
+                     <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent pointer-events-none"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">Adaptive Cruise Control (HIL)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Modeled and deployed a multi-mode ACC and lane-keeping PD controller in Simulink. Generated code onto an NXP S32K144 MCU, validating state machines via hardware-in-the-loop testing and CAN Bus communications.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto mb-4">
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Simulink</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">NXP S32K</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">CAN Bus</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IoT Project from Resume -->
+            <div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal reveal-delay-2 group">
+                <div class="relative h-48 bg-dark/50 border-b border-white/5 flex items-center justify-center">
+                     <i class="fas fa-wifi text-6xl text-slate-600 group-hover:text-sky-400 transition-colors duration-500"></i>
+                     <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent pointer-events-none"></div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold text-white mb-3">IoT Occupancy Monitor</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+                        Engineered a 2-layer ESP32-based PCB integrating a Time-of-Flight sensor. Optimized RF keep-out zones and ground pours for reliable Wi-Fi telemetry to accurately track up to 100 individuals dynamically.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto mb-4">
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Altium</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">ESP32</span>
+                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">VL53L1X</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="text-center py-8 mt-12 border-t border-gray-800">
-        <p class="text-gray-500">&copy; 2025 Thomas Tran. All Rights Reserved.</p>
+    <footer class="border-t border-white/10 bg-dark py-8 text-center mt-12 relative z-10">
+        <p class="text-slate-500 font-mono text-sm">&copy; 2026 Thomas Tran. Engineering Portfolio.</p>
+        <div class="flex justify-center gap-4 mt-4">
+            <a href="https://github.com/tommytt427" target="_blank" class="text-slate-600 hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-slate-600 hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+        </div>
     </footer>
 
     <!-- Resume Modal -->
-    <div id="resume-modal" class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-75 backdrop-blur-sm">
-        <div class="relative bg-gray-800 rounded-lg shadow-xl w-11/12 max-w-4xl h-5/6 flex flex-col border border-gray-700">
-            <div class="flex justify-between items-center p-4 border-b border-gray-700">
-                <h3 class="text-lg font-semibold text-white">Thomas Tran - Resume</h3>
-                <button id="close-modal-btn" class="text-gray-300 hover:text-white text-3xl leading-none">&times;</button>
+    <div id="resume-modal" class="fixed inset-0 z-50 items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleModal('resume-modal')"></div>
+        <div class="relative glass-card shadow-2xl w-11/12 max-w-5xl h-[85vh] flex flex-col border border-white/10 rounded-xl overflow-hidden transform scale-95 transition-transform duration-300" id="resume-content">
+            <div class="flex justify-between items-center p-4 border-b border-white/10 bg-surface2">
+                <h3 class="text-lg font-mono text-white flex items-center gap-2"><i class="fas fa-file-pdf text-red-400"></i> Tran_Thomas_Resume.pdf</h3>
+                <button onclick="toggleModal('resume-modal')" class="text-slate-400 hover:text-white transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
-            <div class="flex-grow p-1">
-                <iframe src="Tran_Thomas_Resume20266.pdf" class="w-full h-full rounded-b-lg" frameborder="0"></iframe>
+            <div class="flex-grow bg-[#323639] flex items-center justify-center">
+                <iframe src="TranThomasResume.pdf" class="w-full h-full border-none" title="Resume"></iframe>
             </div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Resume Modal Logic ---
-            const viewResumeBtn = document.getElementById('view-resume-btn');
-            const resumeModal = document.getElementById('resume-modal');
-            const closeModalBtn = document.getElementById('close-modal-btn');
+        // --- Modal Logic ---
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            const content = document.getElementById('resume-content');
             
-            function toggleModal() {
-                resumeModal.classList.toggle('hidden');
-                resumeModal.classList.toggle('flex');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                // Trigger reflow
+                void modal.offsetWidth;
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                document.body.style.overflow = 'hidden'; // prevent background scrolling
+            } else {
+                modal.classList.add('opacity-0');
+                content.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.body.style.overflow = 'auto';
+                }, 300); // match duration
+            }
+        }
+
+        // --- Terminal Typewriter Effect ---
+        const phrases = [
+            "Hardware Research Engineer.",
+            "PCB Designer.",
+            "Embedded Firmware Developer.",
+            "Mechatronics Architect."
+        ];
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+
+        function type() {
+            const text = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                typewriterEl.textContent = text.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typewriterEl.textContent = text.substring(0, currentChar + 1);
+                currentChar++;
             }
 
-            viewResumeBtn.addEventListener('click', toggleModal);
-            closeModalBtn.addEventListener('click', toggleModal);
-            resumeModal.addEventListener('click', (e) => {
-                if (e.target === resumeModal) {
-                    toggleModal();
-                }
-            });
+            let typeSpeed = isDeleting ? 30 : 80;
 
-            // --- Typing Animation ---
-            const typingTextElement = document.getElementById('typing-text');
-            const textToType = "Computer & Electrical Engineering Student at the University of Michigan";
-            let charIndex = 0;
-
-            function type() {
-                if (charIndex < textToType.length) {
-                    typingTextElement.textContent += textToType.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(type, 50); // Adjust typing speed here
-                }
+            if (!isDeleting && currentChar === text.length) {
+                typeSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                typeSpeed = 500; // Pause before typing next
             }
-            type();
 
-            // --- Particle Animation ---
-            const canvas = document.getElementById('particle-canvas');
-            const ctx = canvas.getContext('2d');
+            setTimeout(type, typeSpeed);
+        }
+        setTimeout(type, 1000);
+
+        // --- Interactive Particle Canvas ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function resizeCanvas() {
             canvas.width = window.innerWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-            
-            let particlesArray;
-
-            class Particle {
-                constructor(x, y, directionX, directionY, size, color) {
-                    this.x = x;
-                    this.y = y;
-                    this.directionX = directionX;
-                    this.directionY = directionY;
-                    this.size = size;
-                    this.color = color;
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                }
-                update() {
-                    if (this.x > canvas.width || this.x < 0) {
-                        this.directionX = -this.directionX;
-                    }
-                    if (this.y > canvas.height || this.y < 0) {
-                        this.directionY = -this.directionY;
-                    }
-                    this.x += this.directionX;
-                    this.y += this.directionY;
-                    this.draw();
-                }
-            }
-
-            function initParticles() {
-                particlesArray = [];
-                let numberOfParticles = (canvas.height * canvas.width) / 9000;
-                for (let i = 0; i < numberOfParticles; i++) {
-                    let size = (Math.random() * 2) + 1;
-                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                    let directionX = (Math.random() * .4) - .2;
-                    let directionY = (Math.random() * .4) - .2;
-                    let color = 'rgba(56, 189, 248, 0.5)';
-                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-                }
-            }
-
-            function animateParticles() {
-                requestAnimationFrame(animateParticles);
-                ctx.clearRect(0, 0, innerWidth, innerHeight);
-                for (let i = 0; i < particlesArray.length; i++) {
-                    particlesArray[i].update();
-                }
-            }
-
-            initParticles();
-            animateParticles();
-
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = canvas.parentElement.offsetHeight;
-                initParticles();
-            });
-
-            // --- Scroll Animations ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            const elementsToAnimate = document.querySelectorAll('.scroll-animate');
-            elementsToAnimate.forEach(el => observer.observe(el));
+            canvas.height = document.querySelector('header').offsetHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            // Adjust mouse Y to account for scrolling if canvas isn't fixed
+            const rect = canvas.getBoundingClientRect();
+            mouse.y = e.y - rect.top;
         });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+            update() {
+                // Interactive mouse repulsion
+                if (mouse.x != null && mouse.y != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * this.density;
+                    let directionY = forceDirectionY * force * this.density;
+
+                    if (distance < mouse.radius) {
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    } else {
+                        if (this.x !== this.baseX) {
+                            let dx = this.x - this.baseX;
+                            this.x -= dx / 20;
+                        }
+                        if (this.y !== this.baseY) {
+                            let dy = this.y - this.baseY;
+                            this.y -= dy / 20;
+                        }
+                    }
+                } else {
+                     // return to base
+                     if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 20;
+                     if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 20;
+                }
+                
+                // Slow vertical drift
+                this.baseY -= 0.3;
+                if(this.baseY < 0) {
+                    this.baseY = canvas.height;
+                    this.y = canvas.height;
+                }
+
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            resizeCanvas();
+            particles = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Draw connecting lines
+            for(let a=0; a<particles.length; a++) {
+                for(let b=a; b<particles.length; b++) {
+                    let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) 
+                                 + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                    if(distance < (canvas.width/12) * (canvas.height/12)) {
+                        let opacityValue = 1 - (distance/15000);
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${opacityValue * 0.15})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize particles after slight delay to ensure layout is done
+        setTimeout(() => {
+            initParticles();
+            animate();
+        }, 100);
+
+        // --- Scroll Reveal Logic ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                // Optional: stop observing once revealed
+                // observer.unobserve(entry.target); 
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
     </script>
 </body>
 </html>
