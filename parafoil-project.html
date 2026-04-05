@@ -327,12 +327,12 @@
 
                     <div class="border-l-2 border-purple-400 pl-4">
                         <h3 class="text-lg font-bold text-white mb-2 font-mono">Power Distribution (Star Topology)</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Implemented a <strong class="text-white">Star Routing</strong> topology to strictly isolate the noisy servo power rails from the sensitive 3.3V logic rails. This prevents inductive ground bounce and voltage sags caused by servo stall currents from resetting the STM32 core during aggressive flight maneuvers.</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Implemented a <strong class="text-white">Star Routing</strong> topology to isolate the noisy servo power rails from the sensitive 3.3V logic rails. This prevents inductive ground bounce and voltage sags caused by servo stall currents from resetting the STM32 core during stall flight maneuvers.</p>
                     </div>
 
                     <div class="border-l-2 border-green-400 pl-4">
                         <h3 class="text-lg font-bold text-white mb-2 font-mono">Active RF Front-End</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Integrated a NEO-M9N GNSS receiver with a custom <strong class="text-white">Bias-Tee circuit</strong> (27nH inductor & 100nF capacitor network). This injects clean, low-noise DC power (via an LT1764AET-3.3 LDO) into the active antenna coax while isolating the delicate RF path back to the receiver, maximizing $C/N_0$ levels.</p>
+                        <p class="text-slate-400 text-sm leading-relaxed">Integrated a NEO-M9N GNSS receiver with a custom <strong class="text-white">Bias-Tee circuit</strong> (27nH inductor & 100nF capacitor network). This injects clean, low-noise DC power (via an LT1764AET-3.3 LDO) into the active antenna coax while isolating the RF path back to the receiver.</p>
                     </div>
                 </div>
             </div>
