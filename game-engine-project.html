@@ -100,7 +100,7 @@
                 Software Architecture & Systems Programming
             </div>
             <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4">Data-Driven Game Engine</h1>
-            <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto mb-8">A bespoke component-based engine bridging C++ memory management with Lua scripting logic.</p>
+            <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto mb-8">A component-based engine bridging C++ memory management with Lua scripting logic.</p>
         </div>
     </header>
 
@@ -121,18 +121,17 @@
             
             <!-- Video Embed -->
             <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg bg-black border border-white/10 shadow-2xl mb-6">
-                <!-- Make sure to place your mp4 in the assets/videos/ folder! -->
                 <video controls playsinline class="absolute top-0 left-0 w-full h-full object-contain">
-                    <source src="assets/videos/2026-04-19 14-09-51-1.mp4" type="video/mp4">
+                    <source src="assets/videos/customgameeng.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <p class="text-sm text-slate-400 leading-relaxed font-mono">
-                <span class="text-accent font-semibold">// OVERVIEW:</span> Demonstrating the Dear ImGui Scene Editor. The C++ engine exposes an API allowing the Lua scripting layer to render debug geometry, instantiate actors dynamically, and modify component properties in real-time.
+                <span class="text-accent font-semibold">// OVERVIEW:</span> Dear ImGui Scene Editor. C++ engine exposes an API allowing the Lua scripting layer to render debug geometry, instantiate actors dynamically, and modify component properties in real-time.
             </p>
         </section>
 
-        <!-- Tech Stack (Mandatory for Grading) -->
+        <!-- Tech Stack -->
         <section class="glass-card bg-trace-pattern p-8 md:p-10 rounded-2xl border border-white/10 hover-glow">
             <h2 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4"><i class="fas fa-microchip text-accent mr-2"></i> Technology Stack</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -176,16 +175,16 @@
             </div>
             <div class="space-y-6 text-slate-300 leading-relaxed text-sm">
                 <p>
-                    Rather than hardcoding gameplay logic in C++, I architected this engine around a strict <strong>Component-Based Actor System (CBAS)</strong>. The C++ backend handles high-performance tasks: managing memory, updating the Box2D physics simulation, rendering SDL textures, and isolating input. 
+                    Rather than hardcoding gameplay logic in C++, I architected this engine around a strict <strong>Component-Based Actor System</strong>. The C++ backend handles high-performance tasks like managing memory, updating the Box2D physics simulation, rendering SDL textures, and isolating input. 
                 </p>
                 <div class="grid md:grid-cols-2 gap-6 mt-4">
                     <div class="bg-surface2 p-5 rounded-lg border border-white/5">
                         <h4 class="text-white font-bold mb-2 font-mono"><i class="fas fa-exchange-alt text-accent mr-2"></i> LuaBridge Integration</h4>
-                        <p class="text-xs text-slate-400">By mapping C++ memory pointers to Lua using LuaBridge, game designers can create entire UI overlays, game logic, and AI behaviors exclusively in scripts without recompiling the core executable.</p>
+                        <p class="text-xs text-slate-400">By mapping C++ memory pointers to Lua using LuaBridge, game designers can create entire UI overlays, game logic, and AI behaviors in scripts without recompiling the core executable.</p>
                     </div>
                     <div class="bg-surface2 p-5 rounded-lg border border-white/5">
                         <h4 class="text-white font-bold mb-2 font-mono"><i class="fas fa-tools text-accent mr-2"></i> ImGui Developer Tools</h4>
-                        <p class="text-xs text-slate-400">A custom feature milestone where I integrated Dear ImGui. I wrote safe C++ wrappers to expose ImGui to Lua, allowing for the creation of a live Property Inspector, Asset Browser, and an Arknights-style pathing tool.</p>
+                        <p class="text-xs text-slate-400">A custom feature where I integrated Dear ImGui. I wrote safe C++ wrappers to expose ImGui to Lua, allowing for the creation of a live Property Inspector, Asset Browser, and an pathing tool.</p>
                     </div>
                 </div>
             </div>
