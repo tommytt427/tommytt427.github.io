@@ -268,28 +268,34 @@
             </div>
 
 <!-- Game Engine Project -->
-            <div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal group">
-                <div class="relative h-48 bg-dark/50 border-b border-white/5 flex items-center justify-center">
-                     <i class="fas fa-gamepad text-6xl text-slate-600 group-hover:text-accent transition-colors duration-500"></i>
-                     <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent pointer-events-none"></div>
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl font-bold text-white mb-3">Data-Driven Game Engine</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
-                        Engineered a bespoke 2D game engine in C++ featuring a Lua scripting layer, Box2D physics, and a custom Dear ImGui scene editor with AI pathing tools.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mt-auto mb-6">
-                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">C++ / Lua</span>
-                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Dear ImGui</span>
-                        <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Box2D</span>
-                    </div>
-                    <div class="mt-auto flex gap-4">
-                        <a href="game-engine-project.html" class="px-6 py-2 bg-accent/10 hover:bg-accent text-accent hover:text-dark font-semibold rounded-lg transition-all duration-300 border border-accent/50 text-center flex-grow text-sm flex items-center justify-center gap-2">
-                            View Architecture <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+<div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal group">
+    
+    <div class="relative h-48 bg-dark/50 border-b border-white/5 overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center font-mono text-white/20 text-xs bg-surface2">
+            <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-500">
+                <source src="assets/videos/customgameengineloop.mp4" type="video/mp4">
+                [Game Engine Pathing Demo]
+            </video>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent pointer-events-none"></div>
+    </div>
+    <div class="p-6 flex flex-col flex-grow">
+        <h3 class="text-xl font-bold text-white mb-3">Data-Driven Game Engine</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+            Engineered a bespoke 2D game engine in C++ featuring a Lua scripting layer, Box2D physics, and a custom Dear ImGui scene editor with AI pathing tools.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-auto mb-6">
+            <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">C++ / Lua</span>
+            <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Dear ImGui</span>
+            <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-2 rounded">Box2D</span>
+        </div>
+        <div class="mt-auto flex gap-4">
+            <a href="game-engine-project.html" class="px-6 py-2 bg-accent/10 hover:bg-accent text-accent hover:text-dark font-semibold rounded-lg transition-all duration-300 border border-accent/50 text-center flex-grow text-sm flex items-center justify-center gap-2">
+                View Architecture <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
 
             <!-- MASA Avionics -->
             <div class="glass-card rounded-xl overflow-hidden flex flex-col hover-glow reveal reveal-delay-1 group">
