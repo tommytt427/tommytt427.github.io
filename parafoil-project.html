@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autonomous Parafoil Project | Thomas Tran</title>
+    <title>Autonomous Parafoil | Thomas Tran</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Glassmorphism Utilities */
         .glass-card {
             background: rgba(19, 19, 26, 0.6);
             backdrop-filter: blur(12px);
@@ -44,86 +43,40 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* Hardware Traces Animation */
-        .pcb-trace {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawTrace 4s ease forwards infinite;
-        }
-        @keyframes drawTrace {
-            to { stroke-dashoffset: 0; }
-        }
-
-        /* Hover Effects */
         .hover-glow {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .hover-glow:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.08);
         }
 
-        .tech-pill {
-            transition: all 0.3s ease;
-        }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0a0f; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-        /* Architecture Diagram Styles */
-        .arch-box {
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.75rem;
-            padding: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .arch-box:hover {
-            border-color: #38bdf8;
-            background: rgba(56, 189, 248, 0.05);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
-        }
-        .arrow-down {
-            width: 2px;
-            height: 24px;
-            background: rgba(255,255,255,0.2);
-            margin: 0 auto;
-            position: relative;
-        }
-        .arrow-down::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: -4px;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 6px solid rgba(255,255,255,0.2);
-        }
-
-        /* PCB Grid & Lightbox */
+        /* PCB Image Grid */
         .pcb-grid-item {
             position: relative;
             overflow: hidden;
-            border-radius: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             background-color: #0a0a0f;
             cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        .pcb-grid-item:hover {
+            border-color: rgba(56, 189, 248, 0.4);
         }
         .pcb-grid-item img {
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            transition: opacity 0.3s ease;
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
         .pcb-grid-item:hover img {
-            transform: scale(1.08);
-            opacity: 0.7;
+            opacity: 0.6;
         }
         .zoom-overlay {
             position: absolute;
@@ -131,10 +84,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(10, 10, 15, 0.6);
-            backdrop-filter: blur(2px);
             opacity: 0;
             transition: opacity 0.3s ease;
+            color: #38bdf8;
         }
         .pcb-grid-item:hover .zoom-overlay {
             opacity: 1;
@@ -144,32 +96,49 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(19, 19, 26, 0.95);
-            backdrop-filter: blur(8px);
-            color: #e2e8f0;
+            background: rgba(10, 10, 15, 0.9);
+            color: #cbd5e1;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            padding: 0.75rem;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.7rem;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Lightbox Modal */
+        /* Lightbox */
         #lightbox {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.3s ease;
         }
         #lightbox.active {
             opacity: 1;
             pointer-events: auto;
         }
-        #lightbox-img {
-            transform: scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+        /* Architecture diagram */
+        .arch-box {
+            background: rgba(28, 28, 38, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.5rem;
+            padding: 0.85rem;
+            text-align: center;
         }
-        #lightbox.active #lightbox-img {
-            transform: scale(1);
+        .arrow-down {
+            width: 1px;
+            height: 18px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 0 auto;
+            position: relative;
+        }
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: -3px;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
@@ -178,327 +147,281 @@
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-40 bg-dark/80 backdrop-blur-md border-b border-white/5">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-slate-300 hover:text-accent font-mono text-sm flex items-center gap-2 transition-colors">
-                <i class="fas fa-arrow-left"></i> cd ../portfolio
+            <a href="index.html" class="text-slate-300 font-mono text-sm hover:text-accent transition-colors">
+                thomas_tran<span class="text-accent">.</span>portfolio
             </a>
-            <div class="font-mono text-xs text-slate-500 hidden sm:block">
-                SYS_STATUS: <span class="text-green-400">FLIGHT_PROVEN</span>
-            </div>
+            <a href="index.html#projects" class="font-mono text-xs text-slate-400 hover:text-accent transition-colors">
+                <i class="fas fa-arrow-left text-xs mr-1"></i> back to projects
+            </a>
         </div>
     </nav>
 
-    <!-- Project Hero -->
-    <header class="relative pt-32 pb-20 overflow-hidden border-b border-white/5">
-        <!-- Abstract Background Traces -->
-        <svg class="absolute inset-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-            <path class="pcb-trace" d="M-100,150 L200,150 L250,200 L800,200" fill="none" stroke="#38bdf8" stroke-width="2"/>
-            <path class="pcb-trace" d="M100,50 L300,50 L350,100 L1000,100" fill="none" stroke="#38bdf8" stroke-width="2" style="animation-delay: 1.5s;"/>
-        </svg>
-        <!-- Background Orbs -->
-        <div class="absolute top-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card text-accent font-mono text-sm mb-6 border-accent/20">
-                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Hardware Design & Firmware
-            </div>
-            <h1 class="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4">Autonomous Parafoil Guidance System</h1>
-            <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto mb-8">A custom 4-layer PCB-based GNC system engineered for precision payload recovery.</p>
-            
-            <div class="flex flex-wrap justify-center gap-3">
-                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">STM32H7</span>
-                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">Altium Designer</span>
-                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">FreeRTOS</span>
-                <span class="tech-pill text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1.5 px-4 rounded-full">EKF Fusion</span>
+    <!-- Hero -->
+    <header class="pt-32 pb-16 border-b border-white/5">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <p class="font-mono text-xs text-accent mb-6">// Hardware Design &amp; Firmware</p>
+            <h1 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">Autonomous Parafoil Guidance System</h1>
+            <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mb-8">
+                A custom 4-layer PCB-based GNC system engineered for precision payload recovery. Landed under 5m from target on a 75m drop.
+            </p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">STM32H7</span>
+                <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Altium Designer</span>
+                <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">FreeRTOS</span>
+                <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">EKF Fusion</span>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-16 space-y-16">
+    <main>
 
-        <!-- Project Overview -->
-        <section class="glass-card p-8 md:p-10 rounded-2xl border border-white/10 hover-glow">
-            <div class="flex items-center gap-3 mb-6">
-                <i class="fas fa-crosshairs text-accent text-2xl"></i>
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Project Overview</h2>
-            </div>
-            <div class="md:flex md:space-x-12 items-center">
-                <div class="md:w-2/3 text-slate-300 leading-relaxed space-y-4">
-                    <p>This project involved designing, building, and validating an autonomous Airborne Guidance Unit (AGU) capable of navigating a 5kg payload to a designated GPS coordinate. The system addresses the specific challenge of recovering high-altitude scientific payloads, which frequently drift off-course during unguided descent.</p>
-                    <p>The final architecture is built entirely from the ground up, featuring a custom 4-layer PCB, a high-fidelity RF/inertial sensor suite, and a robust Guidance, Navigation, and Control (GNC) algorithm operating on FreeRTOS. During the final field validation, the system successfully navigated from a 75-meter drop height, dynamically correcting for wind shear, to land within a <strong class="text-accent">5-meter radius</strong> of the target coordinate.</p>
-                </div>
-                <div class="md:w-1/3 mt-8 md:mt-0 relative group">
-                    <div class="absolute inset-0 bg-accent/20 rounded-xl blur-xl group-hover:bg-accent/30 transition-all duration-500"></div>
-                    <img src="assets/images/pcbstructure.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM0NzU1NjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZpbmFsIEFzc2VtYmx5PC90ZXh0Pjwvc3ZnPg=='" alt="Final Assembly" class="relative z-10 rounded-xl shadow-2xl w-full object-cover h-64 border border-white/10">
-                    <p class="text-center font-mono text-xs mt-4 text-slate-500">AGU Chassis & Actuation Rigging</p>
+        <!-- Overview -->
+        <section class="py-16 border-b border-white/5">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <p class="font-mono text-xs text-accent mb-2">// Overview</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-8">Project Overview</h2>
+
+                <div class="grid md:grid-cols-3 gap-8 items-start">
+                    <div class="md:col-span-2 text-slate-300 leading-relaxed space-y-4 text-base">
+                        <p>An autonomous Airborne Guidance Unit (AGU) that navigates a 5kg payload to a designated GPS coordinate. The problem it solves: high-altitude scientific payloads frequently drift off-course during unguided descent.</p>
+                        <p>The system is a custom 4-layer PCB with a high-fidelity RF/inertial sensor suite and a GNC algorithm running on FreeRTOS. During field validation, it navigated from a 75-meter drop, correcting for wind shear, to land within a <strong class="text-accent">5-meter radius</strong> of the target.</p>
+                    </div>
+                    <div>
+                        <img src="assets/images/pcbstructure.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFHVSBDaGFzc2lzPC90ZXh0Pjwvc3ZnPg=='" alt="AGU Chassis" class="w-full rounded-lg border border-white/10">
+                        <p class="font-mono text-xs text-slate-500 mt-2">AGU chassis &amp; actuation rigging</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Flight Demonstration -->
-        <section class="glass-card p-8 md:p-10 rounded-2xl border-t-4 border-t-green-500 border-white/10 hover-glow">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="relative flex h-3 w-3">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Flight Validation</h2>
-            </div>
-            <p class="text-slate-400 mb-8 font-mono text-sm">TEST_LOG: 2025-12-06 | WIND_CONDITIONS: MODERATE | DROP_ALT: 75M</p>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Video 1 -->
-                <div class="bg-surface/80 p-4 rounded-xl border border-white/5">
+        <!-- Flight Validation -->
+        <section class="py-16 border-b border-white/5">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <p class="font-mono text-xs text-accent mb-2">// Flight Test</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Flight Validation</h2>
+                <p class="font-mono text-xs text-slate-500 mb-8">2025-12-06 &middot; drop altitude 75m &middot; wind moderate</p>
+
+                <div class="glass-card rounded-xl p-5">
                     <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg bg-black border border-white/10">
                         <video controls playsinline class="absolute top-0 left-0 w-full h-full object-contain">
                             <source src="assets/videos/parafoil_flight.mp4" type="video/mp4">
-                            <div class="absolute inset-0 flex items-center justify-center font-mono text-slate-500 text-sm">Video Feed Unavailable</div>
+                            <div class="absolute inset-0 flex items-center justify-center font-mono text-slate-500 text-sm">Video unavailable</div>
                         </video>
                     </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold text-white font-mono mb-2">// Phase 1: Autonomous Descent</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            <span class="text-accent font-semibold">Action:</span> The AGU detects freefall via the IMU, stabilizes the payload, and begins actuating the left/right brake lines to execute calculated heading corrections against the wind vector.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Video 2 -->
-                <div class="bg-surface/80 p-4 rounded-xl border border-white/5">
-                    <div class="relative w-full pb-[56.25%] overflow-hidden rounded-lg bg-black border border-white/10">
-                        <video controls playsinline class="absolute top-0 left-0 w-full h-full object-contain">
-                            <source src="assets/videos/parafoil_landing.mp4" type="video/mp4">
-                            <div class="absolute inset-0 flex items-center justify-center font-mono text-slate-500 text-sm">Video Feed Unavailable</div>
-                        </video>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="text-lg font-bold text-white font-mono mb-2">// Phase 2: Precision Touchdown</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            <span class="text-green-400 font-semibold">Result:</span> Final touchdown occurred < 5m from the target coordinate center. The system successfully demonstrated autonomous flaring and course lock in the final 10 meters.
-                        </p>
-                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mt-4">
+                        AGU detects freefall via the IMU, stabilizes the payload, and begins actuating the left/right brake lines to execute calculated heading corrections against the wind vector. Final touchdown occurred &lt;5m from the target coordinate.
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- PCB Design Spotlight -->
-        <section class="glass-card p-8 md:p-10 rounded-2xl border border-white/10 hover-glow">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fas fa-layer-group text-accent text-2xl"></i>
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Hardware Architecture</h2>
-            </div>
-            
-            <div class="flex flex-col lg:flex-row gap-12">
-                <!-- Left Column: Design Gallery -->
-                <div class="lg:w-1/2">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="pcb-grid-item h-48" onclick="openLightbox('assets/images/pcb_design_3d.png', 'Altium 3D Render - Top Layer')">
-                            <img src="assets/images/pcb_design_3d.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM0NzU1NjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjNEIFJlbmRlcjwvdGV4dD48L3N2Zz4='" alt="Altium 3D Render">
-                            <div class="zoom-overlay"><i class="fas fa-expand text-2xl text-white"></i></div>
-                            <div class="pcb-caption">Altium 3D Render</div>
-                        </div>
-                        <div class="pcb-grid-item h-48" onclick="openLightbox('assets/images/pcb_design_layout.jpg', 'Routing Topology (2oz Inner Copper)')">
-                            <img src="assets/images/pcb_design_layout.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM0NzU1NjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJvdXRpbmcgVG9wb2xvZ3k8L3RleHQ+PC9zdmc+'" alt="Routing Topology">
-                            <div class="zoom-overlay"><i class="fas fa-expand text-2xl text-white"></i></div>
-                            <div class="pcb-caption">Routing Topology</div>
-                        </div>
-                        <div class="pcb-grid-item h-48" onclick="openLightbox('assets/images/pcbimage1.jpg', 'Assembled Flight Computer - Top View')">
-                            <img src="assets/images/pcbimage1.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM0NzU1NjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFzc2VtYmxlZCBUb3A8L3RleHQ+PC9zdmc+'" alt="Assembled Top">
-                            <div class="zoom-overlay"><i class="fas fa-expand text-2xl text-white"></i></div>
-                            <div class="pcb-caption">Assembled (Top)</div>
-                        </div>
-                        <div class="pcb-grid-item h-48" onclick="openLightbox('assets/images/pcbimage2.jpg', 'Assembled Flight Computer - Bottom View')">
-                            <img src="assets/images/pcbimage2.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM0NzU1NjkiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFzc2VtYmxlZCBCb3R0b208L3RleHQ+PC9zdmc+'" alt="Assembled Bottom">
-                            <div class="zoom-overlay"><i class="fas fa-expand text-2xl text-white"></i></div>
-                            <div class="pcb-caption">Assembled (Bottom)</div>
-                        </div>
+        <!-- Hardware Architecture -->
+        <section class="py-16 border-b border-white/5">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <p class="font-mono text-xs text-accent mb-2">// Hardware</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-8">Hardware Architecture</h2>
+
+                <!-- PCB Image Grid -->
+                <div class="grid grid-cols-2 gap-3 mb-10">
+                    <div class="pcb-grid-item aspect-square" onclick="openLightbox('assets/images/pcb_design_3d.png', 'Altium 3D render — top layer')">
+                        <img src="assets/images/pcb_design_3d.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjNEIFJlbmRlcjwvdGV4dD48L3N2Zz4='" alt="Altium 3D render">
+                        <div class="zoom-overlay"><i class="fas fa-expand"></i></div>
+                        <div class="pcb-caption">3d_render.png</div>
                     </div>
-                    <p class="text-center text-xs text-slate-500 mt-4 font-mono"><i class="fas fa-search-plus mr-1"></i> Click to inspect layout</p>
+                    <div class="pcb-grid-item aspect-square" onclick="openLightbox('assets/images/pcb_design_layout.jpg', 'Routing topology — 2oz inner copper')">
+                        <img src="assets/images/pcb_design_layout.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlJvdXRpbmcgVG9wb2xvZ3k8L3RleHQ+PC9zdmc+'" alt="Routing topology">
+                        <div class="zoom-overlay"><i class="fas fa-expand"></i></div>
+                        <div class="pcb-caption">routing.jpg</div>
+                    </div>
+                    <div class="pcb-grid-item aspect-square" onclick="openLightbox('assets/images/pcbimage1.jpg', 'Assembled flight computer — top view')">
+                        <img src="assets/images/pcbimage1.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFzc2VtYmxlZCBUb3A8L3RleHQ+PC9zdmc+'" alt="Assembled top view">
+                        <div class="zoom-overlay"><i class="fas fa-expand"></i></div>
+                        <div class="pcb-caption">assembled_top.jpg</div>
+                    </div>
+                    <div class="pcb-grid-item aspect-square" onclick="openLightbox('assets/images/pcbimage2.jpg', 'Assembled flight computer — bottom view')">
+                        <img src="assets/images/pcbimage2.jpg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWMxYzI2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NDc0OGIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFzc2VtYmxlZCBCb3R0b208L3RleHQ+PC9zdmc+'" alt="Assembled bottom view">
+                        <div class="zoom-overlay"><i class="fas fa-expand"></i></div>
+                        <div class="pcb-caption">assembled_bottom.jpg</div>
+                    </div>
                 </div>
-                
-                <!-- Right Column: Specs -->
-                <div class="lg:w-1/2 space-y-6 flex flex-col justify-center">
-                    <div class="border-l-2 border-accent pl-4">
-                        <h3 class="text-lg font-bold text-white mb-2 font-mono">Layer Stackup & EMI Shielding</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Designed in Altium Designer utilizing a <strong class="text-white">Ground-Signal-Power-Ground</strong> stackup. This configuration shields internal high-speed digital traces from external EMI, vital for the onboard RF modules. Inner layers utilize <strong class="text-white">2oz copper</strong> to easily handle high-current transients from the servo motors without severe thermal rise.</p>
-                    </div>
+                <p class="font-mono text-xs text-slate-500 mb-10 text-center">click any image to inspect at full resolution</p>
 
-                    <div class="border-l-2 border-purple-400 pl-4">
-                        <h3 class="text-lg font-bold text-white mb-2 font-mono">Power Distribution (Star Topology)</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Implemented a <strong class="text-white">Star Routing</strong> topology to isolate the noisy servo power rails from the sensitive 3.3V logic rails. This prevents inductive ground bounce and voltage sags caused by servo stall currents from resetting the STM32 core during stall flight maneuvers.</p>
+                <!-- Spec callouts -->
+                <div class="space-y-6">
+                    <div class="border-l-2 border-accent pl-5">
+                        <h3 class="text-base font-mono text-white mb-2">Layer stackup &amp; EMI shielding</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">A <strong class="text-slate-200">Ground&ndash;Signal&ndash;Power&ndash;Ground</strong> stackup shields internal high-speed digital traces from external EMI, which matters for the onboard RF modules. Inner layers use <strong class="text-slate-200">2oz copper</strong> to handle high-current transients from the servo motors without severe thermal rise.</p>
                     </div>
-
-                    <div class="border-l-2 border-green-400 pl-4">
-                        <h3 class="text-lg font-bold text-white mb-2 font-mono">Active RF Front-End</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Integrated a NEO-M9N GNSS receiver with a custom <strong class="text-white">Bias-Tee circuit</strong> (27nH inductor & 100nF capacitor network). This injects clean, low-noise DC power (via an LT1764AET-3.3 LDO) into the active antenna coax while isolating the RF path back to the receiver.</p>
+                    <div class="border-l-2 border-purple-400 pl-5">
+                        <h3 class="text-base font-mono text-white mb-2">Power distribution &mdash; star topology</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">A <strong class="text-slate-200">star routing</strong> topology isolates the noisy servo power rails from the sensitive 3.3V logic rails. Prevents inductive ground bounce and voltage sags from servo stall currents resetting the STM32 core during stall flight maneuvers.</p>
+                    </div>
+                    <div class="border-l-2 border-green-400 pl-5">
+                        <h3 class="text-base font-mono text-white mb-2">Active RF front-end</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">A NEO-M9N GNSS receiver paired with a custom <strong class="text-slate-200">bias-tee circuit</strong> (27nH inductor + 100nF capacitor network). It injects clean, low-noise DC power via an LT1764AET-3.3 LDO into the active antenna coax while isolating the RF path back to the receiver.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Firmware & Control -->
-        <section class="glass-card p-8 md:p-10 rounded-2xl border border-white/10 hover-glow">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fas fa-microchip text-accent text-2xl"></i>
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Firmware & State Estimation</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Text Data -->
-                <div class="flex flex-col justify-center space-y-8">
-                    <div>
-                        <h3 class="text-xl font-bold text-white font-mono mb-3 border-b border-white/10 pb-2">RTOS Architecture</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-3">
-                            The bare-metal firmware operates on an STM32H7, utilizing FreeRTOS to manage asynchronous sensor pipelines.
-                        </p>
-                        <ul class="space-y-3 text-sm text-slate-400 font-mono">
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-caret-right text-accent mt-1"></i>
-                                <span><strong class="text-white">Task_IMU (100Hz):</strong> High priority. Polls BNO085 via custom SPI driver. Handles SHTP protocol fragmentation/reassembly for zero data loss.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-caret-right text-accent mt-1"></i>
-                                <span><strong class="text-white">Task_GPS (DMA):</strong> Parses binary UBX packets directly from UART via DMA. Extracts precise $V_{NED}$ vectors without blocking CPU cycles.</span>
-                            </li>
-                        </ul>
-                    </div>
+        <section class="py-16 border-b border-white/5">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <p class="font-mono text-xs text-accent mb-2">// Firmware</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-8">Firmware &amp; State Estimation</h2>
 
-                    <div>
-                        <h3 class="text-xl font-bold text-white font-mono mb-3 border-b border-white/10 pb-2">7-State Extended Kalman Filter</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                            Designed a 7-state EKF targeting Position, Velocity, and Heading Bias. To optimize for the MCU's FPU, I implemented a <strong>Sequential Update</strong> mathematical model, processing GPS measurement scalars independently. This completely bypassed the need for expensive matrix inversions during the update step.
-                        </p>
-                        <div class="bg-red-500/10 border border-red-500/30 p-4 rounded-lg">
-                            <h4 class="text-red-400 font-mono font-bold text-sm flex items-center gap-2"><i class="fas fa-shield-alt"></i> SYSTEM_FAILSAFE</h4>
-                            <p class="text-slate-400 text-xs mt-2">Continuous geofence and sensor-health monitoring. Breaches trigger a hard "Deadspin" interrupt, forcing servos into a rapid spiral descent to prevent fly-aways.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Control Loop Diagram -->
-                <div class="flex flex-col justify-center">
-                    <div class="glass-card bg-trace-pattern p-6 rounded-xl border border-white/10 relative overflow-hidden">
-                        <div class="text-center mb-6">
-                            <h4 class="text-white font-bold font-mono text-lg">Control Flow Architecture</h4>
-                            <p class="text-xs text-accent font-mono">Execution Rate: 100Hz</p>
+                <div class="grid lg:grid-cols-2 gap-10">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-base font-mono text-white mb-3 pb-2 border-b border-white/10">RTOS architecture</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                Bare-metal firmware on an STM32H7, with FreeRTOS managing asynchronous sensor pipelines.
+                            </p>
+                            <ul class="space-y-3 text-sm text-slate-400">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-accent font-mono mt-0.5">&rarr;</span>
+                                    <span><strong class="text-slate-200 font-mono text-xs">Task_IMU (100Hz)</strong> &mdash; high priority. Polls BNO085 via custom SPI driver. Handles SHTP protocol fragmentation/reassembly for zero data loss.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-accent font-mono mt-0.5">&rarr;</span>
+                                    <span><strong class="text-slate-200 font-mono text-xs">Task_GPS (DMA)</strong> &mdash; parses binary UBX packets directly from UART via DMA. Extracts V_NED vectors without blocking CPU cycles.</span>
+                                </li>
+                            </ul>
                         </div>
 
-                        <!-- Diagram Flow -->
-                        <div class="space-y-3 relative z-10">
-                            <!-- Inputs -->
-                            <div class="flex justify-between gap-3">
-                                <div class="arch-box w-1/2">
-                                    <i class="fas fa-wave-square text-sky-400 mb-2 text-xl"></i>
-                                    <div class="text-white font-bold text-sm font-mono">BNO085 IMU</div>
-                                    <div class="text-xs text-slate-400 mt-1">SPI / SHTP</div>
-                                </div>
-                                <div class="arch-box w-1/2">
-                                    <i class="fas fa-satellite text-sky-400 mb-2 text-xl"></i>
-                                    <div class="text-white font-bold text-sm font-mono">NEO-M9 GPS</div>
-                                    <div class="text-xs text-slate-400 mt-1">UART / DMA</div>
-                                </div>
+                        <div>
+                            <h3 class="text-base font-mono text-white mb-3 pb-2 border-b border-white/10">7-state EKF</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                A 7-state Extended Kalman Filter targeting position, velocity, and heading bias. To optimize for the MCU's FPU, I used a <strong class="text-slate-200">sequential update</strong> formulation, processing GPS measurement scalars independently and bypassing matrix inversions during the update step.
+                            </p>
+                            <div class="border-l-2 border-rose-400 pl-4 py-1">
+                                <h4 class="font-mono text-xs text-rose-300 mb-1">failsafe</h4>
+                                <p class="text-slate-400 text-xs leading-relaxed">Continuous geofence and sensor-health monitoring. Breaches trigger a hard "deadspin" interrupt, forcing servos into a rapid spiral descent to prevent fly-aways.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control flow diagram -->
+                    <div>
+                        <div class="glass-card rounded-xl p-5">
+                            <div class="mb-5 pb-3 border-b border-white/5">
+                                <h4 class="text-white font-mono text-sm mb-1">Control flow</h4>
+                                <p class="text-xs text-accent font-mono">execution rate: 100Hz</p>
                             </div>
 
-                            <div class="arrow-down"></div>
-
-                            <!-- Processor -->
-                            <div class="arch-box border-accent/40 bg-accent/5">
-                                <div class="text-accent font-bold font-mono text-sm mb-3">STM32H7 Core (FreeRTOS)</div>
-                                <div class="grid grid-cols-2 gap-3 text-xs">
-                                    <div class="bg-surface2/80 p-3 rounded border border-white/5 shadow-inner">
-                                        <div class="text-green-400 font-bold mb-1 font-mono">EKF Fusion</div>
-                                        <div class="text-slate-400">State Vector Pred/Update</div>
+                            <div class="space-y-2.5">
+                                <!-- Inputs -->
+                                <div class="grid grid-cols-2 gap-2.5">
+                                    <div class="arch-box">
+                                        <div class="text-slate-200 font-mono text-xs mb-1">BNO085 IMU</div>
+                                        <div class="text-xs text-slate-500 font-mono">SPI / SHTP</div>
                                     </div>
-                                    <div class="bg-surface2/80 p-3 rounded border border-white/5 shadow-inner">
-                                        <div class="text-purple-400 font-bold mb-1 font-mono">GNC Logic</div>
-                                        <div class="text-slate-400">Pathing & Actuation Math</div>
+                                    <div class="arch-box">
+                                        <div class="text-slate-200 font-mono text-xs mb-1">NEO-M9N GPS</div>
+                                        <div class="text-xs text-slate-500 font-mono">UART / DMA</div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="arrow-down"></div>
+                                <div class="arrow-down"></div>
 
-                            <!-- Outputs -->
-                            <div class="arch-box w-full border-orange-500/30">
-                                <i class="fas fa-cogs text-orange-400 mb-2 text-xl"></i>
-                                <div class="text-white font-bold text-sm font-mono">Dual Servo Actuation</div>
-                                <div class="text-xs text-slate-400 mt-1">Hardware Timer PWM (TIM2)</div>
+                                <!-- Processor -->
+                                <div class="arch-box" style="border-color: rgba(56, 189, 248, 0.3); background: rgba(56, 189, 248, 0.04);">
+                                    <div class="text-accent font-mono text-xs mb-3">STM32H7 core &middot; FreeRTOS</div>
+                                    <div class="grid grid-cols-2 gap-2 text-xs">
+                                        <div class="bg-dark/60 p-2.5 rounded border border-white/5">
+                                            <div class="text-green-400 font-mono text-xs mb-0.5">EKF fusion</div>
+                                            <div class="text-slate-500 text-xs">state predict/update</div>
+                                        </div>
+                                        <div class="bg-dark/60 p-2.5 rounded border border-white/5">
+                                            <div class="text-purple-400 font-mono text-xs mb-0.5">GNC logic</div>
+                                            <div class="text-slate-500 text-xs">pathing &amp; actuation</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="arrow-down"></div>
+
+                                <!-- Output -->
+                                <div class="arch-box" style="border-color: rgba(251, 146, 60, 0.25);">
+                                    <div class="text-slate-200 font-mono text-xs mb-1">Dual servo actuation</div>
+                                    <div class="text-xs text-slate-500 font-mono">hardware timer PWM (TIM2)</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- Project Resources -->
-        <section class="glass-card p-10 rounded-2xl border border-white/10 text-center hover-glow">
-            <h2 class="text-2xl font-bold mb-8 text-white font-mono">// System Documentation</h2>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="assets/docs/EECS_473_Final_Report_Draft__1_ (1).pdf" target="_blank" class="px-6 py-3 glass-card hover:bg-white/10 text-white font-semibold rounded-lg transition-colors border border-white/10 flex items-center gap-3">
-                    <i class="fas fa-file-pdf text-red-400"></i> Final Engineering Report
-                </a>
-                <a href="https://github.com/mjcapo/EECS473-Parafoilers.git" target="_blank" class="px-6 py-3 glass-card hover:bg-white/10 text-white font-semibold rounded-lg transition-colors border border-white/10 flex items-center gap-3">
-                    <i class="fab fa-github text-slate-300"></i> Firmware Source
-                </a>
-                <a href="assets/docs/Parafoil_AGU.pdf" target="_blank" class="px-6 py-3 glass-card hover:bg-accent/20 text-accent font-semibold rounded-lg transition-colors border border-accent/30 flex items-center gap-3">
-                    <i class="fas fa-project-diagram"></i> Hardware Schematic
-                </a>
+
+        <!-- Documentation -->
+        <section class="py-16">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <p class="font-mono text-xs text-accent mb-2">// Documentation</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-8">Resources</h2>
+
+                <div class="grid sm:grid-cols-3 gap-4">
+                    <a href="assets/docs/EECS_473_Final_Report_Draft__1_ (1).pdf" target="_blank" class="glass-card hover-glow rounded-xl p-5 flex items-start gap-3">
+                        <i class="fas fa-file-pdf text-red-400 text-lg mt-0.5"></i>
+                        <div>
+                            <div class="text-white font-mono text-sm mb-1">Final report</div>
+                            <div class="text-slate-500 font-mono text-xs">EECS 473 &middot; PDF</div>
+                        </div>
+                    </a>
+                    <a href="https://github.com/mjcapo/EECS473-Parafoilers.git" target="_blank" class="glass-card hover-glow rounded-xl p-5 flex items-start gap-3">
+                        <i class="fab fa-github text-slate-300 text-lg mt-0.5"></i>
+                        <div>
+                            <div class="text-white font-mono text-sm mb-1">Firmware source</div>
+                            <div class="text-slate-500 font-mono text-xs">GitHub repo</div>
+                        </div>
+                    </a>
+                    <a href="assets/docs/Parafoil_AGU.pdf" target="_blank" class="glass-card hover-glow rounded-xl p-5 flex items-start gap-3">
+                        <i class="fas fa-microchip text-accent text-lg mt-0.5"></i>
+                        <div>
+                            <div class="text-white font-mono text-sm mb-1">Hardware schematic</div>
+                            <div class="text-slate-500 font-mono text-xs">Altium &middot; PDF</div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </section>
 
     </main>
-    
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-dark/95 backdrop-blur-md p-4" onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-slate-400 hover:text-white text-3xl transition-colors font-mono"><i class="fas fa-times"></i></button>
-        <div class="max-w-5xl w-full text-center flex flex-col items-center" onclick="event.stopPropagation()">
-            <img id="lightbox-img" src="" alt="Full view" class="max-h-[80vh] max-w-full rounded-lg shadow-2xl border border-white/10">
-            <div class="mt-6 px-4 py-2 glass-card rounded-full border border-white/10 inline-block">
-                <h3 id="lightbox-caption" class="text-accent font-mono text-sm"></h3>
-            </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-dark/95 backdrop-blur-md p-4 hidden" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-slate-400 hover:text-white text-2xl transition-colors"><i class="fas fa-times"></i></button>
+        <div class="max-w-5xl w-full text-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="" class="max-h-[80vh] max-w-full rounded-lg border border-white/10 mx-auto">
+            <p id="lightbox-caption" class="text-slate-400 font-mono text-xs mt-4"></p>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-white/5 bg-dark py-8 text-center mt-12">
-        <p class="text-slate-500 font-mono text-sm">&copy; 2026 Thomas Tran. Engineering Portfolio.</p>
+    <footer class="border-t border-white/5 bg-dark py-8 text-center">
+        <p class="text-slate-500 font-mono text-sm">&copy; 2026 Thomas Tran</p>
     </footer>
 
     <script>
-        // Lightbox Logic
         function openLightbox(src, caption) {
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
             const cap = document.getElementById('lightbox-caption');
-            
             img.src = src;
-            cap.textContent = `// ${caption}`;
-            
+            cap.textContent = caption;
             lightbox.classList.remove('hidden');
-            // small delay to allow display:block to apply before opacity transition
-            setTimeout(() => {
-                lightbox.classList.add('active');
-            }, 10);
-            
+            setTimeout(() => lightbox.classList.add('active'), 10);
             document.body.style.overflow = 'hidden';
         }
-
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.remove('active');
-            
             setTimeout(() => {
                 lightbox.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            }, 400); // match transition duration
+            }, 300);
         }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape" && document.getElementById('lightbox').classList.contains('active')) {
-                closeLightbox();
-            }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && document.getElementById('lightbox').classList.contains('active')) closeLightbox();
         });
     </script>
 </body>
