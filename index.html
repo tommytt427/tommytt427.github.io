@@ -1,231 +1,253 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thomas Tran</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0e0e0d;
-    --fg: #e6e4de;
-    --muted: #8b8780;
-    --rule: #2a2825;
-    --accent: #d9a86a;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Tran | Hardware & Embedded Systems Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0a0a0f',
+                        surface: '#13131a',
+                        surface2: '#1c1c26',
+                        accent: '#38bdf8',
+                        accentDark: '#0284c7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0f;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
 
-  * { box-sizing: border-box; }
+        .glass-card {
+            background: rgba(19, 19, 26, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 17px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
+        .hover-glow {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-glow:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.08);
+        }
 
-  main {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 6rem 1.5rem 4rem;
-  }
-
-  /* Header */
-  header { margin-bottom: 3rem; }
-  header h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 0.4rem;
-    letter-spacing: -0.01em;
-  }
-  header .tagline {
-    color: var(--muted);
-    margin: 0 0 1.2rem;
-  }
-  header nav {
-    font-size: 0.95rem;
-  }
-  header nav a {
-    color: var(--fg);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1px;
-    margin-right: 1.2rem;
-    transition: border-color 0.15s ease;
-  }
-  header nav a:hover {
-    border-bottom-color: var(--accent);
-  }
-
-  /* Sections */
-  section { margin-bottom: 3.5rem; }
-  section > h2 {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 1.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  /* Intro prose */
-  .intro p {
-    margin: 0 0 1rem;
-  }
-  .intro p:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Project list */
-  .project {
-    margin-bottom: 2.2rem;
-  }
-  .project:last-child {
-    margin-bottom: 0;
-  }
-  .project h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin: 0 0 0.3rem;
-  }
-  .project .meta {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin: 0 0 0.6rem;
-  }
-  .project p {
-    margin: 0 0 0.5rem;
-    color: var(--fg);
-  }
-  .project .more {
-    font-size: 0.9rem;
-  }
-  .project a {
-    color: var(--fg);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    transition: border-color 0.15s ease;
-  }
-  .project a:hover {
-    border-bottom-color: var(--accent);
-  }
-
-  /* Skills */
-  .skills dl {
-    margin: 0;
-    display: grid;
-    grid-template-columns: 7rem 1fr;
-    gap: 0.6rem 1.2rem;
-  }
-  .skills dt {
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-  .skills dd {
-    margin: 0;
-    font-size: 0.95rem;
-  }
-
-  /* Footer */
-  footer {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--rule);
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-
-  @media (max-width: 520px) {
-    main { padding: 3.5rem 1.25rem 3rem; }
-    .skills dl { grid-template-columns: 1fr; gap: 0.1rem 0; }
-    .skills dt { margin-top: 0.6rem; }
-  }
-</style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
 </head>
-<body>
-<main>
+<body class="antialiased selection:bg-accent selection:text-dark">
 
-  <header>
-    <h1>Thomas Tran</h1>
-    <p class="tagline">Hardware & embedded systems engineer. Ann Arbor, MI.</p>
-    <nav>
-      <a href="mailto:ttrann@umich.edu">Email</a>
-      <a href="https://www.linkedin.com/in/ttrann3" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/tommytt427" target="_blank" rel="noopener">GitHub</a>
-      <a href="assets/docs/resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 bg-dark/80 backdrop-blur-md border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-slate-300 font-mono text-sm">
+                thomas_tran<span class="text-accent">.</span>portfolio
+            </a>
+            <div class="hidden sm:flex gap-6 font-mono text-xs text-slate-400">
+                <a href="#projects" class="hover:text-accent transition-colors">projects</a>
+                <a href="#tools" class="hover:text-accent transition-colors">tools</a>
+                <a href="assets/docs/resume.pdf" target="_blank" class="hover:text-accent transition-colors">resume</a>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <section class="intro">
-    <p>Hi.</p>
-  </section>
+    <!-- Hero -->
+    <header class="pt-32 pb-16 border-b border-white/5">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <p class="font-mono text-xs text-accent mb-6">// Hardware &amp; Embedded Systems Engineer</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Thomas Tran</h1>
+            <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mb-8">
+                I work close to the silicon &mdash; PCB design, RF, bare-metal firmware, control. Just finished a dual BSE in Computer and Electrical Engineering at the University of Michigan; starting at RTX this July.
+            </p>
+            <div class="flex flex-wrap gap-5 text-sm">
+                <a href="mailto:ttrann@umich.edu" class="text-slate-300 hover:text-accent transition-colors flex items-center gap-2">
+                    <i class="fas fa-envelope text-xs"></i> ttrann@umich.edu
+                </a>
+                <a href="https://www.linkedin.com/in/ttrann3" target="_blank" class="text-slate-300 hover:text-accent transition-colors flex items-center gap-2">
+                    <i class="fab fa-linkedin text-xs"></i> LinkedIn
+                </a>
+                <a href="https://github.com/tommytt427" target="_blank" class="text-slate-300 hover:text-accent transition-colors flex items-center gap-2">
+                    <i class="fab fa-github text-xs"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </header>
 
-  <section>
-    <h2>Projects</h2>
+    <!-- Projects -->
+    <section id="projects" class="py-16 border-b border-white/5">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <p class="font-mono text-xs text-accent mb-2">// Projects</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-10">Selected work</h2>
 
-    <div class="project">
-      <h3>Autonomous parafoil flight computer</h3>
-      <p class="meta">EECS 473 MDE &middot; September 2025 - December 2025</p>
-      <p>A 4-layer GNC board for recovering scientific payloads. STM32H7 running FreeRTOS, a 7-state EKF for sensor fusion (BNO085 + NEO-M9N), XBee3 telemetry over a custom RF front-end, and heavy copper on the motor rails. Landed under 5m from the target on a 75m drop test.</p>
-      <p class="more"><a href="parafoil-project.html">Write-up &rarr;</a></p>
-    </div>
+            <div class="space-y-6">
 
-    <div class="project">
-      <h3>MASA avionics telemetry</h3>
-      <p class="meta">Radio lead, Michigan Aeronautical Science Association &middot; 2024&ndash;2026</p>
-      <p>2.4 GHz LoRa downlink for rocket flight data from altitude. Wrote the bare-metal C driver for the Semtech SX1280, did the link budget, and recovered a 9.6 dB deficit by integrating an LNA into the ground station front end. Also built the Python/Tkinter ground UI.</p>
-      <p class="more"><a href="masa-project.html">Write-up &rarr;</a></p>
-    </div>
+                <!-- Parafoil -->
+                <article class="glass-card hover-glow p-7 rounded-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                        <h3 class="text-xl font-bold text-white">Autonomous parafoil flight computer</h3>
+                        <p class="font-mono text-xs text-slate-500 whitespace-nowrap">EECS 473 MDE &middot; Sep&ndash;Dec 2025</p>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        A 4-layer GNC board for recovering scientific payloads. STM32H7 running FreeRTOS, a 7-state EKF for sensor fusion (BNO085 + NEO-M9N), XBee3 telemetry over a custom RF front-end, and heavy copper on the motor rails. Landed under 5m from the target on a 75m drop test.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Altium</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">STM32H7</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">FreeRTOS</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">EKF</span>
+                    </div>
+                    <a href="parafoil-project.html" class="text-accent font-mono text-sm hover:underline">
+                        Write-up <i class="fas fa-arrow-right text-xs ml-1"></i>
+                    </a>
+                </article>
 
-    <div class="project">
-      <h3>Aegis &mdash; custom 2D game engine</h3>
-      <p class="meta">EECS 498 &middot; 2026</p>
-      <p>A C++ engine with a Lua scripting layer, Box2D physics, and a Dear ImGui scene editor. Built mostly as an excuse to write a tool I&rsquo;d actually want to use.</p>
-      <p class="more"><a href="game-engine-project.html">Write-up &rarr;</a></p>
-    </div>
+                <!-- MASA -->
+                <article class="glass-card hover-glow p-7 rounded-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                        <h3 class="text-xl font-bold text-white">MASA avionics telemetry</h3>
+                        <p class="font-mono text-xs text-slate-500 whitespace-nowrap">Radio Lead &middot; 2024&ndash;2026</p>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        2.4 GHz LoRa downlink for rocket flight data from altitude. Wrote the bare-metal C driver for the Semtech SX1280, did the link budget, and recovered a 9.6 dB deficit by integrating an LNA into the ground station front end. Also built the Python/Tkinter ground UI.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">LoRa / SX1280</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">RF Design</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Embedded C</span>
+                    </div>
+                    <a href="masa-project.html" class="text-accent font-mono text-sm hover:underline">
+                        Write-up <i class="fas fa-arrow-right text-xs ml-1"></i>
+                    </a>
+                </article>
 
-    <div class="project">
-      <h3>Multi-modal robotic gantry</h3>
-      <p class="meta">2025</p>
-      <p>A 2-axis targeting gantry on an STM32. OpenCV for automated tracking; manual control parsed off Wii Remotes and PS2 joysticks over SPI/I2C, because why not.</p>
-    </div>
+                <!-- Aegis -->
+                <article class="glass-card hover-glow p-7 rounded-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                        <h3 class="text-xl font-bold text-white">Aegis &mdash; custom 2D game engine</h3>
+                        <p class="font-mono text-xs text-slate-500 whitespace-nowrap">EECS 498 &middot; 2026</p>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        A C++ engine with a Lua scripting layer, Box2D physics, and a Dear ImGui scene editor. Built mostly as an excuse to write a tool I&rsquo;d actually want to use.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-5">
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">C++ / Lua</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Dear ImGui</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Box2D</span>
+                    </div>
+                    <a href="game-engine-project.html" class="text-accent font-mono text-sm hover:underline">
+                        Write-up <i class="fas fa-arrow-right text-xs ml-1"></i>
+                    </a>
+                </article>
 
-    <div class="project">
-      <h3>Adaptive cruise control (HIL)</h3>
-      <p class="meta">EECS 461 &middot; 2025</p>
-      <p>Multi-mode ACC and lane-keeping PD controller, modeled in Simulink and code-generated onto an NXP S32K144. Validated via hardware-in-the-loop with CAN bus traffic.</p>
-    </div>
+                <!-- Gantry -->
+                <article class="glass-card hover-glow p-7 rounded-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                        <h3 class="text-xl font-bold text-white">Multi-modal robotic gantry</h3>
+                        <p class="font-mono text-xs text-slate-500 whitespace-nowrap">2025</p>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        A 2-axis targeting gantry on an STM32. OpenCV for automated tracking; manual control parsed off Wii Remotes and PS2 joysticks over SPI/I2C, because why not.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">OpenCV</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">STM32 C</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">SPI / I2C</span>
+                    </div>
+                </article>
 
-    <div class="project">
-      <h3>IoT occupancy monitor</h3>
-      <p class="meta">EECS 300 &middot; 2026</p>
-      <p>2-layer ESP32 board with dual VL53L1X time-of-flight sensors for directional people-counting. The interesting part was the state machine for resolving crossings when two people walked past in opposite directions at once.</p>
-    </div>
+                <!-- ACC -->
+                <article class="glass-card hover-glow p-7 rounded-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                        <h3 class="text-xl font-bold text-white">Adaptive cruise control (HIL)</h3>
+                        <p class="font-mono text-xs text-slate-500 whitespace-nowrap">EECS 461 &middot; 2025</p>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Multi-mode ACC and lane-keeping PD controller, modeled in Simulink and code-generated onto an NXP S32K144. Validated via hardware-in-the-loop with CAN bus traffic.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Simulink</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">NXP S32K</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">CAN Bus</span>
+                    </div>
+                </article>
 
-  </section>
+                <!-- IoT -->
+                <article class="glass-card hover-glow p-7 rounded-xl">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                        <h3 class="text-xl font-bold text-white">IoT occupancy monitor</h3>
+                        <p class="font-mono text-xs text-slate-500 whitespace-nowrap">EECS 300 &middot; 2026</p>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        2-layer ESP32 board with dual VL53L1X time-of-flight sensors for directional people-counting. The interesting part was the state machine for resolving crossings when two people walked past in opposite directions at once.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">Altium</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">ESP32</span>
+                        <span class="text-xs font-mono bg-surface2 border border-white/10 text-slate-300 py-1 px-3 rounded-full">VL53L1X</span>
+                    </div>
+                </article>
 
-  <section class="skills">
-    <h2>Tools</h2>
-    <dl>
-      <dt>Hardware</dt><dd>Altium, KiCad, NanoVNA, oscilloscope debugging</dd>
-      <dt>Firmware</dt><dd>C, C++, STM32, FreeRTOS, bare-metal drivers</dd>
-      <dt>Comms</dt><dd>LoRa, CAN, SPI, I2C, UART, Wi-Fi</dd>
-      <dt>Control</dt><dd>EKF, PID, Simulink, state machines</dd>
-      <dt>Software</dt><dd>Python, Lua, Git, Linux, ROS 2</dd>
-    </dl>
-  </section>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    &copy; 2026 Thomas Tran
-  </footer>
+    <!-- Tools -->
+    <section id="tools" class="py-16">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <p class="font-mono text-xs text-accent mb-2">// Tools</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-10">What I work with</h2>
 
-</main>
+            <div class="glass-card rounded-xl p-8 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+                <div class="border-l-2 border-accent pl-4">
+                    <h3 class="text-sm font-mono text-white mb-1">Hardware</h3>
+                    <p class="text-slate-400 text-sm">Altium, KiCad, NanoVNA, oscilloscope debugging</p>
+                </div>
+                <div class="border-l-2 border-purple-400 pl-4">
+                    <h3 class="text-sm font-mono text-white mb-1">Firmware</h3>
+                    <p class="text-slate-400 text-sm">C, C++, STM32, FreeRTOS, bare-metal drivers</p>
+                </div>
+                <div class="border-l-2 border-green-400 pl-4">
+                    <h3 class="text-sm font-mono text-white mb-1">Comms</h3>
+                    <p class="text-slate-400 text-sm">LoRa, CAN, SPI, I2C, UART, Wi-Fi</p>
+                </div>
+                <div class="border-l-2 border-orange-400 pl-4">
+                    <h3 class="text-sm font-mono text-white mb-1">Control</h3>
+                    <p class="text-slate-400 text-sm">EKF, PID, Simulink, state machines</p>
+                </div>
+                <div class="border-l-2 border-rose-400 pl-4 md:col-span-2">
+                    <h3 class="text-sm font-mono text-white mb-1">Software</h3>
+                    <p class="text-slate-400 text-sm">Python, Lua, Git, Linux, ROS 2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-dark py-8 text-center">
+        <p class="text-slate-500 font-mono text-sm">&copy; 2026 Thomas Tran</p>
+    </footer>
+
 </body>
 </html>
